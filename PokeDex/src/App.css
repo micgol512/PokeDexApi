@@ -4,3 +4,7 @@
   padding: 2rem;
   text-align: center;
 }
+body {
+  background: #f0f0f0 url("../public/PokeBackground.png") fixed repeat;
+  backdrop-filter: brightness(2) saturate(1.5);
+}
