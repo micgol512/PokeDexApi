@@ -3,6 +3,6 @@
 body {
   width: 100vw;
   height: 100vh;
-  background: #f0f0f0 url("../public/PokeBackground.png") fixed repeat;
-  backdrop-filter: brightness(3) saturate(1.5);
+  /* background: #f0f0f0 url("../PokeBackground.png") fixed repeat; */
+  /* backdrop-filter: brightness(3) saturate(1.5); */
 }

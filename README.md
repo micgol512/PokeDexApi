@@ -10,11 +10,13 @@
 
 ### Description
 
-PokeDex Api is an application that uses the knowledge acquired during the second module of DevStock Academy.
+`PokeDex` is an application that uses the knowledge acquired during the second module of DevStock Academy.
 
 ---
 
-### Instalation by Node Package Manager
+### Instalation
+
+by **Node Package Manager**
 
 ```instal
 git clone https://github.com/micgol512/PokeDexApi.git
@@ -38,5 +40,8 @@ npm run dev
 - [JSON-server](https://www.npmjs.com/package/json-server)
 - [styled-components](https://styled-components.com/)
 - [Material UI](https://mui.com/material-ui/getting-started/)
+- [react-router-dom](#pokedexapi)
+- [react-hook-form](https://react-hook-form.com/)
+- [ZOD](https://zod.dev/)
 
 ---
