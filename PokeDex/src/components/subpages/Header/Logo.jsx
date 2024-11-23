@@ -1,14 +1,17 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const ImagedDiv = styled.div`
+const LogoImg = styled.img`
   width: min(35vw, 250px);
   height: 100%;
-  background: transparent url("../../../../src/icons/PokeDex_logo.png") no-repeat center /
-    contain;
 `;
 
 const Logo = () => {
-  return <ImagedDiv></ImagedDiv>;
+  return (
+    <Link to={"/"}>
+      <LogoImg src="../../../../src/images/PokeDex_logo.png" />
+    </Link>
+  );
 };
 
 export default Logo;

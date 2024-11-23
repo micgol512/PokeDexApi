@@ -5,8 +5,8 @@ export const Theme = createContext();
 
 const basicThemeStyles = {
   light: {
-    backgroundColor: "#f5f5f5",
-    color: "#1f1f1f",
+    backgroundColor: "##fff",
+    color: "#fcfcfc",
     borderColor: "#1f1f1f",
     boxShadow: "2px 2px 5px #1f1f1f",
   },

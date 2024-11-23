@@ -1,8 +1,13 @@
+import { useContext } from "react";
 import Wrapper from "../../shared/Wrapper";
 import Logo from "./Logo";
-import Navbar from "./Navbar";
+import { NavButton, Navbar } from "./Navbar";
+import { LoginContext } from "../../../context/LoginContext";
+import Login from "../Login/Login";
 
 const Header = () => {
+  const { isLogged } = useContext(LoginContext);
+
   return (
     <Wrapper
       styles={{
@@ -24,7 +29,11 @@ const Header = () => {
       >
         <Logo />
         <Wrapper>
-          <div>LOGIN i Switch</div>
+          <Wrapper styles={{ flexFlow: "row nowrap" }}>
+            {" "}
+            <Login />
+            {!isLogged && <NavButton name={"Register"} path={"register"} />}
+          </Wrapper>
           <Navbar />
         </Wrapper>
       </Wrapper>

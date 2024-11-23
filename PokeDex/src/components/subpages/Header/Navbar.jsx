@@ -2,11 +2,18 @@
 import { NavLink } from "react-router-dom";
 import Wrapper from "../../shared/Wrapper";
 import Button from "../../shared/Button";
+import { Badge } from "@mui/material";
+import { useContext } from "react";
+import { ArenaContext } from "../../../context/ArenaContext";
+// import { Badge } from "@mui/material";
 
 const routes = [
-  { name: "Home", id: 1, path: "/" },
-  { name: "Login", id: 2, path: "login" },
-  { name: "Register", id: 3, path: "register" },
+  { name: "Pokemons", id: 1, path: "pokemon" },
+  { name: "Favorites", id: 2, path: "favorites" },
+  { name: "Arena", id: 3, path: "arena" },
+  { name: "Ranking", id: 4, path: "ranking" },
+  { name: "Edit", id: 5, path: "edit" },
+  // { name: "Details", id: 5, path: "pokemon/:id" },
 ];
 
 const NavButton = ({ name, path }) => (
@@ -16,13 +23,25 @@ const NavButton = ({ name, path }) => (
 );
 
 const Navbar = () => {
+  const { arenaCounter } = useContext(ArenaContext);
   return (
     <Wrapper styles={{ flexFlow: "row nowrap" }}>
-      {routes.map(({ name, id, path }) => (
-        <NavButton key={`menu-btn-${id}`} name={name} path={path} />
-      ))}
+      {routes.map(({ name, id, path }) => {
+        if (path === "arena")
+          return (
+            <Badge
+              key={`menu-badged-btn-${id}`}
+              badgeContent={arenaCounter}
+              color={"info"}
+              max={2}
+            >
+              <NavButton key={`menu-btn-${id}`} name={name} path={path} />
+            </Badge>
+          );
+        return <NavButton key={`menu-btn-${id}`} name={name} path={path} />;
+      })}
     </Wrapper>
   );
 };
 
-export default Navbar;
+export { Navbar, NavButton };

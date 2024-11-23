@@ -18,7 +18,9 @@ const FullScreen = styled.div`
   }}
   ${({ styles }) => styles && css(styles)};
 `;
-const FlexDiv = styled.div`
+const FlexDiv = styled.div.withConfig({
+  shouldForwardProp: (prop) => prop !== "styles",
+})`
   display: flex;
   flex-flow: column nowrap;
   gap: 1rem;

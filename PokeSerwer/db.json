@@ -1,7 +1,22 @@
 {
-  "pokemons": [
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin",
+      "email": "admin@admin.co"
+    },
+    {
+      "id": 2,
+      "username": "micgol",
+      "password": "micgol",
+      "email": "admin@admin.co"
+    }
+  ],
+  "favorites": [
     { "id": 1, "name": "Bulbasaur", "type": "Grass/Poison" },
     { "id": 2, "name": "Charmander", "type": "Fire" },
     { "id": 3, "name": "Squirtle", "type": "Water" }
-  ]
+  ],
+  "arena": []
 }

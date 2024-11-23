@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled, { css } from "styled-components";
 import Wrapper from "./Wrapper";
 const PokeDexBasic = styled.div`
@@ -6,7 +7,7 @@ const PokeDexBasic = styled.div`
   left: calc(50vw - 200px);
   width: 400px;
   height: 300px;
-  background: transparent url("../../src/icons/PokeDex_show.png") no-repeat center /
+  background: transparent url("../../src/images/PokeDex_show.png") no-repeat center /
     contain;
   z-index: 5;
 `;

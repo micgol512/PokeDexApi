@@ -43,5 +43,6 @@ npm run dev
 - [react-router-dom](#pokedexapi)
 - [react-hook-form](https://react-hook-form.com/)
 - [ZOD](https://zod.dev/)
+- [Notistack](https://notistack.com/)
 
 ---
