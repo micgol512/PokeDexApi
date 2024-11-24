@@ -5,21 +5,27 @@ const StyledInput = styled.input`
   padding: 0 5px;
   width: 100px;
   border-radius: 0.5rem;
-  border: 1px solid white;
-  background-color: white;
-  color: #252525;
+  border: 1px solid ${(props) => props.theme.colors.border};
+  background-color: ${(props) => props.theme.colors.bg};
+  color: ${(props) => props.theme.colors.color};
 
   &::placeholder {
-    color: #ffaa00;
+    color: ${(props) => props.theme.colors.placeholder};
   }
 
   &:focus {
     outline: none;
-    background-color: #ffff00;
-    color: #3c6aff;
+    background-color: ${(props) => props.theme.colors.focusBg};
+    color: ${(props) => props.theme.colors.focusColor};
   }
+  // &:hover {
+  //   background-color: ${(props) => props.theme.colors.hoverBg};
+  //   color: ${(props) => props.theme.colors.hoverColor};
+  // }
 `;
-
+StyledInput.defaultProps = {
+  theme: {},
+};
 // eslint-disable-next-line react/prop-types
 const Input = ({ type = "text", value, onChange, placeholder }) => {
   return (
