@@ -12,7 +12,9 @@ const StyledInput = styled.input`
   &::placeholder {
     color: ${(props) => props.theme.colors.placeholder};
   }
-
+  &::placeholder:focus {
+    color: ${(props) => props.theme.colors.placeholder};
+  }
   &:focus {
     outline: none;
     background-color: ${(props) => props.theme.colors.focusBg};

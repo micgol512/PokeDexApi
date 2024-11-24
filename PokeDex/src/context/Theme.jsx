@@ -1,24 +1,43 @@
 /* eslint-disable react/prop-types */
 import { createContext, useState } from "react";
+import { ThemeProvider } from "styled-components";
 
 const Theme = createContext();
 
 const basicThemeStyles = {
   light: {
-    backgroundColor: "##fff",
-    color: "#fcfcfc",
-    borderColor: "#1f1f1f",
-    boxShadow: "2px 2px 5px #1f1f1f",
+    colors: {
+      color: "#0c0c0c",
+      focusColor: "#ffcc00",
+      hoverColor: "#ffcc00",
+      bg: "#fcfcfc",
+      focusBg: "#cc0000",
+      hoverBg: "#cc0000",
+      border: "#3c6aff",
+      placeholder: "#3c6affcc",
+    },
+    typography: {
+      fontFamily: "'Roboto', sans-serif",
+    },
   },
   dark: {
-    backgroundColor: "#1f1f1f",
-    color: "#f5f5f5",
-    borderColor: "#f5f5f5",
-    boxShadow: "2px 2px 5px #f5f5f5",
+    colors: {
+      color: "#0c0c0c",
+      focusColor: "#ffcc00",
+      hoverColor: "#ffcc00",
+      bg: "#fcfcfc",
+      focusBg: "#cc0000",
+      hoverBg: "#cc0000",
+      border: "#3c6aff",
+      placeholder: "#3c6affcc",
+    },
+    typography: {
+      fontFamily: "'Roboto', sans-serif",
+    },
   },
 };
 
-export const ThemeProvider = ({ children }) => {
+export const ThemeProviderWrapp = ({ children }) => {
   const [theme, setTheme] = useState("light");
   const currentTheme = basicThemeStyles[theme];
 
@@ -27,8 +46,8 @@ export const ThemeProvider = ({ children }) => {
   };
 
   return (
-    <Theme.Provider value={{ theme, setTheme, toggleTheme, themeStyles: currentTheme }}>
-      {children}
+    <Theme.Provider value={{ theme, toggleTheme }}>
+      <ThemeProvider theme={currentTheme}>{children}</ThemeProvider>
     </Theme.Provider>
   );
 };
