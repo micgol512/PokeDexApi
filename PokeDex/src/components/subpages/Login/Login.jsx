@@ -1,7 +1,7 @@
-import Button from "../../shared/Button";
 import Input from "../../shared/Input";
 import Wrapper from "../../shared/Wrapper";
 import useLogin from "./useLogin";
+import StylButton from "../../shared/StylButton";
 
 const Login = () => {
   const { handleSubmit, setUsername, setPassword, username, password, isLogged } =
@@ -30,9 +30,9 @@ const Login = () => {
         </form>
       )}
 
-      <Button type="submit" onClick={handleSubmit}>
+      <StylButton type="submit" onClick={handleSubmit}>
         {isLogged ? "Logout" : "Login"}
-      </Button>
+      </StylButton>
     </Wrapper>
   );
 };

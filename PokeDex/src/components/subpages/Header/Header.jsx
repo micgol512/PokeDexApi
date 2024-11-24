@@ -16,6 +16,7 @@ const Header = () => {
         width: "100%",
         justifyContent: "center",
         alignItems: "center",
+        paddingTop: "10px",
       }}
     >
       <Wrapper

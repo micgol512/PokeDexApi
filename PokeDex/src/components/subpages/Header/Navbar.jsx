@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
 import Wrapper from "../../shared/Wrapper";
-import Button from "../../shared/Button";
+import StylButton from "../../shared/StylButton";
 import { Badge } from "@mui/material";
 import { useContext } from "react";
 import { ArenaContext } from "../../../context/ArenaContext";
@@ -18,7 +18,7 @@ const routes = [
 
 const NavButton = ({ name, path }) => (
   <NavLink to={path}>
-    {({ isActive }) => <Button isActive={isActive}>{name}</Button>}
+    {({ isActive }) => <StylButton isActive={isActive}>{name}</StylButton>}
   </NavLink>
 );
 

@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Button } from "@mui/material";
 import styled from "styled-components";
 
 const StyledButton = styled.button.withConfig({
@@ -20,10 +21,20 @@ const StyledButton = styled.button.withConfig({
   }
 `;
 
-const Button = ({ onClick, children, isActive }) => (
-  <StyledButton onClick={onClick} isActive={isActive}>
+const StyledButtonCss = styled(Button)(({ theme }) => ({
+  borderRadius: "0.5rem",
+  color: theme.colors.color,
+  backgroundColor: theme.colors.bg,
+}));
+
+const StylButton = ({ onClick, children, isActive }) => (
+  <StyledButtonCss
+    variant={isActive ? "contained" : "outlined"}
+    size="small"
+    onClick={onClick}
+  >
     {children}
-  </StyledButton>
+  </StyledButtonCss>
 );
 
-export default Button;
+export default StylButton;
