@@ -1,4 +1,6 @@
+/* eslint-disable react/display-name */
 import { TextField } from "@mui/material";
+import React from "react";
 import styled from "styled-components";
 
 const StyledInput = styled.input`
@@ -29,31 +31,31 @@ const StyledInput = styled.input`
 StyledInput.defaultProps = {
   theme: {},
 };
-const StyletTextArea = styled(TextField)`
-  // width: 100px;
+// const StyletTextArea = styled(TextField)`
+//   // width: 100px;
 
-  border: 1px solid ${(props) => props.theme.colors.border};
-  // background-color: ${(props) => props.theme.colors.bg};
-  color: ${(props) => props.theme.colors.color};
+//   border: 1px solid ${(props) => props.theme.colors.border};
+//   // background-color: ${(props) => props.theme.colors.bg};
+//   color: ${(props) => props.theme.colors.color};
 
-  &::placeholder {
-    color: ${(props) => props.theme.colors.placeholder};
-  }
-  // &::placeholder:focus {
-  color: ${(props) => props.theme.colors.placeholder};
-  // }
-  &:focus {
-    outline: none;
-    background-color: ${(props) => props.theme.colors.focusBg};
-    color: ${(props) => props.theme.colors.focusColor};
-    color: green;
-  }
-  // &:hover {
-  outline: none;
-  //   background-color: ${(props) => props.theme.colors.hoverBg};
-  //   color: ${(props) => props.theme.colors.hoverColor};
-  // }
-`;
+//   &::placeholder {
+//     color: ${(props) => props.theme.colors.placeholder};
+//   }
+//   // &::placeholder:focus {
+//   color: ${(props) => props.theme.colors.placeholder};
+//   // }
+//   &:focus {
+//     outline: none;
+//     background-color: ${(props) => props.theme.colors.focusBg};
+//     color: ${(props) => props.theme.colors.focusColor};
+//     color: green;
+//   }
+//   // &:hover {
+//   outline: none;
+//   //   background-color: ${(props) => props.theme.colors.hoverBg};
+//   //   color: ${(props) => props.theme.colors.hoverColor};
+//   // }
+// `;
 
 const CssTextField = styled(TextField)(({ theme }) => ({
   "&": {
@@ -79,21 +81,28 @@ const CssTextField = styled(TextField)(({ theme }) => ({
       borderColor: theme.colors.border,
     },
   },
+  "& .Mui-error": {
+    color: theme.colors.border.error, // Kolor tekstu przy błędzie
+  },
 }));
 
-// eslint-disable-next-line react/prop-types
-const Input = ({ type = "text", value, onChange, placeholder, error }) => {
-  return (
-    <CssTextField
-      size="small"
-      label={placeholder}
-      placeholder={placeholder}
-      type={type}
-      value={value}
-      onChange={onChange}
-      helperText={error ? error : "Terar "}
-    />
-  );
-};
+const Input = React.forwardRef(
+  // eslint-disable-next-line react/prop-types
+  ({ type = "text", value, onChange, placeholder, error }, ref) => {
+    return (
+      <CssTextField
+        inputRef={ref}
+        size="small"
+        label={placeholder}
+        placeholder={placeholder}
+        type={type}
+        value={value}
+        onChange={onChange}
+        helperText={error ? error : " "}
+        error={!!error}
+      />
+    );
+  }
+);
 
 export default Input;

@@ -4,7 +4,7 @@ import RegisterForm from "./RegisterForm";
 const Register = () => {
   return (
     <Wrapper>
-      Sing in
+      Register
       <RegisterForm />
     </Wrapper>
   );

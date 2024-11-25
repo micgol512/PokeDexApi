@@ -15,6 +15,7 @@ const basicThemeStyles = {
       hoverBg: "#cc0000",
       border: "#3c6aff",
       placeholder: "#3c6affcc",
+      error: "#ff0000",
     },
     typography: {
       fontFamily: "'Roboto', sans-serif",
@@ -30,6 +31,7 @@ const basicThemeStyles = {
       hoverBg: "#cc0000",
       border: "#3c6aff",
       placeholder: "#3c6affcc",
+      error: "#ff0000",
     },
     typography: {
       fontFamily: "'Roboto', sans-serif",
