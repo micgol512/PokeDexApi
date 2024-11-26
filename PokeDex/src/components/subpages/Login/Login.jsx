@@ -19,12 +19,14 @@ const Login = () => {
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="Username"
+              autoComplete="name"
             />
             <Input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
+              autoComplete="current-password"
             />
           </Wrapper>
         </form>

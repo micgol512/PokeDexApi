@@ -5,17 +5,26 @@ import { z } from "zod";
 import styled from "styled-components";
 import Input from "../../shared/Input";
 import StylButton from "../../shared/StylButton";
+import { TextField } from "@mui/material";
+import StyledInput from "../../shared/StyledInput";
 
-const StyledForm = styled.form`
-  display: flex;
-  flex-flow: column nowrap;
-  gap: 5px;
-  width: 200px;
-`;
+const StyledForm = styled.form(({ theme }) => ({
+  padding: "10px 5px",
+  display: "flex",
+  flexFlow: "column nowrap",
+  gap: "10px",
+  minWidth: "450px",
+  borderRadius: "0.5rem",
+  border: `5px double ${theme.colors.border}`,
+}));
 
 const registerSchema = z
   .object({
     id: z.string(),
+    lastname: z
+      .string()
+      .min(3, { message: "Username is too short." })
+      .nonempty({ message: "Username is required." }),
     username: z
       .string()
       .min(3, { message: "Username is too short." })
@@ -67,27 +76,75 @@ const RegisterForm = () => {
   };
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      <Input
+      {/* <Input
         {...register("username")}
         placeholder="Username*"
         error={errors?.username?.message}
+        autoComplete="name"
       />
       <Input
         {...register("password")}
         placeholder="Password*"
         type="password"
         error={errors?.password?.message}
+        autoComplete="new-password"
       />
       <Input
         {...register("repeatPassword")}
         placeholder="Reapeat password*"
         type="password"
         error={errors?.repeatPassword?.message}
+        autoComplete="new-password"
       />
       <Input
         {...register("email")}
         placeholder="E-mail*"
         error={errors?.email?.message}
+        autoComplete="email"
+      /> */}
+      <StyledInput label="Something" error={true} helperText="Wrong" />
+      <StyledInput
+        register={register}
+        name="lastname"
+        label="Lastname"
+        placeholder="Lastname"
+        error={!!errors.lastname}
+        helperText={errors.lastname ? errors.lastname.message : ""}
+        autoComplete="lastname"
+      />
+      <TextField
+        {...register("username")}
+        label="Username"
+        placeholder="Username"
+        error={!!errors.username}
+        helperText={errors.username ? errors.username.message : ""}
+        autoComplete="name"
+      />
+      <TextField
+        {...register("password")}
+        label="Password"
+        placeholder="Password"
+        type="password"
+        error={!!errors.password}
+        helperText={errors.password ? errors.password.message : ""}
+        autoComplete="new-password"
+      />
+      <TextField
+        {...register("repeatPassword")}
+        label="Reapeat password"
+        placeholder="Reapeat password"
+        type="password"
+        error={!!errors.repeatPassword}
+        helperText={errors.repeatPassword ? errors.repeatPassword.message : ""}
+        autoComplete="new-password"
+      />
+      <TextField
+        {...register("email")}
+        label="E-mail"
+        placeholder="E-mail"
+        error={!!errors.email}
+        helperText={errors.email ? errors.email.message : ""}
+        autoComplete="email"
       />
 
       <StylButton onClick={handleSubmit(onSubmit)} type="submit">

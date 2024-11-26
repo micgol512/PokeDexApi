@@ -4,7 +4,7 @@ import RegisterForm from "./RegisterForm";
 const Register = () => {
   return (
     <Wrapper>
-      Register
+      <h3>Register</h3>
       <RegisterForm />
     </Wrapper>
   );

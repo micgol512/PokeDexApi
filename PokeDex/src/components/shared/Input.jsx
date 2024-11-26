@@ -88,7 +88,7 @@ const CssTextField = styled(TextField)(({ theme }) => ({
 
 const Input = React.forwardRef(
   // eslint-disable-next-line react/prop-types
-  ({ type = "text", value, onChange, placeholder, error }, ref) => {
+  ({ type = "text", value, onChange, placeholder, error, autoComplete }, ref) => {
     return (
       <CssTextField
         inputRef={ref}
@@ -100,6 +100,7 @@ const Input = React.forwardRef(
         onChange={onChange}
         helperText={error ? error : " "}
         error={!!error}
+        autoComplete={autoComplete}
       />
     );
   }

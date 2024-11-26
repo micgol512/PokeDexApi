@@ -21,10 +21,16 @@ const StyledButton = styled.button.withConfig({
   }
 `;
 
-const StyledButtonCss = styled(Button)(({ theme }) => ({
+const StyledButtonCss = styled(Button)(({ theme, isActive }) => ({
   borderRadius: "0.5rem",
   color: theme.colors.color,
   backgroundColor: theme.colors.bg,
+  "&:hover": {
+    backgroundColor: isActive ? theme.colors.hoverbg : theme.colors.bg,
+    color: isActive ? theme.colors.hoverColor : theme.colors.color,
+    borderColor: "#0062cc",
+    boxShadow: "none",
+  },
 }));
 
 const StylButton = ({ onClick, children, isActive }) => (
