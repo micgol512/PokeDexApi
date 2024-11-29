@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { LoginContext } from "../../../context/LoginContext";
 import { enqueueSnackbar } from "notistack";
+import { LOCAL_URL } from "../../../services/links";
 
 const useLogin = () => {
   const [username, setUsername] = useState("");
@@ -10,7 +11,7 @@ const useLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isLogged) {
-      const url = `http://localhost:5000/users?username=${username}&password=${password}`;
+      const url = `${LOCAL_URL}/users?username=${username}&password=${password}`;
 
       try {
         const response = await fetch(url);

@@ -56,8 +56,9 @@ const router = createBrowserRouter(
             </NotLoggedRoute>
           ),
           path: "/pokemon",
+          children: [{ element: <PokeDetails />, path: "/pokemon/:id" }],
         },
-        { element: <PokeDetails />, path: "/pokemon/:id" },
+
         {
           element: (
             <NotLoggedRoute>

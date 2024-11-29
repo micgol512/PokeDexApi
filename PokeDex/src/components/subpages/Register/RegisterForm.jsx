@@ -3,10 +3,12 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 import styled from "styled-components";
-import Input from "../../shared/Input";
 import StylButton from "../../shared/StylButton";
 import { TextField } from "@mui/material";
-import StyledInput from "../../shared/StyledInput";
+import useRegisterUser from "../../../hooks/useRegisterUser";
+import { enqueueSnackbar } from "notistack";
+import { useContext } from "react";
+import { LoginContext } from "../../../context/LoginContext";
 
 const StyledForm = styled.form(({ theme }) => ({
   padding: "10px 5px",
@@ -21,10 +23,6 @@ const StyledForm = styled.form(({ theme }) => ({
 const registerSchema = z
   .object({
     id: z.string(),
-    lastname: z
-      .string()
-      .min(3, { message: "Username is too short." })
-      .nonempty({ message: "Username is required." }),
     username: z
       .string()
       .min(3, { message: "Username is too short." })
@@ -55,10 +53,13 @@ const registerSchema = z
   });
 
 const RegisterForm = () => {
+  const { registerUser, loading, error } = useRegisterUser();
+  const { logIn } = useContext(LoginContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm({
     resolver: zodResolver(registerSchema),
     defaultValues: {
@@ -70,9 +71,20 @@ const RegisterForm = () => {
     },
   });
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     // e.preventDefault();
-    return console.log(e);
+    const result = await registerUser(e);
+    if (result) {
+      enqueueSnackbar("User registered successfully. Automatically logged in", {
+        variant: "success",
+      });
+
+      localStorage.setItem("user", e.username);
+      logIn();
+      reset();
+    } else {
+      enqueueSnackbar(error, { variant: "error" });
+    }
   };
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
@@ -102,7 +114,7 @@ const RegisterForm = () => {
         error={errors?.email?.message}
         autoComplete="email"
       /> */}
-      <StyledInput label="Something" error={true} helperText="Wrong" />
+      {/* <StyledInput label="Something" error={true} helperText="Wrong" />
       <StyledInput
         register={register}
         name="lastname"
@@ -111,7 +123,7 @@ const RegisterForm = () => {
         error={!!errors.lastname}
         helperText={errors.lastname ? errors.lastname.message : ""}
         autoComplete="lastname"
-      />
+      /> */}
       <TextField
         {...register("username")}
         label="Username"
@@ -148,12 +160,12 @@ const RegisterForm = () => {
       />
 
       <StylButton onClick={handleSubmit(onSubmit)} type="submit">
-        Sing In
+        {loading ? "Checking..." : "Sing In"}
       </StylButton>
       <button onClick={() => console.log("Errors: ", errors)} type="button">
         Pokaż błędy
       </button>
-      <button type="submit">wyślij</button>
+      <button type="submit">Wyślij</button>
     </StyledForm>
   );
 };

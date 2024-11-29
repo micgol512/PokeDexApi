@@ -1,2 +1,2 @@
-export const LOCAL_URL = "http://localhost:5000/";
-export const API_URL = "https://pokeapi.co/api/v2/";
+export const LOCAL_URL = "http://localhost:5000";
+export const API_URL = "https://pokeapi.co/api/v2";
