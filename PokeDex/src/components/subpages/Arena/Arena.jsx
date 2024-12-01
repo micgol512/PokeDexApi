@@ -2,14 +2,16 @@ import { useContext } from "react";
 import { ArenaContext } from "../../../context/ArenaContext";
 
 const Arena = () => {
-  const { arenaCounter } = useContext(ArenaContext);
+  const { arenaPokemon } = useContext(ArenaContext);
 
-  if (arenaCounter === 0) return <div>List of Pokes in Arena is empty.</div>;
+  if (arenaPokemon.length === 0)
+    return <div>List of Pokes in Arena is empty.</div>;
 
   return (
     <div>
-      In Arena {arenaCounter === 1 ? "is" : "are"} {arenaCounter} Poke
-      {arenaCounter === 1 ? "" : "s"}!!!
+      In Arena {arenaPokemon.length === 1 ? "is" : "are"} {arenaPokemon.length}{" "}
+      Poke
+      {arenaPokemon.length === 1 ? "" : "s"}!!! Sprawdzam {arenaPokemon[1]}
     </div>
   );
 };

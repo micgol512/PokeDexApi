@@ -6,6 +6,7 @@ import { LoginProvider } from "./context/LoginContext";
 import Layout from "./components/layout/Layout";
 import "./App.css";
 import { ThemeProviderWrapp } from "./context/Theme";
+import { PageProvider } from "./context/PageContext";
 
 function App() {
   return (
@@ -22,9 +23,11 @@ function App() {
       <LoginProvider>
         <ArenaProvider>
           <ThemeProviderWrapp>
-            <Layout>
-              <Outlet />
-            </Layout>
+            <PageProvider>
+              <Layout>
+                <Outlet />
+              </Layout>
+            </PageProvider>
           </ThemeProviderWrapp>
         </ArenaProvider>
       </LoginProvider>

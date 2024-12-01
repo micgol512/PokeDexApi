@@ -8,7 +8,7 @@ const FullScreen = styled.div`
   position: absolute;
   width: 100%;
   height: 100%;
-  top: 0;
+  top: max(100px, 10vh);
   left: 0;
   ${({ blur }) => {
     if (blur)
@@ -28,15 +28,19 @@ const FlexDiv = styled.div.withConfig({
   justify-content: center;
   ${({ styles }) => styles && css(styles)};
 `;
-const Wrapper = ({ full, children, blur, styles }) => {
+const Wrapper = ({ full, children, blur, styles, onClick }) => {
   if (full)
     return (
-      <FullScreen blur={blur} styles={styles}>
+      <FullScreen blur={blur} styles={styles} onClick={onClick}>
         {children}
       </FullScreen>
     );
 
-  return <FlexDiv styles={styles}>{children}</FlexDiv>;
+  return (
+    <FlexDiv styles={styles} onClick={onClick}>
+      {children}
+    </FlexDiv>
+  );
 };
 
 export default Wrapper;

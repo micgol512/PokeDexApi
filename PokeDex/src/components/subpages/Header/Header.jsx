@@ -4,7 +4,7 @@ import Logo from "./Logo";
 import { NavButton, Navbar } from "./Navbar";
 import { LoginContext } from "../../../context/LoginContext";
 import Login from "../Login/Login";
-import useGetData from "../../../hooks/useGetData";
+import useGetPokemonData from "../../../hooks/useGetPokemonData";
 
 const Header = () => {
   const { isLogged } = useContext(LoginContext);

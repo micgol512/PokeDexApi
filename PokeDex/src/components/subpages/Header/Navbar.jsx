@@ -23,7 +23,8 @@ const NavButton = ({ name, path }) => (
 );
 
 const Navbar = () => {
-  const { arenaCounter } = useContext(ArenaContext);
+  const { arenaPokemon } = useContext(ArenaContext);
+
   return (
     <Wrapper styles={{ flexFlow: "row nowrap" }}>
       {routes.map(({ name, id, path }) => {
@@ -31,7 +32,7 @@ const Navbar = () => {
           return (
             <Badge
               key={`menu-badged-btn-${id}`}
-              badgeContent={arenaCounter}
+              badgeContent={arenaPokemon.length}
               color={"info"}
               max={2}
             >
