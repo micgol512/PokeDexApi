@@ -5,7 +5,7 @@ const useGetPokemonData = (url) => {
   const [isLoading, setIsLoading] = useState(false);
   const [pokemons, setPokemons] = useState([]);
   const [error, setError] = useState(null);
-
+  const [pokemonsURL, setPokemonsURL] = useState([]);
   // const getPokemons = async () => {
   //   setIsLoading(true);
   //   const [apiPokesResp, localPokesResp] = await Promise.all([
@@ -19,18 +19,47 @@ const useGetPokemonData = (url) => {
   // };
 
   useEffect(() => {
+    setIsLoading(true);
     const fetchData = async () => {
-      setIsLoading(true);
+      console.log("Pobieranie Danych o pokemonach");
+
       try {
         const resp = await fetch(url);
-        const data = resp.json();
-        setPokemons(data);
+        const data = await resp.json();
+        setPokemonsURL(data.results);
       } catch (e) {
         setError(e);
       }
     };
     fetchData();
+    const fetchPokes = async (_url) => {
+      console.log("Pobieranie szczegółów dla: ", _url);
+
+      try {
+        const resp = await fetch(_url);
+        const data = await resp.json();
+        const pokeData = {
+          id: data.id,
+          name: data.name,
+          base_experience: data.base_experience,
+          height: data.height,
+          weight: data.weight,
+          abilities: data.abilities.filter(
+            ({ is_hidden }) => is_hidden === false
+          )[0].name,
+        };
+        setPokemons((p) => {
+          if (p.length < 15) return [...p, pokeData];
+          return [pokeData];
+        });
+      } catch (e) {
+        setError(e);
+      }
+    };
+    // setPokemons(() => []);
+    pokemonsURL.map(({ url }) => fetchPokes(url));
     setIsLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
 
   return { pokemons, isLoading, error };

@@ -8,6 +8,7 @@ import useGetPokemonData from "../../../hooks/useGetPokemonData";
 import { API_URL } from "../../../services/links";
 import PokemonList from "../../shared/PokemonList/PokemonList";
 import { PageContext } from "../../../context/PageContext";
+import StaticPagination from "../../shared/Pagination/StaticPagination";
 
 const Pokemons = () => {
   const { pushToArena, popFromArena } = useContext(ArenaContext);
@@ -15,6 +16,9 @@ const Pokemons = () => {
   const { pokemons, isLoading, error } = useGetPokemonData(
     `${API_URL}/pokemon?limit=15&offset=${offset}`
   );
+  // const { pokemons, isLoading, error } = useGetPokemonData(
+  //   `${API_URL}/pokemon/1`
+  // );
 
   return (
     <div>
@@ -32,6 +36,7 @@ const Pokemons = () => {
       <Wrapper>
         <Outlet />
       </Wrapper>
+      <StaticPagination />
     </div>
   );
 };

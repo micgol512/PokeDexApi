@@ -10,9 +10,9 @@ const PageProvider = ({ children }) => {
   const setPage = (page) => {
     setOffset((page - 1) * 15);
   };
-
+  const getPage = () => Math.ceil(offset / 15) + 1;
   return (
-    <PageContext.Provider value={{ offset, setPage }}>
+    <PageContext.Provider value={{ offset, setPage, getPage }}>
       {children}
     </PageContext.Provider>
   );
