@@ -2,9 +2,10 @@
 import styled, { css } from "styled-components";
 import Wrapper from "./Wrapper";
 import { useNavigate, useParams } from "react-router-dom";
+import useGetPokeByID from "../../hooks/useGetPokeByID";
 const PokeDexBasic = styled.div`
   position: absolute;
-  top: calc(50% - 150px);
+  top: 0;
   left: calc(50% - 200px);
   width: 400px;
   height: 300px;
@@ -14,12 +15,16 @@ const PokeDexBasic = styled.div`
 `;
 const PokeImage = styled.img`
   position: absolute;
-  top: calc(50% - 60px);
+  top: 90px;
   left: calc(50% - 165px);
   width: 130px;
   height: 90px;
-  background-color: #00ff0d;
+  background: url("../../src/images/pokeBG.jpg");
+  background-position: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
   object-fit: contain;
+  object-position: center;
   z-index: 4;
 `;
 const PokeString = styled.div`
@@ -30,34 +35,39 @@ const PokeString = styled.div`
   color: white;
   z-index: 5;
   font-size: 0.7rem;
+  font-weight: 800;
   ${({ type }) => {
     if (type === "name")
       return css`
-        top: calc(50% - 45px);
+        top: 105px;
         left: calc(50% + 45px);
         font-size: 1rem;
       `;
     if (type === "ability")
       return css`
-        top: calc(50% - 25px);
+        top: 130px;
         left: calc(50% + 45px);
       `;
     if (type === "weight")
       return css`
-        top: calc(50% + 103px);
-        left: calc(50% + 115px);
+        top: 253px;
+        left: calc(50% + 113px);
       `;
     if (type === "height")
       return css`
-        top: calc(50% + 103px);
-        left: calc(50% + 45px);
+        top: 253px;
+        left: calc(50% + 43px);
       `;
     if (type === "base experience")
       return css`
         display: flex;
-        top: calc(50% + 100px);
+        top: 245px;
         left: calc(50% - 148px);
-        font-size: 0.5rem;
+
+        &::first-line: {
+          color: red;
+          font-size: 0.1rem;
+        }
       `;
   }}
 `;
@@ -76,29 +86,39 @@ const PokeStrings = ({ type, children }) => {
 const PokeDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const { pokemon, isLoading, error } = useGetPokeByID(id);
+  const firstUpper = (string = "none") =>
+    `${string.slice(0, 1).toUpperCase()}${string.slice(1)}`;
+  const backPage = () => {
+    navigate(-1);
+  };
+
+  if (error) return <div>{error}</div>;
+  if (!isLoading) return <div>Loading...</div>;
+  console.log("Details: ", pokemon.images);
+
   return (
-    <>
-      something
-      <Wrapper full onClick={() => navigate(-1)}>
-        <Wrapper
-          styles={{
-            position: "relative",
-            width: "100%",
-            height: "200px",
-          }}
-        >
-          <PokeDexBasic onClick={(e) => e.defaultPrevented()} />
-          <PokeImage
-            src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`}
-          />
-          <PokeStrings type={"name"}>Crabominable ID:{id}</PokeStrings>
-          <PokeStrings type={"ability"}>Fast Attack</PokeStrings>
-          <PokeStrings type={"height"}>15</PokeStrings>
-          <PokeStrings type={"weight"}>34</PokeStrings>
-          <PokeStrings type={"base experience"}>34</PokeStrings>
-        </Wrapper>
-      </Wrapper>
-    </>
+    // <Wrapper full>
+    <Wrapper
+      full
+      blur
+      styles={{
+        top: "110px",
+        height: "calc(100vh + 150px)",
+      }}
+      onClick={backPage}
+    >
+      <PokeDexBasic onClick={(e) => e.defaultPrevented()} />
+      <PokeImage src={pokemon.images?.front_default} alt={pokemon.name} />
+      <PokeStrings type={"name"}>{firstUpper(pokemon.name)}</PokeStrings>
+      <PokeStrings type={"ability"}>{firstUpper(pokemon.ability)}</PokeStrings>
+      <PokeStrings type={"height"}>{pokemon.height}</PokeStrings>
+      <PokeStrings type={"weight"}>{pokemon.weight}</PokeStrings>
+      <PokeStrings type={"base experience"}>
+        {pokemon.base_experience}
+      </PokeStrings>
+    </Wrapper>
+    // </Wrapper>
   );
 };
 

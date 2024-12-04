@@ -35,9 +35,18 @@
       "username": "Michał",
       "password": "zaq1@wsX",
       "email": "pp@w2.ww"
+    },
+    {
+      "id": 7,
+      "username": "Sdd",
+      "password": "zaq12wsX!",
+      "email": "q@w.ww"
     }
   ],
-  "favorities": [1, 7],
+  "favorities": [
+    1,
+    7
+  ],
   "pokemons": [
     {
       "id": 1,

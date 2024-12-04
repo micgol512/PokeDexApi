@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
-import { extractUrls } from "../services/extractURL";
-// import { API_URL, LOCAL_URL } from "../services/links";
+import { API_URL } from "../services/links";
 
-const useGetPokemonData = (url) => {
+const useGetPokeByID = (id) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [pokemons, setPokemons] = useState([]);
+  const [pokemon, setPokemon] = useState([]);
   const [error, setError] = useState(null);
-  const [pokemonsURL, setPokemonsURL] = useState([]);
   // const getPokemons = async () => {
   //   setIsLoading(true);
   //   const [apiPokesResp, localPokesResp] = await Promise.all([
@@ -25,19 +23,7 @@ const useGetPokemonData = (url) => {
       console.log("Pobieranie Danych o pokemonach");
 
       try {
-        const resp = await fetch(url);
-        const data = await resp.json();
-        setPokemonsURL(data.results);
-      } catch (e) {
-        setError(e);
-      }
-    };
-    fetchData();
-    const fetchPokes = async (_url) => {
-      console.log("Pobieranie szczegółów dla: ", _url);
-
-      try {
-        const resp = await fetch(_url);
+        const resp = await fetch(`${API_URL}/pokemon/${id}`);
         const data = await resp.json();
         const pokeData = {
           id: data.id,
@@ -48,24 +34,17 @@ const useGetPokemonData = (url) => {
           ability: data.abilities.filter(
             ({ is_hidden }) => is_hidden === false
           )[0].ability.name,
-
-          images: extractUrls(data.sprites),
+          images: { ...data.sprites },
         };
-        setPokemons((p) => {
-          if (p.length < 15) return [...p, pokeData];
-          return [pokeData];
-        });
+        setPokemon(pokeData);
       } catch (e) {
         setError(e);
       }
     };
-    // setPokemons(() => []);
-    pokemonsURL.map(({ url }) => fetchPokes(url));
-    setIsLoading(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
+    fetchData();
+  }, [id]);
 
-  return { pokemons, isLoading, error };
+  return { pokemon, isLoading, error };
 };
 
-export default useGetPokemonData;
+export default useGetPokeByID;
