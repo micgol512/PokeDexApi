@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { extractUrls } from "../services/extractURL";
+import { removeNullValues } from "../services/functions.js";
 // import { API_URL, LOCAL_URL } from "../services/links";
 
 const useGetPokemonData = (url) => {
@@ -22,7 +22,7 @@ const useGetPokemonData = (url) => {
   useEffect(() => {
     setIsLoading(true);
     const fetchData = async () => {
-      console.log("Pobieranie Danych o pokemonach");
+      // console.log("Pobieranie Danych o pokemonach");
 
       try {
         const resp = await fetch(url);
@@ -34,7 +34,7 @@ const useGetPokemonData = (url) => {
     };
     fetchData();
     const fetchPokes = async (_url) => {
-      console.log("Pobieranie szczegółów dla: ", _url);
+      // console.log("Pobieranie szczegółów dla: ", _url);
 
       try {
         const resp = await fetch(_url);
@@ -49,8 +49,10 @@ const useGetPokemonData = (url) => {
             ({ is_hidden }) => is_hidden === false
           )[0].ability.name,
 
-          images: extractUrls(data.sprites),
+          images: removeNullValues(data.sprites),
         };
+        console.log("PokeData:", pokeData);
+
         setPokemons((p) => {
           if (p.length < 15) return [...p, pokeData];
           return [pokeData];

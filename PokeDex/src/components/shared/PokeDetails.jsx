@@ -3,13 +3,14 @@ import styled, { css } from "styled-components";
 import Wrapper from "./Wrapper";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetPokeByID from "../../hooks/useGetPokeByID";
+import { firstUpper } from "../../services/functions";
 const PokeDexBasic = styled.div`
   position: absolute;
   top: 0;
   left: calc(50% - 200px);
   width: 400px;
   height: 300px;
-  background: transparent url("../../src/images/PokeDex_show.png") no-repeat
+  background: transparent url("../../src/images/dex/PokedexBase.png") no-repeat
     center / contain;
   z-index: 5;
 `;
@@ -19,7 +20,7 @@ const PokeImage = styled.img`
   left: calc(50% - 165px);
   width: 130px;
   height: 90px;
-  background: url("../../src/images/pokeBG.jpg");
+  background: url("../../src/images/dex/dexBG${({ randBG }) => randBG}.jpg");
   background-position: 0;
   background-size: cover;
   background-repeat: no-repeat;
@@ -32,7 +33,8 @@ const PokeString = styled.div`
   width: auto;
   height: auto;
   background-color: transparent;
-  color: white;
+  color: lime;
+  text-shadow: 0px 0px 1px #000;
   z-index: 5;
   font-size: 0.7rem;
   font-weight: 800;
@@ -61,55 +63,87 @@ const PokeString = styled.div`
     if (type === "base experience")
       return css`
         display: flex;
+        flex-direction: column;
         top: 245px;
         left: calc(50% - 148px);
-
-        &::first-line: {
-          color: red;
-          font-size: 0.1rem;
-        }
       `;
   }}
 `;
 
-const PokeStrings = ({ type, children }) => {
-  if (type === "name") return <PokeString type={type}>{children}</PokeString>;
-  return (
-    <PokeString type={type}>
-      {`${type.slice(0, 1).toUpperCase()}${type.slice(1)}`}:
-      {type === "base experience" ? <br /> : ""}
-      {children}
-    </PokeString>
-  );
-};
+const Span = styled.span`
+  color: #fff;
+  text-shadow: 0px 0px 1px darkred;
+  font-size: 0.5rem;
+`;
+const NavBtn = styled.div`
+  position: absolute;
+  top: 228px;
+  color: red;
+  font-weight: 800;
+  cursor: pointer;
+  z-index: 5;
+  ${({ nav }) => {
+    if (nav === "-")
+      return css`
+        left: calc(50% - 65px);
+      `;
+    else
+      return css`
+        left: calc(50% - 35px);
+      `;
+  }}
+  &:before {
+    content: "${({ nav }) => {
+      if (nav === "-") return css`‹‹`;
+      return css`››`;
+    }}";
+  }
+`;
+const PokeStrings = ({ type, children }) => (
+  <PokeString onClick={(e) => e.stopPropagation()} type={type}>
+    {type !== "name" && <Span>{`${firstUpper(type)}: `}</Span>}
+    {children}
+  </PokeString>
+);
 
 const PokeDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { pokemon, isLoading, error } = useGetPokeByID(id);
-  const firstUpper = (string = "none") =>
-    `${string.slice(0, 1).toUpperCase()}${string.slice(1)}`;
+  const randBG = Math.ceil(Math.random() * 3);
+
   const backPage = () => {
-    navigate(-1);
+    navigate(`/pokemon`);
+  };
+
+  const prevPoke = () => {
+    if (id > 1) navigate(`/pokemon/${id - 1}`);
+  };
+  const nextPoke = () => {
+    if (id < 151) navigate(`/pokemon/${parseInt(id) + 1}`);
   };
 
   if (error) return <div>{error}</div>;
   if (!isLoading) return <div>Loading...</div>;
-  console.log("Details: ", pokemon.images);
+  // console.log("Details: ", pokemon.images);
 
   return (
     // <Wrapper full>
     <Wrapper
       full
-      blur
+      blur="true"
       styles={{
         top: "110px",
-        height: "calc(100vh + 150px)",
+        height: "100vh",
       }}
       onClick={backPage}
     >
-      <PokeDexBasic onClick={(e) => e.defaultPrevented()} />
-      <PokeImage src={pokemon.images?.front_default} alt={pokemon.name} />
+      <PokeDexBasic onClick={(e) => e.stopPropagation()} />
+      <PokeImage
+        src={pokemon.images?.front_default}
+        alt={pokemon.name}
+        randBG={randBG}
+      />
       <PokeStrings type={"name"}>{firstUpper(pokemon.name)}</PokeStrings>
       <PokeStrings type={"ability"}>{firstUpper(pokemon.ability)}</PokeStrings>
       <PokeStrings type={"height"}>{pokemon.height}</PokeStrings>
@@ -117,6 +151,21 @@ const PokeDetails = () => {
       <PokeStrings type={"base experience"}>
         {pokemon.base_experience}
       </PokeStrings>
+      <NavBtn
+        onClick={(e) => {
+          e.stopPropagation();
+          prevPoke();
+        }}
+        nav="-"
+      />
+      <NavBtn
+        onClick={(e) => {
+          e.stopPropagation();
+          nextPoke();
+        }}
+        nav="+"
+      />
+      {/* <NavBtn type="+" /> */}
     </Wrapper>
     // </Wrapper>
   );

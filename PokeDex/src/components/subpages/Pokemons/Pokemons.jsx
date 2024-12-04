@@ -21,7 +21,7 @@ const Pokemons = () => {
   // );
 
   return (
-    <div>
+    <Wrapper styles={{ justifyContent: "center" }}>
       Pokemons
       {/* <StylButton onClick={() => popFromArena(1)}>dec 1</StylButton>
       <StylButton onClick={() => popFromArena(2)}>dec 2</StylButton>
@@ -35,7 +35,7 @@ const Pokemons = () => {
       {isLoading ? "Loading..." : <PokemonList pokemons={pokemons} />}
       <StaticPagination />
       <Outlet />
-    </div>
+    </Wrapper>
   );
 };
 

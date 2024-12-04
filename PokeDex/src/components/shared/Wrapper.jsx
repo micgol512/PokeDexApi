@@ -23,7 +23,7 @@ const FlexDiv = styled.div.withConfig({
 })`
   display: flex;
   flex-flow: column nowrap;
-  gap: 1rem;
+  gap: 0.3rem;
   align-items: center;
   justify-content: center;
   ${({ styles }) => styles && css(styles)};
