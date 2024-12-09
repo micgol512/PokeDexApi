@@ -5,6 +5,7 @@ import { NavButton, Navbar } from "./Navbar";
 import { LoginContext } from "../../../context/LoginContext";
 import Login from "../Login/Login";
 import useGetPokemonData from "../../../hooks/useGetPokemonData";
+import ThemeChanger from "./ThemeChanger";
 
 const Header = () => {
   const { isLogged } = useContext(LoginContext);
@@ -30,11 +31,11 @@ const Header = () => {
         }}
       >
         <Logo />
-        <Wrapper>
+        <Wrapper styles={{ alignItems: "end" }}>
           <Wrapper styles={{ flexFlow: "row nowrap" }}>
-            {" "}
             <Login />
             {!isLogged && <NavButton name={"Register"} path={"register"} />}
+            <ThemeChanger />
           </Wrapper>
           <Navbar />
         </Wrapper>

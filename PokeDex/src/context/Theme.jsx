@@ -2,7 +2,7 @@
 import { createContext, useState } from "react";
 import { ThemeProvider } from "styled-components";
 
-const Theme = createContext();
+export const Theme = createContext();
 
 const basicThemeStyles = {
   light: {
@@ -23,10 +23,10 @@ const basicThemeStyles = {
   },
   dark: {
     colors: {
-      color: "#0c0c0c",
+      color: "blue",
       focusColor: "#ffcc00",
       hoverColor: "#ffcc00",
-      bg: "#fcfcfc",
+      bg: "#cfcfcf",
       focusBg: "#cc0000",
       hoverBg: "#cc0000",
       border: "#3c6aff",
@@ -44,7 +44,8 @@ export const ThemeProviderWrapp = ({ children }) => {
   const currentTheme = basicThemeStyles[theme];
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    console.log("zmiania motywu");
+    setTheme((p) => (p === "light" ? "dark" : "light"));
   };
 
   return (

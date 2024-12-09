@@ -29,7 +29,8 @@ const Arena = () => {
           }}
           width={"300px"}
           height={"300px"}
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeId}.png`}
+          // src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeId}.png`}
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokeId}.svg`}
           alt="left"
         />
         <img
@@ -40,9 +41,7 @@ const Arena = () => {
           }}
           width={"300px"}
           height={"300px"}
-          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${
-            150 - parseInt(pokeId) + 1
-          }.png`}
+          src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokeId}.svg`}
           alt="left"
         />
         <button onClick={() => setPokeId((p) => p + 1)}>Fight</button>
