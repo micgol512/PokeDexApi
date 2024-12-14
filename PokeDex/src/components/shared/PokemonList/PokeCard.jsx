@@ -2,6 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import styled, { css, keyframes } from "styled-components";
 import { firstUpper } from "../../../services/functions";
+import FavIcon from "../FavIcon";
 
 const rotateShadow = keyframes`
   0% {
@@ -64,10 +65,13 @@ const StyledImg = styled.img`
 `;
 const PokeCard = ({ pokemon }) => {
   const navigate = useNavigate();
+  // console.log("POKECARD: ", pokemon);
+
   return (
     <BaseCard onClick={() => navigate(`/pokemon/${pokemon.id}`)}>
       <StyledImg src={pokemon.images.front_default} alt={pokemon.name} />
-      {firstUpper(pokemon.name)}
+      {firstUpper(pokemon.name)} {pokemon?.isFavorites ? " tak" : " nie"}
+      <FavIcon isFavorites={pokemon?.isFavorites} id={pokemon.id} />
     </BaseCard>
   );
 };

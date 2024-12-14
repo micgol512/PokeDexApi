@@ -5,11 +5,13 @@ import { useContext } from "react";
 
 const StyledPaginaton = styled(Pagination)(({ theme }) => {});
 const StaticPagination = () => {
-  const { getPage, setPage } = useContext(PageContext);
+  const { offset, setPage, setOffset } = useContext(PageContext);
   const handleChange = (_e, value) => {
-    setPage(value);
+    // setOffset;
+    setOffset((value - 1) * 15);
+    // setPage(value);
   };
-
+  const getPage = () => Math.ceil(offset / 15) + 1;
   return (
     <Pagination
       count={10}

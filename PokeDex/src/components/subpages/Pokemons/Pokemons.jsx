@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ArenaContext } from "../../../context/ArenaContext";
 
 import StylButton from "../../shared/StylButton";
@@ -9,17 +9,18 @@ import { API_URL } from "../../../services/links";
 import PokemonList from "../../shared/PokemonList/PokemonList";
 import { PageContext } from "../../../context/PageContext";
 import StaticPagination from "../../shared/Pagination/StaticPagination";
+import { PokemonsListContext } from "../../../context/PokemonsListContext";
 
 const Pokemons = () => {
   const { pushToArena, popFromArena } = useContext(ArenaContext);
   const { offset } = useContext(PageContext);
-  const { pokemons, isLoading, error } = useGetPokemonData(
-    `${API_URL}/pokemon?limit=15&offset=${offset}`
-  );
+  const { pokemonsList, isLoading } = useContext(PokemonsListContext);
   // const { pokemons, isLoading, error } = useGetPokemonData(
   //   `${API_URL}/pokemon/1`
   // );
-
+  useEffect(() => {
+    console.log("IsLoading: ", isLoading);
+  }, [isLoading]);
   return (
     <Wrapper styles={{ justifyContent: "center" }}>
       Pokemons
@@ -32,7 +33,7 @@ const Pokemons = () => {
       <Link to={"/pokemon/1"}>Pokemon 1 </Link>
       <Link to={"/pokemon/2"}>Pokemon 2 </Link>
        */}
-      {isLoading ? "Loading..." : <PokemonList pokemons={pokemons} />}
+      {isLoading ? "Loading..." : <PokemonList />}
       <StaticPagination />
       <Outlet />
     </Wrapper>

@@ -7,6 +7,7 @@ import Layout from "./components/layout/Layout";
 import "./App.css";
 import { ThemeProviderWrapp } from "./context/Theme";
 import { PageProvider } from "./context/PageContext";
+import { PokemonsListProvider } from "./context/PokemonsListContext";
 
 function App() {
   return (
@@ -20,17 +21,19 @@ function App() {
         horizontal: "left",
       }}
     >
-      <LoginProvider>
-        <ArenaProvider>
-          <ThemeProviderWrapp>
-            <PageProvider>
-              <Layout>
-                <Outlet />
-              </Layout>
-            </PageProvider>
-          </ThemeProviderWrapp>
-        </ArenaProvider>
-      </LoginProvider>
+      <PokemonsListProvider>
+        <LoginProvider>
+          <ArenaProvider>
+            <ThemeProviderWrapp>
+              <PageProvider>
+                <Layout>
+                  <Outlet />
+                </Layout>
+              </PageProvider>
+            </ThemeProviderWrapp>
+          </ArenaProvider>
+        </LoginProvider>
+      </PokemonsListProvider>
     </SnackbarProvider>
   );
 }

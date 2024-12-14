@@ -14,19 +14,34 @@ export const extractUrls = (obj) => {
 };
 
 export const removeNullValues = (obj) => {
-  if (typeof obj !== "object" || obj === null) return obj; // Zwróć wartość, jeśli nie jest obiektem
+  if (typeof obj !== "object" || obj === null) return obj;
 
-  const result = Array.isArray(obj) ? [] : {}; // Zachowaj strukturę (tablica/obiekt)
+  const result = Array.isArray(obj) ? [] : {};
 
   for (const [key, value] of Object.entries(obj)) {
     if (value !== null) {
-      const cleanedValue = removeNullValues(value); // Rekurencyjne czyszczenie wartości
+      const cleanedValue = removeNullValues(value);
       if (cleanedValue !== undefined) {
-        // Dodaj tylko, jeśli wynik nie jest undefined
         result[key] = cleanedValue;
       }
     }
   }
 
   return result;
+};
+
+export const mergePokemon = (apiPokes, localPokes) => {
+  const mergePokes = apiPokes.map((apiPoke) => {
+    const match = localPokes.find((localPoke) => localPoke.id === apiPoke.id);
+    return match ? { ...apiPoke, ...match } : apiPoke;
+  });
+  return mergePokes;
+};
+
+export const sortPokesByKey = (pokes, key, ascending = true) => {
+  return pokes.sort((a, b) => {
+    if (a[key] < b[key]) return ascending ? -1 : 1;
+    if (a[key] > b[key]) return ascending ? 1 : -1;
+    return 0;
+  });
 };

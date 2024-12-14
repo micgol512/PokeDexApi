@@ -1,7 +1,11 @@
 /* eslint-disable react/prop-types */
+import { useContext } from "react";
 import PokeCard from "./PokeCard";
+import { PokemonsListContext } from "../../../context/PokemonsListContext";
 // name, height, weight, base_experience, sprites
 const PokemonList = ({ pokemons }) => {
+  // console.log("Komponent pokelIst otrzymuje: ", pokemons);
+  const { pokemonsList, isLoading } = useContext(PokemonsListContext);
   return (
     <div
       style={{
@@ -12,7 +16,7 @@ const PokemonList = ({ pokemons }) => {
         justifyContent: "center",
       }}
     >
-      {pokemons.map((pokemon) => (
+      {pokemonsList.map((pokemon) => (
         <PokeCard key={`pokecard-${pokemon.id}`} pokemon={pokemon} />
       ))}
     </div>

@@ -4,6 +4,8 @@ import Wrapper from "./Wrapper";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetPokeByID from "../../hooks/useGetPokeByID";
 import { firstUpper } from "../../services/functions";
+import { useContext } from "react";
+import { PokemonsListContext } from "../../context/PokemonsListContext";
 const PokeDexBasic = styled.div`
   position: absolute;
   top: 0;
@@ -14,7 +16,9 @@ const PokeDexBasic = styled.div`
     center / contain;
   z-index: 5;
 `;
-const PokeImage = styled.img`
+const PokeImage = styled.img.withConfig({
+  shouldForwardProp: (prop) => prop !== "randBG",
+})`
   position: absolute;
   top: 90px;
   left: calc(50% - 165px);
@@ -110,6 +114,7 @@ const PokeDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
   const { pokemon, isLoading, error } = useGetPokeByID(id);
+  const { pokemonsList } = useContext(PokemonsListContext);
   const randBG = Math.ceil(Math.random() * 3);
 
   const backPage = () => {
@@ -122,6 +127,8 @@ const PokeDetails = () => {
   const nextPoke = () => {
     if (id < 151) navigate(`/pokemon/${parseInt(id) + 1}`);
   };
+  const getPokeByID = (_id) => pokemonsList.find((poke) => poke.id === _id);
+  // console.log(getPokeByID(id));
 
   if (error) return <div>{error}</div>;
   if (!isLoading) return <div>Loading...</div>;

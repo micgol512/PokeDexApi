@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
-import { LoginContext } from "../../../context/LoginContext";
+import { LoginContext } from "../context/LoginContext";
 import { enqueueSnackbar } from "notistack";
-import { LOCAL_URL } from "../../../services/links";
+import { LOCAL_URL } from "../services/links";
 
 const useLogin = () => {
   const [username, setUsername] = useState("");
@@ -27,7 +27,9 @@ const useLogin = () => {
           logOut();
         }
       } catch (err) {
-        enqueueSnackbar(`Failed to connect to the server: ${err}`, { variant: "error" });
+        enqueueSnackbar(`Failed to connect to the server: ${err}`, {
+          variant: "error",
+        });
         logOut();
       }
     } else {

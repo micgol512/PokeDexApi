@@ -1,73 +1,62 @@
-import { useEffect, useState } from "react";
-import { removeNullValues } from "../services/functions.js";
-// import { API_URL, LOCAL_URL } from "../services/links";
+import { useContext, useEffect, useState } from "react";
+import { removeNullValues, sortPokesByKey } from "../services/functions.js";
+import { PokemonsListContext } from "../context/PokemonsListContext.jsx";
 
 const useGetPokemonData = (url) => {
-  const [isLoading, setIsLoading] = useState(false);
+  const { setIsLoading } = useContext(PokemonsListContext);
+
   const [pokemons, setPokemons] = useState([]);
   const [error, setError] = useState(null);
-  const [pokemonsURL, setPokemonsURL] = useState([]);
-  // const getPokemons = async () => {
-  //   setIsLoading(true);
-  //   const [apiPokesResp, localPokesResp] = await Promise.all([
-  //     fetch(`${API_URL}/`),
-  //     fetch(`${LOCAL_URL}/pokemons`),
-  //   ]);
-  //   const [apiPokes, localPokes] = await Promise.all([
-  //     apiPokesResp.json(),
-  //     localPokesResp.json(),
-  //   ]);
-  // };
+
+  const fetchPokes = async (_url) => {
+    try {
+      const resp = await fetch(_url);
+      const data = await resp.json();
+
+      return {
+        id: data.id,
+        name: data.name,
+        base_experience: data.base_experience,
+        height: data.height,
+        weight: data.weight,
+        ability: data.abilities.find(({ is_hidden }) => !is_hidden)?.ability
+          .name,
+        images: removeNullValues(data.sprites),
+      };
+    } catch (e) {
+      setError(e);
+      return null;
+    }
+  };
 
   useEffect(() => {
-    setIsLoading(true);
     const fetchData = async () => {
-      // console.log("Pobieranie Danych o pokemonach");
+      setIsLoading(true);
 
       try {
         const resp = await fetch(url);
         const data = await resp.json();
-        setPokemonsURL(data.results);
+
+        const pokemonsData = await Promise.all(
+          data.results.map(({ url }) => fetchPokes(url))
+        );
+
+        setPokemons(pokemonsData.filter(Boolean));
       } catch (e) {
-        setError(e);
+        setError(e.message);
+      } finally {
+        setIsLoading(false);
       }
     };
+
     fetchData();
-    const fetchPokes = async (_url) => {
-      // console.log("Pobieranie szczegółów dla: ", _url);
+  }, [url, setIsLoading]);
 
-      try {
-        const resp = await fetch(_url);
-        const data = await resp.json();
-        const pokeData = {
-          id: data.id,
-          name: data.name,
-          base_experience: data.base_experience,
-          height: data.height,
-          weight: data.weight,
-          ability: data.abilities.filter(
-            ({ is_hidden }) => is_hidden === false
-          )[0].ability.name,
+  useEffect(() => {
+    setPokemons((prev) => sortPokesByKey(prev, "id", true));
+  }, [pokemons]);
 
-          images: removeNullValues(data.sprites),
-        };
-        console.log("PokeData:", pokeData);
-
-        setPokemons((p) => {
-          if (p.length < 15) return [...p, pokeData];
-          return [pokeData];
-        });
-      } catch (e) {
-        setError(e);
-      }
-    };
-    // setPokemons(() => []);
-    pokemonsURL.map(({ url }) => fetchPokes(url));
-    setIsLoading(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
-
-  return { pokemons, isLoading, error };
+  return { pokemons, error };
 };
 
 export default useGetPokemonData;

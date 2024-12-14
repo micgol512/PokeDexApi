@@ -2,7 +2,7 @@
 import { createContext, useState } from "react";
 import { ThemeProvider } from "styled-components";
 
-export const Theme = createContext();
+const Theme = createContext();
 
 const basicThemeStyles = {
   light: {
@@ -39,7 +39,7 @@ const basicThemeStyles = {
   },
 };
 
-export const ThemeProviderWrapp = ({ children }) => {
+const ThemeProviderWrapp = ({ children }) => {
   const [theme, setTheme] = useState("light");
   const currentTheme = basicThemeStyles[theme];
 
@@ -54,3 +54,4 @@ export const ThemeProviderWrapp = ({ children }) => {
     </Theme.Provider>
   );
 };
+export { Theme, ThemeProviderWrapp };

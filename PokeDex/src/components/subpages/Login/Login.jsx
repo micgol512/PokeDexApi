@@ -1,11 +1,17 @@
 import Input from "../../shared/Input";
 import Wrapper from "../../shared/Wrapper";
-import useLogin from "./useLogin";
 import StylButton from "../../shared/StylButton";
+import useLogin from "../../../hooks/useLogin";
 
 const Login = () => {
-  const { handleSubmit, setUsername, setPassword, username, password, isLogged } =
-    useLogin();
+  const {
+    handleSubmit,
+    setUsername,
+    setPassword,
+    username,
+    password,
+    isLogged,
+  } = useLogin();
 
   return (
     <Wrapper styles={{ flexFlow: "row nowrap" }}>
