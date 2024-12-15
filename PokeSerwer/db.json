@@ -57,33 +57,27 @@
       "id": 4,
       "wins": "0",
       "lose": "2",
+      "rows": "0"
+    },
+    {
+      "id": 7,
+      "wins": "0",
+      "lose": "2",
       "rows": "0",
       "isFavorites": true
     },
     {
-      "id": 7,
-      "isFavorites": true,
-      "wins": "0",
-      "lose": "2",
-      "rows": "0"
-    },
-    {
       "id": 25,
-      "isFavorites": true,
       "wins": "5",
       "lose": "1",
-      "rows": "2"
-    },
-    {
-      "id": 5,
+      "rows": "2",
       "isFavorites": true
     },
     {
-      "id": 9,
-      "isFavorites": true
-    },
-    {
-      "id": 3,
+      "id": 8,
+      "wins": "0",
+      "lose": "2",
+      "rows": "0",
       "isFavorites": true
     }
   ]

@@ -12,7 +12,6 @@ const useGetPokemonData = (url) => {
     try {
       const resp = await fetch(_url);
       const data = await resp.json();
-
       return {
         id: data.id,
         name: data.name,
@@ -21,7 +20,7 @@ const useGetPokemonData = (url) => {
         weight: data.weight,
         ability: data.abilities.find(({ is_hidden }) => !is_hidden)?.ability
           .name,
-        images: removeNullValues(data.sprites),
+        images: removeNullValues(data.sprites), //wybrać jedno albo z tablicy jeszcze zastanawiam sie
       };
     } catch (e) {
       setError(e);
@@ -43,7 +42,7 @@ const useGetPokemonData = (url) => {
 
         setPokemons(pokemonsData.filter(Boolean));
       } catch (e) {
-        setError(e.message);
+        setError(e);
       } finally {
         setIsLoading(false);
       }
@@ -52,9 +51,9 @@ const useGetPokemonData = (url) => {
     fetchData();
   }, [url, setIsLoading]);
 
-  useEffect(() => {
-    setPokemons((prev) => sortPokesByKey(prev, "id", true));
-  }, [pokemons]);
+  // useEffect(() => {
+  //   setPokemons((prev) => sortPokesByKey(prev, "id", true));
+  // }, [pokemons]);
 
   return { pokemons, error };
 };

@@ -4,8 +4,9 @@ import Wrapper from "./Wrapper";
 import { useNavigate, useParams } from "react-router-dom";
 import useGetPokeByID from "../../hooks/useGetPokeByID";
 import { firstUpper } from "../../services/functions";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { PokemonsListContext } from "../../context/PokemonsListContext";
+import FavIcon from "./FavIcon";
 const PokeDexBasic = styled.div`
   position: absolute;
   top: 0;
@@ -129,7 +130,9 @@ const PokeDetails = () => {
   };
   const getPokeByID = (_id) => pokemonsList.find((poke) => poke.id === _id);
   // console.log(getPokeByID(id));
-
+  useEffect(() => {
+    console.log("Pokemon ID:", getPokeByID(parseInt(id)));
+  }, []);
   if (error) return <div>{error}</div>;
   if (!isLoading) return <div>Loading...</div>;
   // console.log("Details: ", pokemon.images);
@@ -173,6 +176,10 @@ const PokeDetails = () => {
         nav="+"
       />
       {/* <NavBtn type="+" /> */}
+      <FavIcon
+        isFavorites={getPokeByID(parseInt(id)).isFavorites}
+        id={pokemon.id}
+      />
     </Wrapper>
     // </Wrapper>
   );

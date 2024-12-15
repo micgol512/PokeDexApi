@@ -50,11 +50,7 @@ const router = createBrowserRouter(
           path: "/register",
         },
         {
-          element: (
-            <NotLoggedRoute>
-              <Pokemons />
-            </NotLoggedRoute>
-          ),
+          element: <Pokemons />,
           path: "/pokemon",
           children: [{ element: <PokeDetails />, path: "/pokemon/:id" }],
         },

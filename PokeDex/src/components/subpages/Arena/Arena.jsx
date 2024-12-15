@@ -1,25 +1,25 @@
 import { useContext, useState } from "react";
 import { ArenaContext } from "../../../context/ArenaContext";
 import styled from "styled-components";
-const ArenaBasic = styled.div(({ theme, randBG }) => ({
+const ArenaBasic = styled.div(({ theme, randbg }) => ({
   display: "flex",
   color: "white",
   justifyContent: "center",
   width: "100%",
   height: "80vh",
-  background: `red url("../../src/images/arenas/arena${randBG}.jpg") no-repeat
+  background: `red url("../../src/images/arenas/arena${randbg}.jpg") no-repeat
     center / cover`,
 }));
 
 const Arena = () => {
   const { arenaPokemon } = useContext(ArenaContext);
   // const randBG = Math.ceil(Math.random() * 10);
-  const randBG = 10;
+  const randbg = 10;
   const [pokeId, setPokeId] = useState(1);
 
   if (arenaPokemon.length === 0)
     return (
-      <ArenaBasic randBG={randBG}>
+      <ArenaBasic randbg={randbg}>
         <img
           style={{
             position: "absolute",
