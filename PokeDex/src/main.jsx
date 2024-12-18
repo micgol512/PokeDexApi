@@ -26,6 +26,10 @@ const router = createBrowserRouter(
         { element: <Home />, path: "*" },
         { element: <Home />, path: "/" },
         {
+          element: <PokeDetails />,
+          path: "/:id",
+        },
+        {
           element: (
             <LoggedRoute>
               <NotLogged />

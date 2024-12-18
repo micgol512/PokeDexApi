@@ -6,7 +6,7 @@ import useGetPokeByID from "../../hooks/useGetPokeByID";
 import { firstUpper } from "../../services/functions";
 import { useContext, useEffect } from "react";
 import { PokemonsListContext } from "../../context/PokemonsListContext";
-import FavIcon from "./FavIcon";
+import FavoriteBtn from "./FavoriteBtn";
 const PokeDexBasic = styled.div`
   position: absolute;
   top: 0;
@@ -119,20 +119,20 @@ const PokeDetails = () => {
   const randBG = Math.ceil(Math.random() * 3);
 
   const backPage = () => {
-    navigate(`/pokemon`);
+    navigate(-1);
   };
 
   const prevPoke = () => {
-    if (id > 1) navigate(`/pokemon/${id - 1}`);
+    if (id > 1) navigate(`/${id - 1}`);
   };
   const nextPoke = () => {
-    if (id < 151) navigate(`/pokemon/${parseInt(id) + 1}`);
+    if (id < 151) navigate(`/${parseInt(id) + 1}`);
   };
   const getPokeByID = (_id) => pokemonsList.find((poke) => poke.id === _id);
   // console.log(getPokeByID(id));
-  useEffect(() => {
-    console.log("Pokemon ID:", getPokeByID(parseInt(id)));
-  }, []);
+  // useEffect(() => {
+  //   console.log("Pokemon ID:", getPokeByID(parseInt(id)));
+  // }, [id]);
   if (error) return <div>{error}</div>;
   if (!isLoading) return <div>Loading...</div>;
   // console.log("Details: ", pokemon.images);
@@ -176,8 +176,8 @@ const PokeDetails = () => {
         nav="+"
       />
       {/* <NavBtn type="+" /> */}
-      <FavIcon
-        isFavorites={getPokeByID(parseInt(id)).isFavorites}
+      <FavoriteBtn
+        isFavorites={getPokeByID(parseInt(id))?.isFavorites}
         id={pokemon.id}
       />
     </Wrapper>

@@ -4,7 +4,6 @@ import { PokemonsListContext } from "../context/PokemonsListContext.jsx";
 
 const useGetPokemonData = (url) => {
   const { setIsLoading } = useContext(PokemonsListContext);
-
   const [pokemons, setPokemons] = useState([]);
   const [error, setError] = useState(null);
 
@@ -20,7 +19,7 @@ const useGetPokemonData = (url) => {
         weight: data.weight,
         ability: data.abilities.find(({ is_hidden }) => !is_hidden)?.ability
           .name,
-        images: removeNullValues(data.sprites), //wybrać jedno albo z tablicy jeszcze zastanawiam sie
+        images: removeNullValues(data.sprites), //choose one or make Array of images
       };
     } catch (e) {
       setError(e);

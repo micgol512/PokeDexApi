@@ -33,8 +33,8 @@ const Pokemons = () => {
       <Link to={"/pokemon/1"}>Pokemon 1 </Link>
       <Link to={"/pokemon/2"}>Pokemon 2 </Link>
        */}
-      {isLoading ? "Loading..." : <PokemonList />}
-      <StaticPagination />
+      {isLoading ? "Loading..." : <PokemonList pokemons={pokemonsList} />}
+      {/* <StaticPagination /> */}
       <Outlet />
     </Wrapper>
   );

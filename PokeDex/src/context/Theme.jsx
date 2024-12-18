@@ -16,6 +16,7 @@ const basicThemeStyles = {
       border: "#3c6aff",
       placeholder: "#3c6affcc",
       error: "#ff0000",
+      primary: "#ff0000",
     },
     typography: {
       fontFamily: "'Roboto', sans-serif",
@@ -32,6 +33,7 @@ const basicThemeStyles = {
       border: "#3c6aff",
       placeholder: "#3c6affcc",
       error: "#ff0000",
+      primary: "#ff0000",
     },
     typography: {
       fontFamily: "'Roboto', sans-serif",

@@ -18,6 +18,7 @@ const ArenaProvider = ({ children }) => {
       }
       return [...p];
     });
+    console.log("Pokemoy w arenia to: ", arenaPokemon);
   };
   const popFromArena = (id) => {
     setArenaPokemon((p) => {
@@ -29,6 +30,8 @@ const ArenaProvider = ({ children }) => {
         return p.filter((pokeId) => pokeId !== id);
       }
     });
+
+    console.log("Pokemoy w arenia to: ", arenaPokemon);
   };
 
   return (

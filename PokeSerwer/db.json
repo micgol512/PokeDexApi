@@ -41,6 +41,12 @@
       "username": "Sdd",
       "password": "zaq12wsX!",
       "email": "q@w.ww"
+    },
+    {
+      "id": 8,
+      "username": "Aas",
+      "password": "Zaq12@wsx",
+      "email": "aa@ssc.ow"
     }
   ],
   "favorities": [
@@ -57,7 +63,8 @@
       "id": 4,
       "wins": "0",
       "lose": "2",
-      "rows": "0"
+      "rows": "0",
+      "isFavorites": true
     },
     {
       "id": 7,
@@ -70,14 +77,65 @@
       "id": 25,
       "wins": "5",
       "lose": "1",
-      "rows": "2",
-      "isFavorites": true
+      "rows": "2"
     },
     {
       "id": 8,
       "wins": "0",
       "lose": "2",
       "rows": "0",
+      "isFavorites": true
+    },
+    {
+      "id": 12,
+      "isFavorites": true
+    },
+    {
+      "id": 13,
+      "isFavorites": true
+    },
+    {
+      "id": 9,
+      "isFavorites": true
+    },
+    {
+      "id": 10,
+      "isFavorites": true
+    },
+    {
+      "id": 11,
+      "isFavorites": true
+    },
+    {
+      "id": 23,
+      "isFavorites": true
+    },
+    {
+      "id": 14,
+      "isFavorites": true
+    },
+    {
+      "id": 2,
+      "isFavorites": true
+    },
+    {
+      "id": 3,
+      "isFavorites": true
+    },
+    {
+      "id": 5,
+      "isFavorites": true
+    },
+    {
+      "id": 15,
+      "isFavorites": true
+    },
+    {
+      "id": 39,
+      "isFavorites": true
+    },
+    {
+      "id": 151,
       "isFavorites": true
     }
   ]

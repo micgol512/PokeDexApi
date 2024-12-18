@@ -16,7 +16,7 @@ const Header = () => {
   const { offset } = useContext(PageContext);
   const { setPokemonsList } = useContext(PokemonsListContext);
   const { pokemons } = useGetPokemonData(
-    `${API_URL}/pokemon?limit=15&offset=${offset}`
+    `${API_URL}/pokemon?limit=151&offset=0`
   );
 
   // fetch(`${API_URL}/pokemon?limit=15&offset=0`).then((resp) => resp.json())
@@ -37,7 +37,7 @@ const Header = () => {
       // setPokemonsList((p) => mergePokemon(pokemons, p));
     } else setPokemonsList(pokemons);
     // setIsLoading(false);
-  }, [isLogged, offset]);
+  }, [isLogged, pokemons]);
 
   return (
     <Wrapper
