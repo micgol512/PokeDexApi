@@ -28,8 +28,9 @@ const ArenaInactiveIcon = styled(StadiumOutlinedIcon)`
 
 const ArenaBtn = ({ pokemon }) => {
   const { isLogged } = useContext(LoginContext);
-  const [isInArena, setIsInArena] = useState(false);
-  const { arenaPokemon, pushToArena, popFromArena } = useContext(ArenaContext);
+
+  const { arenaPokemon, pushToArena, popFromArena, isInArena } =
+    useContext(ArenaContext);
 
   const toggleArena = (e) => {
     e.stopPropagation();
@@ -39,11 +40,11 @@ const ArenaBtn = ({ pokemon }) => {
       });
       return;
     }
-    !isInArena ? pushToArena(pokemon) : popFromArena(pokemon);
-    setIsInArena(!isInArena);
+    !isInArena(pokemon.id) ? pushToArena(pokemon) : popFromArena(pokemon);
+    // setIsInArena(!isInArena(pokemon.id));
   };
 
-  return isInArena ? (
+  return isInArena(pokemon.id) ? (
     <ArenaActiveIcon onClick={toggleArena} />
   ) : (
     <ArenaInactiveIcon onClick={toggleArena} />

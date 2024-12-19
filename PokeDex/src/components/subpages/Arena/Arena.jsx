@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { ArenaContext } from "../../../context/ArenaContext";
 import styled from "styled-components";
-import PokeCard from "../../shared/PokemonList/PokeCard";
+import PokeCard from "../../shared/PokeCard";
 import { PokemonsListContext } from "../../../context/PokemonsListContext";
 import Wrapper from "../../shared/Wrapper";
 const ArenaBasic = styled.div(({ theme, randbg }) => ({
@@ -10,6 +10,7 @@ const ArenaBasic = styled.div(({ theme, randbg }) => ({
   justifyContent: "center",
   width: "100%",
   height: "80vh",
+  gat: "15px",
   background: `red url("../../src/images/arenas/arena${randbg}.jpg") no-repeat
     center / cover`,
 }));
@@ -17,20 +18,22 @@ const ArenaBasic = styled.div(({ theme, randbg }) => ({
 const Arena = () => {
   const { arenaPokemon } = useContext(ArenaContext);
   const { pokemonsList } = useContext(PokemonsListContext);
-  // const randBG = Math.ceil(Math.random() * 10);
-  const randbg = 10;
+  const randbg = Math.ceil(Math.random() * 10);
+  // const randbg = 10;
   const [pokeId, setPokeId] = useState(1);
   if (arenaPokemon.length === 0)
-    return <div>Brak elementów do wyświetlenia</div>;
+    return (
+      <ArenaBasic randbg={randbg}>Brak elementów do wyświetlenia</ArenaBasic>
+    );
   // if (arenaPokemon.length === 1) return <PokeCard pokemon={arenaPokemon[0]} />;
   return (
-    <Wrapper styles={{ flexDirection: "row" }}>
+    <ArenaBasic randbg={randbg}>
       {arenaPokemon.map((pokemon, index) => (
         <PokeCard key={`ArenaPoke-${index}`} pokemon={pokemon} />
       ))}
       {/* <PokeCard pokemon={arenaPokemon[0]} />
       <PokeCard pokemon={arenaPokemon[1]} /> */}
-    </Wrapper>
+    </ArenaBasic>
   );
   // if (arenaPokemon.length === 0)
   //   return (

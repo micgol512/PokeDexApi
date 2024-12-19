@@ -6,14 +6,12 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import Wrapper from "../../shared/Wrapper";
 import useGetPokemonData from "../../../hooks/useGetPokemonData";
 import { API_URL } from "../../../services/links";
-import PokemonList from "../../shared/PokemonList/PokemonList";
-import { PageContext } from "../../../context/PageContext";
-import StaticPagination from "../../shared/Pagination/StaticPagination";
+import PokemonList from "../../shared/PokemonList";
 import { PokemonsListContext } from "../../../context/PokemonsListContext";
 
 const Pokemons = () => {
   const { pushToArena, popFromArena } = useContext(ArenaContext);
-  const { offset } = useContext(PageContext);
+
   const { pokemonsList, isLoading } = useContext(PokemonsListContext);
   // const { pokemons, isLoading, error } = useGetPokemonData(
   //   `${API_URL}/pokemon/1`
@@ -34,7 +32,6 @@ const Pokemons = () => {
       <Link to={"/pokemon/2"}>Pokemon 2 </Link>
        */}
       {isLoading ? "Loading..." : <PokemonList pokemons={pokemonsList} />}
-      {/* <StaticPagination /> */}
       <Outlet />
     </Wrapper>
   );

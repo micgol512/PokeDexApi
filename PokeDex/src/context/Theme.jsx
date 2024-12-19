@@ -30,10 +30,10 @@ const basicThemeStyles = {
       bg: "#cfcfcf",
       focusBg: "#cc0000",
       hoverBg: "#cc0000",
-      border: "#3c6aff",
+      border: "#0077ff",
       placeholder: "#3c6affcc",
       error: "#ff0000",
-      primary: "#ff0000",
+      primary: "#0077ff",
     },
     typography: {
       fontFamily: "'Roboto', sans-serif",

@@ -1,7 +1,7 @@
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import styled, { keyframes } from "styled-components";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { LOCAL_URL } from "../../services/links";
 import { LoginContext } from "../../context/LoginContext";
 import { enqueueSnackbar } from "notistack";

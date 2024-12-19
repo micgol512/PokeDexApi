@@ -56,22 +56,16 @@
   ],
   "pokemons": [
     {
-      "id": 1,
-      "isFavorites": true
-    },
-    {
       "id": 4,
       "wins": "0",
       "lose": "2",
-      "rows": "0",
-      "isFavorites": true
+      "rows": "0"
     },
     {
       "id": 7,
       "wins": "0",
       "lose": "2",
-      "rows": "0",
-      "isFavorites": true
+      "rows": "0"
     },
     {
       "id": 25,
@@ -83,59 +77,18 @@
       "id": 8,
       "wins": "0",
       "lose": "2",
-      "rows": "0",
-      "isFavorites": true
-    },
-    {
-      "id": 12,
-      "isFavorites": true
-    },
-    {
-      "id": 13,
-      "isFavorites": true
-    },
-    {
-      "id": 9,
-      "isFavorites": true
-    },
-    {
-      "id": 10,
-      "isFavorites": true
-    },
-    {
-      "id": 11,
-      "isFavorites": true
+      "rows": "0"
     },
     {
       "id": 23,
       "isFavorites": true
     },
     {
-      "id": 14,
-      "isFavorites": true
-    },
-    {
-      "id": 2,
-      "isFavorites": true
-    },
-    {
-      "id": 3,
-      "isFavorites": true
-    },
-    {
-      "id": 5,
-      "isFavorites": true
-    },
-    {
-      "id": 15,
+      "id": 151,
       "isFavorites": true
     },
     {
       "id": 39,
-      "isFavorites": true
-    },
-    {
-      "id": 151,
       "isFavorites": true
     }
   ]

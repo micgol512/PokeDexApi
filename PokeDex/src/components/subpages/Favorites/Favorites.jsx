@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import PokemonList from "../../shared/PokemonList/PokemonList";
+import PokemonList from "../../shared/PokemonList";
 import { PokemonsListContext } from "../../../context/PokemonsListContext";
 
 const Favorites = () => {

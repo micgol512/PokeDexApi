@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from "react-router-dom";
 import styled, { css, keyframes } from "styled-components";
-import { firstUpper } from "../../../services/functions";
-import FavoriteBtn from "../FavoriteBtn";
-import ArenaBtn from "../ArenaBtn";
-import Wrapper from "../Wrapper";
+import { firstUpper } from "../../services/functions";
+import FavoriteBtn from "./FavoriteBtn";
+import ArenaBtn from "./ArenaBtn";
+import Wrapper from "./Wrapper";
 
 const rotateShadow = keyframes`
   0% {
@@ -61,9 +61,9 @@ const BaseCard = styled.div(
 const StyledImg = styled.img`
   width: 50px;
   height: auto;
-  box-shadow: 0px 0px 5px #cccccc;
+  box-shadow: 0px 0px 5px ${({ theme }) => theme.colors.primary};
   border-radius: 50%;
-  background: #ccccccee;
+  background: ${({ theme }) => theme.colors.bg};
 `;
 const PokeCard = ({ pokemon }) => {
   const navigate = useNavigate();

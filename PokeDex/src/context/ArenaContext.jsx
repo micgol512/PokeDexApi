@@ -5,6 +5,7 @@ const ArenaContext = createContext(0);
 // eslint-disable-next-line react/prop-types
 const ArenaProvider = ({ children }) => {
   const [arenaPokemon, setArenaPokemon] = useState([]);
+  // const [isInArena, setIsInArena] = useState(false);
 
   const pushToArena = (id) => {
     setArenaPokemon((p) => {
@@ -30,12 +31,12 @@ const ArenaProvider = ({ children }) => {
         return p.filter((pokeId) => pokeId !== id);
       }
     });
-
-    console.log("Pokemoy w arenia to: ", arenaPokemon);
   };
-
+  const isInArena = (id) => arenaPokemon.some((p) => p.id === id);
   return (
-    <ArenaContext.Provider value={{ arenaPokemon, pushToArena, popFromArena }}>
+    <ArenaContext.Provider
+      value={{ arenaPokemon, pushToArena, popFromArena, isInArena }}
+    >
       {children}
     </ArenaContext.Provider>
   );
