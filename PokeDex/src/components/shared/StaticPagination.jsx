@@ -3,25 +3,25 @@ import { Pagination } from "@mui/material";
 import styled, { css } from "styled-components";
 import { useSearchParams } from "react-router-dom";
 
-const StyledPaginaton = styled(Pagination)`
-  .MuiPaginationItem-root {
-    color: black; /* Kolor tekstu */
-    border-radius: 50%; /* Zaokrąglenie */
-    &:hover {
-      background-color: ${({ theme }) =>
-        theme.colors.hover}; /* Kolor tła po najechaniu */
-    }
-  }
-   .Mui-selected {
-    background: yellow;
-    color: white;
-    font-weight: bold;
-    &:hover: background: yellow;
-  }
-  .MuiPaginationItem-icon {
-    color: red;
-  }
-`;
+// const StyledPagination = styled(Pagination)`
+//   .MuiPaginationItem-root {
+//     color: black; /* Kolor tekstu */
+//     border-radius: 50%; /* Zaokrąglenie */
+//     &:hover {
+//       background-color: ${({ theme }) =>
+//         theme.colors.hover}; /* Kolor tła po najechaniu */
+//     }
+//   }
+//    .Mui-selected {
+//     background: yellow;
+//     color: white;
+//     font-weight: bold;
+//     &:hover: background: yellow;
+//   }
+//   .MuiPaginationItem-icon {
+//     color: red;
+//   }
+// `;
 
 const StaticPagination = ({ max = 1 }) => {
   // const { offset, setPage, setOffset } = useContext(PageContext);
@@ -34,7 +34,7 @@ const StaticPagination = ({ max = 1 }) => {
     // setPage(value);
   };
   return (
-    <StyledPaginaton
+    <Pagination
       count={max}
       page={Number(currentPage)}
       showFirstButton

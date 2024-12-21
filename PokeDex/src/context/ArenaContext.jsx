@@ -23,6 +23,10 @@ const ArenaProvider = ({ children }) => {
   };
   const popFromArena = (id) => {
     setArenaPokemon((p) => {
+      if (id === undefined) {
+        return [];
+      }
+
       if (p.indexOf(id) === -1) {
         enqueueSnackbar("Pokemon isn't in arena", { variant: "info" });
         return [...p];

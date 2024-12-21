@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import { LOCAL_URL } from "../../services/links";
 import { LoginContext } from "../../context/LoginContext";
 import { enqueueSnackbar } from "notistack";
+import useUpdatePokemonStatus from "../../hooks/useUpdateStatus";
 
 const PulseHeart = keyframes`
 0% { transform: scale(1); }
@@ -96,6 +97,12 @@ const FavoriteBtn = ({ isFavorites = false, id }) => {
   const [isFavorite, setIsFavorite] = useState(isFavorites);
   const { isLogged } = useContext(LoginContext);
 
+  const updateStatus = useUpdatePokemonStatus();
+
+  // const handleClick = () => {
+  //   updateStatus(id, status);
+  // };
+
   const toggleFavorite = async (e) => {
     e.stopPropagation();
     if (!isLogged) {
@@ -104,7 +111,7 @@ const FavoriteBtn = ({ isFavorites = false, id }) => {
       });
       return;
     }
-    await updateFavoriteStatus(id, !isFavorite);
+    await updateStatus(id, { isFavorites: !isFavorite });
     setIsFavorite(!isFavorite);
   };
 
