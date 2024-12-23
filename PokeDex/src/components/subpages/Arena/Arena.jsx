@@ -185,8 +185,10 @@ const Arena = () => {
 
   useEffect(() => {
     console.log("ArenaZamontowana");
-
+    setFightStarted(false);
+    setEndFight(false);
     return () => {
+      if (endFight) popFromArena();
       console.log("ArenaOdmontowana");
     };
   }, []);
@@ -212,11 +214,12 @@ const Arena = () => {
     setTimeout(() => {
       const indexWinner = fight();
       if (indexWinner === -1) {
-        updateStatus(arenaPokemon[0].id, { rows: 1 });
-        updateStatus(arenaPokemon[1].id, { rows: 1 });
+        updateStatus(arenaPokemon[0].id, { draws: 1 });
+        updateStatus(arenaPokemon[1].id, { draws: 1 });
       } else {
         updateStatus(arenaPokemon[indexWinner].id, { wins: 1 });
         updateStatus(arenaPokemon[1 - indexWinner].id, { loses: 1 });
+        popFromArena(arenaPokemon[1 - indexWinner]);
       }
       setFightStarted(false);
       setEndFight(true);
@@ -225,7 +228,7 @@ const Arena = () => {
   const handleResetArenaFight = () => {
     setEndFight(false);
     setFightStarted(false);
-    popFromArena();
+    // popFromArena();
   };
   if (!endFight) {
     return (
@@ -261,7 +264,7 @@ const Arena = () => {
     return (
       <ArenaBasic>
         <ArenaFloor>
-          <PokeCard pokemon={arenaPokemon[fight()]} />
+          <PokeCard pokemon={arenaPokemon[0]} />
         </ArenaFloor>
         <FightButton onClick={handleResetArenaFight}>Reset Arena</FightButton>
       </ArenaBasic>

@@ -23,21 +23,21 @@
     {
       "id": 4,
       "wins": 0,
-      "loses": 5,
-      "rows": 0,
+      "loses": 9,
+      "draws": 0,
       "isFavorites": true
     },
     {
       "id": 7,
       "wins": 0,
       "loses": 2,
-      "rows": 0
+      "draws": 0
     },
     {
       "id": 25,
       "wins": 5,
-      "loses": 1,
-      "rows": 2,
+      "loses": 4,
+      "draws": 2,
       "isFavorites": true
     },
     {
@@ -48,20 +48,52 @@
     },
     {
       "id": 17,
-      "isFavorites": true
+      "isFavorites": true,
+      "wins": 4
     },
     {
       "id": 2,
-      "wins": 8
+      "wins": 8,
+      "loses": 7,
+      "isFavorites": true
     },
     {
       "id": 1,
-      "loses": 10,
-      "wins": 3
+      "loses": 13,
+      "wins": 3,
+      "base_experience": 0,
+      "width": 0,
+      "isFavorites": true,
+      "draws": 2
     },
     {
       "id": 3,
+      "wins": 11,
+      "base_experience": 0,
+      "width": 0,
+      "isFavorites": true,
+      "draws": 2
+    },
+    {
+      "id": 9,
+      "wins": 1
+    },
+    {
+      "id": 10,
+      "loses": 1
+    },
+    {
+      "id": 15,
       "wins": 2
+    },
+    {
+      "id": 151,
+      "wins": 2,
+      "loses": 1
+    },
+    {
+      "id": 150,
+      "wins": 1
     }
   ]
 }

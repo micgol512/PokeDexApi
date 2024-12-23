@@ -32,7 +32,6 @@ const StyledInput = ({
       error={!!error}
       helperText={error ? helperText : ""}
       autoComplete={autoComplete}
-      fullWidth
       variant="outlined"
       {...rest}
       sx={{
