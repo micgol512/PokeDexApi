@@ -24,14 +24,10 @@ import { useSearchParams } from "react-router-dom";
 // `;
 
 const StaticPagination = ({ max = 1 }) => {
-  // const { offset, setPage, setOffset } = useContext(PageContext);
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = searchParams.get("page") || 1;
   const handleChange = (_e, value) => {
     setSearchParams({ page: value });
-    // setOffset;
-    // setOffset((value - 1) * 15);
-    // setPage(value);
   };
   return (
     <Pagination
@@ -42,8 +38,8 @@ const StaticPagination = ({ max = 1 }) => {
       variant="outlined"
       shape="circular"
       onChange={handleChange}
+      sx={{ margin: " 1rem 0" }}
     />
-    // <StyledPaginaton count={10} page={getPage()} onChange={handleChange} />
   );
 };
 export default StaticPagination;

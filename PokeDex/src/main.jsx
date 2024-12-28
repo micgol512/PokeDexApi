@@ -16,6 +16,8 @@ import {
 } from "./components/subpages/";
 import PokeDetails from "./components/shared/PokeDetails.jsx";
 import { LoggedRoute, NotLoggedRoute } from "./components/RouteWrappers/";
+import EditAddForm from "./components/subpages/Edit/EditAddForm.jsx";
+import ListForEdit from "./components/subpages/Edit/ListForEdit.jsx";
 
 const router = createBrowserRouter(
   [
@@ -56,7 +58,6 @@ const router = createBrowserRouter(
         {
           element: <Pokemons />,
           path: "/pokemon",
-          children: [{ element: <PokeDetails />, path: "/pokemon/:id" }],
         },
 
         {
@@ -90,6 +91,11 @@ const router = createBrowserRouter(
             </NotLoggedRoute>
           ),
           path: "/edit",
+          children: [
+            { element: <EditAddForm />, path: "/edit/add" },
+            { element: <ListForEdit />, path: "/edit/list" },
+            { element: <EditAddForm />, path: "/edit/:id" },
+          ],
         },
 
         // { element: <ListElementsDetails />, path: "/summary/:id" },

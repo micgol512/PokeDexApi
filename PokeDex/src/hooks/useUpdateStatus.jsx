@@ -8,7 +8,6 @@ const useUpdatePokemonStatus = () => {
     try {
       const response = await fetch(`${LOCAL_URL}/pokemons/${id}`);
       if (response.ok) {
-        // Obiekt istnieje w bazie
         const pokemon = await response.json();
         let updatedPokemon = { ...pokemon };
 
@@ -29,7 +28,6 @@ const useUpdatePokemonStatus = () => {
               keys.includes("id") &&
               keys.includes("isFavorites")
             ) {
-              // Usuń całego Pokémona, jeśli ma tylko `id` i `isFavorites`
               await fetch(`${LOCAL_URL}/pokemons/${id}`, { method: "DELETE" });
               enqueueSnackbar(`Pokemon #${id} removed from favorites.`, {
                 variant: "info",
@@ -48,7 +46,6 @@ const useUpdatePokemonStatus = () => {
             return;
           }
         } else {
-          // Aktualizacja innych pól
           Object.keys(statusUpdates).forEach((key) => {
             if (key !== "isFavorites") {
               updatedPokemon[key] = (pokemon[key] || 0) + statusUpdates[key];
@@ -56,7 +53,6 @@ const useUpdatePokemonStatus = () => {
           });
         }
 
-        // Aktualizacja obiektu (PUT)
         const updateResponse = await fetch(`${LOCAL_URL}/pokemons/${id}`, {
           method: "PUT",
           headers: { "Content-Type": "application/json" },
@@ -69,7 +65,6 @@ const useUpdatePokemonStatus = () => {
           );
         }
       } else {
-        // Obiekt nie istnieje
         if (
           statusUpdates.isFavorites === true ||
           Object.keys(statusUpdates).some((key) => key !== "isFavorites")

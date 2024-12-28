@@ -26,6 +26,7 @@ const FlexDiv = styled.div.withConfig({
   gap: 0.3rem;
   align-items: center;
   justify-content: center;
+
   ${({ styles }) => styles && css(styles)};
 `;
 const Wrapper = ({ full, children, blur, styles, onClick }) => {

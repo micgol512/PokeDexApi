@@ -45,7 +45,9 @@ const registerSchema = z
       })
       .nonempty({ message: "Password is required." }),
 
-    repeatPassword: z.string().nonempty({ message: "Confirmation is required." }),
+    repeatPassword: z
+      .string()
+      .nonempty({ message: "Confirmation is required." }),
   })
   .refine((data) => data.password === data.repeatPassword, {
     message: "Confirmation is not valid.",
@@ -159,13 +161,9 @@ const RegisterForm = () => {
         autoComplete="email"
       />
 
-      <StylButton onClick={handleSubmit(onSubmit)} type="submit">
+      <StylButton type="submit">
         {loading ? "Checking..." : "Sing In"}
       </StylButton>
-      <button onClick={() => console.log("Errors: ", errors)} type="button">
-        Pokaż błędy
-      </button>
-      <button type="submit">Wyślij</button>
     </StyledForm>
   );
 };

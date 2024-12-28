@@ -39,7 +39,7 @@ const Pokemons = () => {
       <Link to={"/pokemon/2"}>Pokemon 2 </Link>
        */}
       {isLoading ? "Loading..." : <PokemonList pokemons={sortedPokemons} />}
-      <Outlet />
+      {/* <Outlet /> */}
     </Wrapper>
   );
 };

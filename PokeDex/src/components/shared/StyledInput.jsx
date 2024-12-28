@@ -24,7 +24,7 @@ const StyledInput = ({
   ...rest
 }) => {
   return (
-    <TextField
+    <StyledTextField
       {...(register ? { ...register(name) } : null)}
       label={label}
       placeholder={label}
@@ -33,17 +33,8 @@ const StyledInput = ({
       helperText={error ? helperText : ""}
       autoComplete={autoComplete}
       variant="outlined"
+      size="small"
       {...rest}
-      sx={{
-        "& .MuiOutlinedInput-root": {
-          "&:hover fieldset": {
-            borderColor: "blue", // Niebieski na hover
-          },
-          "&.Mui-focused fieldset": {
-            borderColor: "yellow", // Żółty na focus
-          },
-        },
-      }}
     />
   );
 };

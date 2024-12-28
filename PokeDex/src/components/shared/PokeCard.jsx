@@ -37,6 +37,7 @@ const rotateShadow = keyframes`
 `;
 const BaseCard = styled.div(
   ({ theme }) => css`
+    position: relative;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
@@ -46,8 +47,7 @@ const BaseCard = styled.div(
     border-radius: 0.5rem;
     cursor: pointer;
     width: auto;
-    height: 100px;
-    padding: 5px;
+    padding: ${({ size }) => (size === "large" ? "2rem" : "1rem")};
     transition: background-color 0.3s, transform 0.2s;
     box-shadow: 0px 0px 2px black;
     --border-color: ${theme.colors.border};
@@ -59,24 +59,44 @@ const BaseCard = styled.div(
 );
 
 const StyledImg = styled.img`
-  width: 50px;
+  width: ${({ size }) => (size === "large" ? "150px" : "100px")};
   height: auto;
   box-shadow: 0px 0px 5px ${({ theme }) => theme.colors.primary};
   border-radius: 50%;
   background: ${({ theme }) => theme.colors.bg};
 `;
-const PokeCard = ({ pokemon }) => {
+
+const PokeCard = ({ pokemon, size, forEdit }) => {
   const navigate = useNavigate();
   // console.log("POKECARD: ", pokemon);
 
   return (
-    <BaseCard onClick={() => navigate(`/${pokemon.id}`)}>
-      <StyledImg src={pokemon.images.front_default} alt={pokemon.name} />
+    <BaseCard
+      size={size}
+      onClick={() => navigate(`/${forEdit ? "edit/" : ""}${pokemon.id}`)}
+    >
+      <StyledImg size={size} src={pokemon.image} alt={pokemon.name} />
       {firstUpper(pokemon.name)}
-      <Wrapper styles={{ flexDirection: "row" }}>
-        <FavoriteBtn isFavorites={pokemon?.isFavorites} id={pokemon.id} />
-        <ArenaBtn pokemon={pokemon} />
-      </Wrapper>
+      {!forEdit && (
+        <Wrapper styles={{ flexDirection: "row" }}>
+          <FavoriteBtn isFavorites={pokemon?.isFavorites} id={pokemon.id} />
+          <ArenaBtn pokemon={pokemon} />
+        </Wrapper>
+      )}
+      {(pokemon?.wins || pokemon?.loses || pokemon?.draws) && (
+        <Wrapper
+          styles={{
+            fontSize: "0.8rem",
+            backgroundColor: "#00000080",
+            width: "80%",
+            borderRadius: "0.2rem",
+            position: "absolute",
+            bottom: "0px",
+          }}
+        >
+          W:{pokemon.wins || 0} L:{pokemon.loses || 0} D:{pokemon.draws || 0}
+        </Wrapper>
+      )}
     </BaseCard>
   );
 };

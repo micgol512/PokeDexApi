@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { removeNullValues, sortPokesByKey } from "../services/functions.js";
+import { removeNullValues } from "../services/functions.js";
 import { PokemonsListContext } from "../context/PokemonsListContext.jsx";
 
 const useGetPokemonData = (url) => {
@@ -7,7 +7,7 @@ const useGetPokemonData = (url) => {
   const [pokemons, setPokemons] = useState([]);
   const [error, setError] = useState(null);
 
-  const fetchPokes = async (_url) => {
+  const fetchPoke = async (_url) => {
     try {
       const resp = await fetch(_url);
       const data = await resp.json();
@@ -19,7 +19,7 @@ const useGetPokemonData = (url) => {
         weight: data.weight,
         ability: data.abilities.find(({ is_hidden }) => !is_hidden)?.ability
           .name,
-        images: removeNullValues(data.sprites), //choose one or make Array of images
+        image: data.sprites.front_default,
       };
     } catch (e) {
       setError(e);
@@ -36,7 +36,7 @@ const useGetPokemonData = (url) => {
         const data = await resp.json();
 
         const pokemonsData = await Promise.all(
-          data.results.map(({ url }) => fetchPokes(url))
+          data.results.map(({ url }) => fetchPoke(url))
         );
 
         setPokemons(pokemonsData.filter(Boolean));

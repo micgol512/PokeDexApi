@@ -22,9 +22,11 @@ const StyledButton = styled.button.withConfig({
 `;
 
 const StyledButtonCss = styled(Button)(({ theme, isActive }) => ({
-  borderRadius: "0.5rem",
-  color: theme.colors.color,
-  backgroundColor: theme.colors.bg,
+  "&&": {
+    borderRadius: "0.5rem",
+    color: theme.colors.color,
+    //backgroundColor: theme.colors.bg,
+  },
   "&:hover": {
     backgroundColor: isActive ? theme.colors.hoverbg : theme.colors.bg,
     color: isActive ? theme.colors.hoverColor : theme.colors.color,
@@ -33,11 +35,19 @@ const StyledButtonCss = styled(Button)(({ theme, isActive }) => ({
   },
 }));
 
-const StylButton = ({ onClick, children, isActive }) => (
+const StylButton = ({
+  onClick,
+  children,
+  isActive,
+  type = "button",
+  disabled,
+}) => (
   <StyledButtonCss
     variant={isActive ? "contained" : "outlined"}
     size="small"
     onClick={onClick}
+    type={type}
+    disabled={disabled}
   >
     {children}
   </StyledButtonCss>

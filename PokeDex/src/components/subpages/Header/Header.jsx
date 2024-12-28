@@ -8,18 +8,15 @@ import useGetPokemonData from "../../../hooks/useGetPokemonData";
 import ThemeChanger from "./ThemeChanger";
 import { API_URL, LOCAL_URL } from "../../../services/links";
 import { mergePokemon } from "../../../services/functions";
-import { PageContext } from "../../../context/PageContext";
 import { PokemonsListContext } from "../../../context/PokemonsListContext";
 
 const Header = () => {
   const { isLogged } = useContext(LoginContext);
-  const { offset } = useContext(PageContext);
   const { setPokemonsList } = useContext(PokemonsListContext);
   const { pokemons } = useGetPokemonData(
     `${API_URL}/pokemon?limit=151&offset=0`
   );
 
-  // fetch(`${API_URL}/pokemon?limit=15&offset=0`).then((resp) => resp.json())
   useEffect(() => {
     // setIsLoading(true);
     if (isLogged) {
@@ -64,7 +61,6 @@ const Header = () => {
           <Wrapper styles={{ flexFlow: "row nowrap" }}>
             <Login />
             {!isLogged && <NavButton name={"Register"} path={"register"} />}
-            {/* {console.log("PokemonsLists", pokemonsList)} */}
             <ThemeChanger />
           </Wrapper>
           <Navbar />

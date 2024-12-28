@@ -123,6 +123,7 @@ import PokeCard from "../../shared/PokeCard";
 import { PokemonsListContext } from "../../../context/PokemonsListContext";
 import Wrapper from "../../shared/Wrapper";
 import useUpdatePokemonStatus from "../../../hooks/useUpdateStatus";
+import { Button } from "@mui/material";
 
 const ArenaBasic = styled.div(({ theme, randbg }) => ({
   display: "flex",
@@ -143,17 +144,36 @@ const ArenaFloor = styled.div`
   align-items: center;
   width: 50%;
   height: 50%;
-  background: green;
+  // background: green;
   gap: 50px;
+  & > p {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.5);
+    width: 200px;
+    height: 100%;
+    trasform: scale(1);
+  }
 `;
 
-const FightButton = styled.button`
-  margin-top: 20px;
-  padding: 10px 20px;
-  background-color: yellow;
-  border: none;
-  cursor: pointer;
-`;
+const FightButton = styled(Button)({
+  "&&": {
+    marginTop: "20px",
+    padding: "10px 20px",
+    backgroundColor: "yellow",
+    color: "black",
+    border: "none",
+    cursor: "pointer",
+    transition: "background-color 0.3s, transform 0.2s",
+  },
+  "&:hover": {
+    backgroundColor: "darkorange",
+    transform: "scale(1.1)",
+  },
+});
 
 const moveToCenter = keyframes`
   0% { transform: translateX(0); }
@@ -168,7 +188,7 @@ const moveToCenterSecond = keyframes`
   25% { transform: translateX(-10px); }
   50% { transform: translateX(10px); }
   75% { transform: translateX(-20px); }
-  100% { transform: translateX(80%); }
+  100% { transform: translateX(50%); }
 `;
 const PokemonWrapper = styled.div`
   animation: ${({ animate, second }) =>
@@ -178,18 +198,16 @@ const PokemonWrapper = styled.div`
 
 const Arena = () => {
   const { arenaPokemon, popFromArena } = useContext(ArenaContext);
-  const { pokemonsList } = useContext(PokemonsListContext);
+  // const { pokemonsList } = useContext(PokemonsListContext);
   const [fightStarted, setFightStarted] = useState(false);
   const [endFight, setEndFight] = useState(false);
   const updateStatus = useUpdatePokemonStatus();
-
+  const randbg = Math.ceil(Math.random() * 10);
   useEffect(() => {
-    console.log("ArenaZamontowana");
     setFightStarted(false);
     setEndFight(false);
     return () => {
       if (endFight) popFromArena();
-      console.log("ArenaOdmontowana");
     };
   }, []);
   const fight = () => {
@@ -228,11 +246,11 @@ const Arena = () => {
   const handleResetArenaFight = () => {
     setEndFight(false);
     setFightStarted(false);
-    // popFromArena();
+    popFromArena();
   };
   if (!endFight) {
     return (
-      <ArenaBasic>
+      <ArenaBasic randbg={randbg}>
         {arenaPokemon.length === 0 && (
           <ArenaFloor>
             <p>Add first Pokémon to the Arena</p>
@@ -241,7 +259,7 @@ const Arena = () => {
         )}
         {arenaPokemon.length === 1 && (
           <ArenaFloor>
-            <PokeCard pokemon={arenaPokemon[0]} />
+            <PokeCard pokemon={arenaPokemon[0]} size="large" />
             <p>Add another Pokémon to the Arena</p>
           </ArenaFloor>
         )}
@@ -249,22 +267,24 @@ const Arena = () => {
           <>
             <ArenaFloor>
               <PokemonWrapper animate={fightStarted}>
-                <PokeCard pokemon={arenaPokemon[0]} />
+                <PokeCard pokemon={arenaPokemon[0]} size="large" />
               </PokemonWrapper>
               <PokemonWrapper animate={fightStarted} second={true}>
-                <PokeCard pokemon={arenaPokemon[1]} />
+                <PokeCard pokemon={arenaPokemon[1]} size="large" />
               </PokemonWrapper>
             </ArenaFloor>
-            <FightButton onClick={handleFight}>Fight</FightButton>
+            <FightButton onClick={handleFight} variant="contained">
+              Fight
+            </FightButton>
           </>
         )}
       </ArenaBasic>
     );
   } else {
     return (
-      <ArenaBasic>
+      <ArenaBasic randbg={randbg}>
         <ArenaFloor>
-          <PokeCard pokemon={arenaPokemon[0]} />
+          <PokeCard pokemon={arenaPokemon[0]} size="large" />
         </ArenaFloor>
         <FightButton onClick={handleResetArenaFight}>Reset Arena</FightButton>
       </ArenaBasic>

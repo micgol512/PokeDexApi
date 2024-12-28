@@ -17,13 +17,13 @@ const useLogin = () => {
         const response = await fetch(url);
         const data = await response.json();
         if (data.length > 0) {
-          enqueueSnackbar("Logowanie powiodło się!", { variant: "success" });
+          enqueueSnackbar("Login succesfull.", { variant: "success" });
           localStorage.setItem("user", username);
           logIn();
           setPassword("");
           setUsername("");
         } else {
-          enqueueSnackbar("Nieprawidłowe dane logowania", { variant: "error" });
+          enqueueSnackbar("Invalid username or password", { variant: "error" });
           logOut();
         }
       } catch (err) {
@@ -33,7 +33,7 @@ const useLogin = () => {
         logOut();
       }
     } else {
-      enqueueSnackbar("Wylogowano.", { variant: "info" });
+      enqueueSnackbar("Logout.", { variant: "info" });
       logOut();
       setPassword("");
       setUsername("");

@@ -7,6 +7,7 @@ import { firstUpper } from "../../services/functions";
 import { useContext, useEffect } from "react";
 import { PokemonsListContext } from "../../context/PokemonsListContext";
 import FavoriteBtn from "./FavoriteBtn";
+
 const PokeDexBasic = styled.div`
   position: absolute;
   top: 0;
@@ -17,6 +18,17 @@ const PokeDexBasic = styled.div`
     center / contain;
   z-index: 5;
 `;
+const PokeDexBasicClose = styled.div`
+  position: absolute;
+  top: 0;
+  left: calc(50% - 200px);
+  width: 400px;
+  height: 300px;
+  background: transparent url("../../src/images/dex/PokedexBaseClose.png")
+    no-repeat center / contain;
+  z-index: 5;
+`;
+
 const PokeImage = styled.img.withConfig({
   shouldForwardProp: (prop) => prop !== "randBG",
 })`
@@ -80,30 +92,6 @@ const Span = styled.span`
   text-shadow: 0px 0px 1px darkred;
   font-size: 0.5rem;
 `;
-const NavBtn = styled.div`
-  position: absolute;
-  top: 228px;
-  color: red;
-  font-weight: 800;
-  cursor: pointer;
-  z-index: 5;
-  ${({ nav }) => {
-    if (nav === "-")
-      return css`
-        left: calc(50% - 65px);
-      `;
-    else
-      return css`
-        left: calc(50% - 35px);
-      `;
-  }}
-  &:before {
-    content: "${({ nav }) => {
-      if (nav === "-") return css`‹‹`;
-      return css`››`;
-    }}";
-  }
-`;
 const PokeStrings = ({ type, children }) => (
   <PokeString onClick={(e) => e.stopPropagation()} type={type}>
     {type !== "name" && <Span>{`${firstUpper(type)}: `}</Span>}
@@ -114,28 +102,27 @@ const PokeStrings = ({ type, children }) => (
 const PokeDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { pokemon, isLoading, error } = useGetPokeByID(id);
   const { pokemonsList } = useContext(PokemonsListContext);
   const randBG = Math.ceil(Math.random() * 3);
+  const pokemon = pokemonsList.find((poke) => poke.id === parseInt(id));
 
   const backPage = () => {
     navigate(-1);
   };
-
-  const prevPoke = () => {
-    if (id > 1) navigate(`/${id - 1}`);
-  };
-  const nextPoke = () => {
-    if (id < 151) navigate(`/${parseInt(id) + 1}`);
-  };
-  const getPokeByID = (_id) => pokemonsList.find((poke) => poke.id === _id);
-  // console.log(getPokeByID(id));
-  // useEffect(() => {
-  //   console.log("Pokemon ID:", getPokeByID(parseInt(id)));
-  // }, [id]);
-  if (error) return <div>{error}</div>;
-  if (!isLoading) return <div>Loading...</div>;
-  // console.log("Details: ", pokemon.images);
+  if (!pokemon)
+    return (
+      <Wrapper
+        full
+        blur="true"
+        styles={{
+          top: "110px",
+          height: "100vh",
+        }}
+        onClick={backPage}
+      >
+        <PokeDexBasicClose />
+      </Wrapper>
+    );
 
   return (
     // <Wrapper full>
@@ -149,11 +136,7 @@ const PokeDetails = () => {
       onClick={backPage}
     >
       <PokeDexBasic onClick={(e) => e.stopPropagation()} />
-      <PokeImage
-        src={pokemon.images?.front_default}
-        alt={pokemon.name}
-        randBG={randBG}
-      />
+      <PokeImage src={pokemon.image} alt={pokemon.name} randBG={randBG} />
       <PokeStrings type={"name"}>{firstUpper(pokemon.name)}</PokeStrings>
       <PokeStrings type={"ability"}>{firstUpper(pokemon.ability)}</PokeStrings>
       <PokeStrings type={"height"}>{pokemon.height}</PokeStrings>
@@ -161,25 +144,7 @@ const PokeDetails = () => {
       <PokeStrings type={"base experience"}>
         {pokemon.base_experience}
       </PokeStrings>
-      <NavBtn
-        onClick={(e) => {
-          e.stopPropagation();
-          prevPoke();
-        }}
-        nav="-"
-      />
-      <NavBtn
-        onClick={(e) => {
-          e.stopPropagation();
-          nextPoke();
-        }}
-        nav="+"
-      />
-      {/* <NavBtn type="+" /> */}
-      <FavoriteBtn
-        isFavorites={getPokeByID(parseInt(id))?.isFavorites}
-        id={pokemon.id}
-      />
+      <FavoriteBtn isFavorites={pokemon?.isFavorites} id={pokemon.id} />
     </Wrapper>
     // </Wrapper>
   );

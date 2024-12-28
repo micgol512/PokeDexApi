@@ -88,7 +88,10 @@ const CssTextField = styled(TextField)(({ theme }) => ({
 
 const Input = React.forwardRef(
   // eslint-disable-next-line react/prop-types
-  ({ type = "text", value, onChange, placeholder, error, autoComplete }, ref) => {
+  (
+    { type = "text", value, onChange, placeholder, error, autoComplete },
+    ref
+  ) => {
     return (
       <CssTextField
         inputRef={ref}

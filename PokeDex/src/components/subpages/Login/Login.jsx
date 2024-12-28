@@ -2,6 +2,7 @@ import Input from "../../shared/Input";
 import Wrapper from "../../shared/Wrapper";
 import StylButton from "../../shared/StylButton";
 import useLogin from "../../../hooks/useLogin";
+import { FormControl } from "@mui/material";
 
 const Login = () => {
   const {
@@ -18,8 +19,12 @@ const Login = () => {
       {isLogged ? (
         <div>Zalogowano jako: {localStorage.getItem("user")}</div>
       ) : (
-        <form onSubmit={handleSubmit}>
-          <Wrapper styles={{ flexFlow: "row nowrap" }}>
+        <>
+          <FormControl
+            onSubmit={handleSubmit}
+            size="small"
+            sx={{ flexDirection: "row" }}
+          >
             <Input
               type="text"
               value={username}
@@ -27,15 +32,18 @@ const Login = () => {
               placeholder="Username"
               autoComplete="name"
             />
+          </FormControl>
+          <FormControl>
             <Input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="Password"
               autoComplete="current-password"
+              size="small"
             />
-          </Wrapper>
-        </form>
+          </FormControl>
+        </>
       )}
 
       <StylButton type="submit" onClick={handleSubmit}>
