@@ -1,126 +1,7 @@
-// import { useContext, useState } from "react";
-// import { ArenaContext } from "../../../context/ArenaContext";
-// import styled, { keyframes } from "styled-components";
-// import PokeCard from "../../shared/PokeCard";
-// import { PokemonsListContext } from "../../../context/PokemonsListContext";
-// import Wrapper from "../../shared/Wrapper";
-
-// const ArenaBasic = styled.div(({ theme, randbg }) => ({
-//   display: "flex",
-//   flexFlow: "column nowrap",
-//   color: "white",
-//   justifyContent: "center",
-//   alignItems: "center",
-//   width: "100%",
-//   height: "80vh",
-//   gat: "15px",
-//   background: `red url("../../src/images/arenas/arena${randbg}.jpg") no-repeat
-//     center / cover`,
-// }));
-
-// const ArenaFloor = styled.div`
-//   display: flex;
-//   flex-flow: row nowrap;
-//   justify-content: center;
-//   width: 50%;
-//   height: 100%;
-//   background: green;
-//   gap: 50px;
-// `;
-
-// const FightButton = styled.button`
-//   margin-top: 20px;
-//   padding: 10px 20px;
-//   background-color: yellow;
-//   border: none;
-//   cursor: pointer;
-// `;
-
-// const moveToCenter = keyframes`
-//   0% { transform: translateX(0); }
-//   100% { transform: translateX(-100%); }
-// `;
-// const moveToCenterSecond = keyframes`
-//   0% { transform: translateX(0); }
-//   100% { transform: translateX(100%); }
-// `;
-// const PokemonWrapper = styled.div`
-//   animation: ${({ animate, second }) =>
-//       animate ? (second ? moveToCenter : moveToCenterSecond) : "none"}
-//     2000ms forwards;
-// `;
-
-// const Arena = () => {
-//   const { arenaPokemon } = useContext(ArenaContext);
-//   const { pokemonsList } = useContext(PokemonsListContext);
-//   const randbg = Math.ceil(Math.random() * 10);
-//   // const randbg = 10;
-//   const [pokeId, setPokeId] = useState(1);
-//   if (arenaPokemon.length === 0)
-//     return (
-//       <ArenaBasic randbg={randbg}>Brak elementów do wyświetlenia</ArenaBasic>
-//     );
-//   // if (arenaPokemon.length === 1) return <PokeCard pokemon={arenaPokemon[0]} />;
-//   return (
-//     <ArenaBasic randbg={randbg}>
-//       <ArenaFloor>
-//         {arenaPokemon.map((pokemon, index) => (
-//           <PokeCard key={`ArenaPoke-${index}`} pokemon={pokemon} />
-//         ))}
-//         {/* <PokeCard pokemon={arenaPokemon[0]} />
-//       <PokeCard pokemon={arenaPokemon[1]} /> */}
-//       </ArenaFloor>
-//       <FightButton>Fight</FightButton>
-//     </ArenaBasic>
-//   );
-//   // if (arenaPokemon.length === 0)
-//   //   return (
-//   //     <ArenaBasic randbg={randbg}>
-//   //       <img
-//   //         style={{
-//   //           position: "absolute",
-//   //           top: "150px",
-//   //           left: "200px",
-//   //           transform: "scaleX(-1)",
-//   //         }}
-//   //         width={"300px"}
-//   //         height={"300px"}
-//   //         // src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokeId}.png`}
-//   //         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokeId}.svg`}
-//   //         alt="left"
-//   //       />
-//   //       <img
-//   //         style={{
-//   //           position: "absolute",
-//   //           top: "150px",
-//   //           right: "200px",
-//   //         }}
-//   //         width={"300px"}
-//   //         height={"300px"}
-//   //         src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${pokeId}.svg`}
-//   //         alt="left"
-//   //       />
-//   //       <button onClick={() => setPokeId((p) => p + 1)}>Fight</button>
-//   //       {console.log("Arena Lista: ", pokemonsList)}
-//   //     </ArenaBasic>
-//   //   );
-
-//   return (
-//     <div>
-//       In Arena {arenaPokemon.length === 1 ? "is" : "are"} {arenaPokemon.length}{" "}
-//       Poke
-//       {arenaPokemon.length === 1 ? "" : "s"}!!! Sprawdzam{" "}
-//       {arenaPokemon[1]?.name}
-//     </div>
-//   );
-// };
-
-// export default Arena;
 import { useContext, useEffect, useState } from "react";
 import { ArenaContext } from "../../../context/ArenaContext";
 import styled, { keyframes } from "styled-components";
 import PokeCard from "../../shared/PokeCard";
-import { PokemonsListContext } from "../../../context/PokemonsListContext";
 import Wrapper from "../../shared/Wrapper";
 import useUpdatePokemonStatus from "../../../hooks/useUpdateStatus";
 import { Button } from "@mui/material";
@@ -128,13 +9,13 @@ import { Button } from "@mui/material";
 const ArenaBasic = styled.div(({ theme, randbg }) => ({
   display: "flex",
   flexFlow: "column nowrap",
-  color: "white",
+  color: theme.colors.color,
   justifyContent: "center",
   alignItems: "center",
   width: "100%",
-  height: "80vh",
+  height: "100%",
   gap: "15px",
-  background: `red url("../../src/images/arenas/arena${randbg}.jpg") no-repeat center / cover`,
+  background: `url("../../src/images/arenas/arena${randbg}.jpg") no-repeat center / cover`,
 }));
 
 const ArenaFloor = styled.div`
@@ -142,9 +23,8 @@ const ArenaFloor = styled.div`
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  width: 50%;
-  height: 50%;
-  // background: green;
+  width: 100%;
+  height: 100%;
   gap: 50px;
   & > p {
     color: white;
@@ -154,26 +34,27 @@ const ArenaFloor = styled.div`
     text-align: center;
     background: rgba(0, 0, 0, 0.5);
     width: 200px;
-    height: 100%;
+    height: 250px;
     trasform: scale(1);
   }
 `;
 
-const FightButton = styled(Button)({
+const FightButton = styled(Button)(({ theme }) => ({
   "&&": {
-    marginTop: "20px",
-    padding: "10px 20px",
-    backgroundColor: "yellow",
-    color: "black",
+    fontWeight: "bold",
+    backgroundColor: theme.colors.focusColor,
+    color: theme.colors.color,
     border: "none",
     cursor: "pointer",
-    transition: "background-color 0.3s, transform 0.2s",
+    width: "100%",
+    transition: "background-color 0.3s, transform 0.2s, color 0.3s",
   },
   "&:hover": {
-    backgroundColor: "darkorange",
-    transform: "scale(1.1)",
+    color: theme.colors.bg,
+    backgroundColor: theme.colors.hoverBg,
+    transform: "scale(1.05)",
   },
-});
+}));
 
 const moveToCenter = keyframes`
   0% { transform: translateX(0); }
@@ -198,7 +79,6 @@ const PokemonWrapper = styled.div`
 
 const Arena = () => {
   const { arenaPokemon, popFromArena } = useContext(ArenaContext);
-  // const { pokemonsList } = useContext(PokemonsListContext);
   const [fightStarted, setFightStarted] = useState(false);
   const [endFight, setEndFight] = useState(false);
   const updateStatus = useUpdatePokemonStatus();
@@ -264,7 +144,7 @@ const Arena = () => {
           </ArenaFloor>
         )}
         {arenaPokemon.length === 2 && (
-          <>
+          <Wrapper styles={{ gap: "20px" }}>
             <ArenaFloor>
               <PokemonWrapper animate={fightStarted}>
                 <PokeCard pokemon={arenaPokemon[0]} size="large" />
@@ -276,17 +156,19 @@ const Arena = () => {
             <FightButton onClick={handleFight} variant="contained">
               Fight
             </FightButton>
-          </>
+          </Wrapper>
         )}
       </ArenaBasic>
     );
   } else {
     return (
       <ArenaBasic randbg={randbg}>
-        <ArenaFloor>
-          <PokeCard pokemon={arenaPokemon[0]} size="large" />
-        </ArenaFloor>
-        <FightButton onClick={handleResetArenaFight}>Reset Arena</FightButton>
+        <Wrapper styles={{ gap: "20px" }}>
+          <ArenaFloor>
+            <PokeCard pokemon={arenaPokemon[0]} size="large" />
+          </ArenaFloor>
+          <FightButton onClick={handleResetArenaFight}>Reset Arena</FightButton>
+        </Wrapper>
       </ArenaBasic>
     );
   }

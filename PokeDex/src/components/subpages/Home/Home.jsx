@@ -7,14 +7,13 @@ const Home = () => {
   const { syncData } = useSyncData();
   const { isLogged } = useContext(LoginContext);
   useEffect(() => {
-    console.log("Syncing data");
-
-    syncData();
+    if (isLogged) {
+      syncData();
+    }
   }, []);
   return (
     <Wrapper
       styles={{
-        textAlign: "center",
         marginTop: "20px",
         gap: "2rem",
       }}

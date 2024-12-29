@@ -1,4 +1,5 @@
-import { useContext, useState } from "react";
+/* eslint-disable react/prop-types */
+import { useContext } from "react";
 import styled, { keyframes } from "styled-components";
 import { ArenaContext } from "../../context/ArenaContext";
 import StadiumOutlinedIcon from "@mui/icons-material/StadiumOutlined";
@@ -29,8 +30,7 @@ const ArenaInactiveIcon = styled(StadiumOutlinedIcon)`
 const ArenaBtn = ({ pokemon }) => {
   const { isLogged } = useContext(LoginContext);
 
-  const { arenaPokemon, pushToArena, popFromArena, isInArena } =
-    useContext(ArenaContext);
+  const { pushToArena, popFromArena, isInArena } = useContext(ArenaContext);
 
   const toggleArena = (e) => {
     e.stopPropagation();
@@ -41,7 +41,6 @@ const ArenaBtn = ({ pokemon }) => {
       return;
     }
     !isInArena(pokemon.id) ? pushToArena(pokemon) : popFromArena(pokemon);
-    // setIsInArena(!isInArena(pokemon.id));
   };
 
   return isInArena(pokemon.id) ? (

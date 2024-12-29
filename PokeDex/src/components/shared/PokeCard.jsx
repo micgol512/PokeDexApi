@@ -63,12 +63,11 @@ const StyledImg = styled.img`
   height: auto;
   box-shadow: 0px 0px 5px ${({ theme }) => theme.colors.primary};
   border-radius: 50%;
-  background: ${({ theme }) => theme.colors.bg};
+  background: ${({ theme }) => theme.colors.main};
 `;
 
 const PokeCard = ({ pokemon, size, forEdit }) => {
   const navigate = useNavigate();
-  // console.log("POKECARD: ", pokemon);
 
   return (
     <BaseCard

@@ -16,9 +16,9 @@ const Pokemons = () => {
     );
   };
   return (
-    <Wrapper styles={{ justifyContent: "center" }}>
+    <Wrapper styles={{ justifyContent: "center", gap: "20px" }}>
       <StyledInput
-        label="Search Pokemon"
+        label="Search Pokémon"
         type="search"
         onChange={onChanegeSearch}
       />

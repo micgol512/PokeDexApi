@@ -2,9 +2,8 @@
 import styled, { css } from "styled-components";
 import Wrapper from "./Wrapper";
 import { useNavigate, useParams } from "react-router-dom";
-import useGetPokeByID from "../../hooks/useGetPokeByID";
 import { firstUpper } from "../../services/functions";
-import { useContext, useEffect } from "react";
+import { useContext } from "react";
 import { PokemonsListContext } from "../../context/PokemonsListContext";
 import FavoriteBtn from "./FavoriteBtn";
 import ArenaBtn from "./ArenaBtn";
@@ -100,9 +99,11 @@ const PokeStrings = ({ type, children }) => (
   </PokeString>
 );
 const FunctonsBtn = styled.div`
+  display: flex;
+  gap: 5px;
   position: absolute;
-  top: 209px;
-  left: calc(50% + 45px);
+  top: 5px;
+  left: calc(50% + 145px);
   z-index: 5;
 `;
 
@@ -133,15 +134,7 @@ const PokeDetails = () => {
 
   return (
     // <Wrapper full>
-    <Wrapper
-      full
-      blur="true"
-      styles={{
-        top: "110px",
-        height: "100vh",
-      }}
-      onClick={backPage}
-    >
+    <Wrapper full onClick={backPage}>
       <PokeDexBasic onClick={(e) => e.stopPropagation()} />
       <PokeImage src={pokemon.image} alt={pokemon.name} randBG={randBG} />
       <PokeStrings type={"name"}>{firstUpper(pokemon.name)}</PokeStrings>

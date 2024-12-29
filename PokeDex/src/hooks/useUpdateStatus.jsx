@@ -14,11 +14,11 @@ const useUpdatePokemonStatus = () => {
         if (statusUpdates.isFavorites === true) {
           if (!pokemon.isFavorites) {
             updatedPokemon.isFavorites = true;
-            enqueueSnackbar(`Pokemon #${id} add to favorites.`, {
+            enqueueSnackbar(`Pokémon #${id} add to favorites.`, {
               variant: "info",
             });
           } else {
-            enqueueSnackbar(`Pokemon #${id} is already a favorite.`, {
+            enqueueSnackbar(`Pokémon #${id} is already a favorite.`, {
               variant: "info",
             });
             return;
@@ -32,18 +32,18 @@ const useUpdatePokemonStatus = () => {
               keys.includes("isFavorites")
             ) {
               await fetch(`${LOCAL_URL}/pokemons/${id}`, { method: "DELETE" });
-              enqueueSnackbar(`Pokemon #${id} removed from favorites.`, {
+              enqueueSnackbar(`Pokémon #${id} removed from favorites.`, {
                 variant: "info",
               });
               return;
             } else {
               delete updatedPokemon.isFavorites;
-              enqueueSnackbar(`Pokemon #${id} removed from favorites.`, {
+              enqueueSnackbar(`Pokémon #${id} removed from favorites.`, {
                 variant: "info",
               });
             }
           } else {
-            enqueueSnackbar(`Pokemon #${id} is not a favorite.`, {
+            enqueueSnackbar(`Pokémon #${id} is not a favorite.`, {
               variant: "info",
             });
             return;
@@ -78,12 +78,17 @@ const useUpdatePokemonStatus = () => {
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(newPokemon),
           });
-          enqueueSnackbar(`Pokemon #${id} created with status updates.`, {
-            variant: "info",
-          });
+          enqueueSnackbar(
+            `Pokémon #${id} ${
+              statusUpdates.isFavorites ? "add to favorites." : "updated."
+            }`,
+            {
+              variant: "info",
+            }
+          );
         } else {
           enqueueSnackbar(
-            `Pokemon #${id} not found and no valid status to create.`,
+            `Pokémon #${id} not found and no valid status to create.`,
             {
               variant: "info",
             }

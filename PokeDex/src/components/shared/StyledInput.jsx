@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 import { TextField } from "@mui/material";
-// import { styled } from "styled-components";
-import { styled } from "@mui/material/styles";
+import { styled } from "styled-components";
 
 const StyledTextField = styled(TextField)(({ theme }) => ({
   "& .MuiOutlinedInput-root": {
     "&:hover fieldset": {
-      borderColor: "blue", // Niebieski na hover
+      borderColor: theme.colors.border, // Niebieski na hover
     },
     "&.Mui-focused fieldset": {
-      borderColor: "yellow", // Żółty na focus
+      color: theme.colors.focusColor,
+      borderColor: theme.colors.focusColor, // Żółty na focus
     },
   },
 }));

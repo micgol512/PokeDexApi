@@ -8,7 +8,8 @@ export const mergePokemon = (apiPokes, localPokes) => {
     const match = localPokes.find((localPoke) => localPoke.id === apiPoke.id);
     if (match) {
       if (match.isFavorites === undefined) {
-        const { isFavorites, ...rest } = apiPoke;
+        // eslint-disable-next-line no-unused-vars
+        const { _isFavorites, ...rest } = apiPoke;
         return { ...rest, ...match };
       }
       return { ...apiPoke, ...match };
@@ -44,6 +45,23 @@ export const updateLocalDatabase = async (id, updatedData) => {
       },
       body: JSON.stringify(updatedData),
     });
+
+    if (response.status === 404) {
+      const createResponse = await fetch(`${LOCAL_URL}/pokemons`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ id, ...updatedData }),
+      });
+
+      if (!createResponse.ok) {
+        throw new Error("Failed to create new pokemon in local database");
+      }
+
+      const result = await createResponse.json();
+      return result;
+    }
 
     if (!response.ok) {
       throw new Error("Failed to update local database");

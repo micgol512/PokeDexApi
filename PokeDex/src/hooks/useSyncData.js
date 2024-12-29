@@ -1,13 +1,14 @@
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect } from "react";
 
 import { mergePokemon } from "../services/functions";
 import { LOCAL_URL } from "../services/links";
 import { PokemonsListContext } from "../context/PokemonsListContext";
+import { LoginContext } from "../context/LoginContext";
 
 const useSyncData = () => {
   const { setPokemonsList } = useContext(PokemonsListContext);
-
-  const syncData = async () => {
+  const { isLogged } = useContext(LoginContext);
+  const syncData = useCallback(async () => {
     try {
       const response = await fetch(`${LOCAL_URL}/pokemons`);
 
@@ -15,13 +16,11 @@ const useSyncData = () => {
         throw new Error(`Failed to fetch Pokémon. Status: ${response.status}`);
       }
       const data = await response.json();
-      setPokemonsList((p) => mergePokemon(p, data));
+      isLogged && setPokemonsList((p) => mergePokemon(p, data));
     } catch (err) {
-      //   setError(error.message);
-    } finally {
-      //   setLoading(false);
+      console.error("ERROR: ", err);
     }
-  };
+  }, []);
 
   useEffect(() => {
     syncData();

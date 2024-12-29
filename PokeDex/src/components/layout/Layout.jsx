@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
-import Wrapper from "../shared/Wrapper";
 import { Header } from "../subpages/index";
 const RootWrapper = styled.div`
   display: flex;
@@ -11,6 +10,7 @@ const RootWrapper = styled.div`
   background: ${({ theme }) => theme.colors.border};
 `;
 const HeaderWrapper = styled.div`
+  padding: 10px 0;
   display: flex;
   flex-flow: row nowrap;
   background: red;
@@ -22,8 +22,15 @@ const HeaderWrapper = styled.div`
 `;
 const MainWrapper = styled.div`
   background-color: ${({ theme }) => theme.colors.bg};
+
   height: 100%;
   padding: 10px;
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+  // justify-content: center;
+  align-items: center;
+  padding-top: 10px;
 `;
 
 const Layout = ({ children }) => {

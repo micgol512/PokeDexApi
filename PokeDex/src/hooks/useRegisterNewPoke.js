@@ -21,7 +21,7 @@ const useRegisterNewPoke = () => {
       ]);
 
       if (isName.length || isId.length) {
-        setError("Pokemon with this name or ID already exists.");
+        setError("Pokémon with this name or ID already exists.");
         setLoading(false);
         return false;
       }

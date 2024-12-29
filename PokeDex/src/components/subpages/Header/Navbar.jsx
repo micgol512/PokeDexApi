@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { NavLink } from "react-router-dom";
 import Wrapper from "../../shared/Wrapper";
-import StylButton from "../../shared/StylButton";
+import StyledButton from "../../shared/StyledButton";
 import { Badge } from "@mui/material";
 import { useContext } from "react";
 import { ArenaContext } from "../../../context/ArenaContext";
@@ -13,12 +13,11 @@ const routes = [
   { name: "Arena", id: 3, path: "arena" },
   { name: "Ranking", id: 4, path: "ranking" },
   { name: "Edit", id: 5, path: "edit" },
-  // { name: "Details", id: 5, path: "pokemon/:id" },
 ];
 
 const NavButton = ({ name, path }) => (
   <NavLink to={path}>
-    {({ isActive }) => <StylButton isActive={isActive}>{name}</StylButton>}
+    {({ isActive }) => <StyledButton isActive={isActive}>{name}</StyledButton>}
   </NavLink>
 );
 

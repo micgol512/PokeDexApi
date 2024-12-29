@@ -1,20 +1,18 @@
-import { set, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import Wrapper from "../../shared/Wrapper";
 import { useContext, useEffect, useState } from "react";
-import StylButton from "../../shared/StylButton";
+import StyledButton from "../../shared/StyledButton";
 import StyledInput from "../../shared/StyledInput";
 import useRegisterNewPoke from "../../../hooks/useRegisterNewPoke";
 import { enqueueSnackbar } from "notistack";
-import { Input, TextField } from "@mui/material";
 import { PokemonsListContext } from "../../../context/PokemonsListContext";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
 import { updateLocalDatabase } from "../../../services/functions";
 
 const schema = z.object({
-  //   image: z.string().url({ message: "Invalid URL" }),
   name: z.string().min(1, { message: "Name is required" }),
   height: z
     .string()
@@ -47,7 +45,7 @@ const EditAddForm = () => {
   const [weight, setWeight] = useState("");
   const [base_experience, setBase_experience] = useState("");
 
-  const { registerNewPoke, loading, error } = useRegisterNewPoke();
+  const { registerNewPoke, error } = useRegisterNewPoke();
 
   const {
     register,
@@ -79,8 +77,6 @@ const EditAddForm = () => {
       id: futureID,
       image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${futureID}.png`,
     };
-    // data.preventDefault();
-    console.log("Dane wysłano:", fullData);
     const result = id
       ? await updateLocalDatabase(id, fullData)
       : await registerNewPoke(fullData);
@@ -128,8 +124,8 @@ const EditAddForm = () => {
 
         {!id && (
           <Wrapper styles={{ flexDirection: "row", justifyContent: "center" }}>
-            <StylButton onClick={prevImg}>{"<"}</StylButton>
-            <StylButton onClick={nextImg}>{">"}</StylButton>
+            <StyledButton onClick={prevImg}>{"<"}</StyledButton>
+            <StyledButton onClick={nextImg}>{">"}</StyledButton>
           </Wrapper>
         )}
 
@@ -187,14 +183,14 @@ const EditAddForm = () => {
           value={base_experience}
           onChange={(e) => setBase_experience(e.target.value)}
         />
-        <StylButton
+        <StyledButton
           type="submit"
           disabled={
             pokemonsList.some((pokemon) => pokemon.id === futureID) && !id
           }
         >
           {id ? "Submit changes" : "Add new Pokemon"}
-        </StylButton>
+        </StyledButton>
       </Wrapper>
     </form>
   );

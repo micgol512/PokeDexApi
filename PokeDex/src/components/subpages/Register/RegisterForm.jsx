@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 
 import styled from "styled-components";
-import StylButton from "../../shared/StylButton";
+import StyledButton from "../../shared/StyledButton";
 import { TextField } from "@mui/material";
 import useRegisterUser from "../../../hooks/useRegisterUser";
 import { enqueueSnackbar } from "notistack";
@@ -161,9 +161,9 @@ const RegisterForm = () => {
         autoComplete="email"
       />
 
-      <StylButton type="submit">
+      <StyledButton type="submit">
         {loading ? "Checking..." : "Sing In"}
-      </StylButton>
+      </StyledButton>
     </StyledForm>
   );
 };

@@ -8,21 +8,9 @@
     },
     {
       "id": 2,
-      "username": "micgol",
-      "password": "micgol",
-      "email": "admin@admin.co"
-    },
-    {
-      "id": 3,
       "username": "a",
       "password": "a",
       "email": "a@a.a"
-    },
-    {
-      "id": 4,
-      "username": "Nasa",
-      "password": "NasaNasa",
-      "email": "aaa@sss.ss"
     }
   ],
   "pokemons": [
@@ -37,7 +25,14 @@
     },
     {
       "id": 5,
-      "wins": 1
+      "wins": 1,
+      "loses": 3,
+      "name": "charmeleon",
+      "height": 11,
+      "weight": 1900,
+      "base_experience": 142,
+      "ability": "blaze",
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png"
     },
     {
       "id": 2,
@@ -45,24 +40,21 @@
     },
     {
       "id": 4,
-      "loses": 1,
+      "loses": 2,
       "isFavorites": true
     },
     {
-      "id": 8,
+      "id": 1,
+      "loses": 3,
       "wins": 1
     },
     {
-      "id": 153,
-      "name": "Aasd",
-      "height": 123,
-      "weight": 23,
-      "base_experience": 4,
-      "ability": "asd",
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/153.png"
+      "id": 3,
+      "wins": 4
     },
     {
-      "id": 1,
+      "id": 6,
+      "wins": 3,
       "isFavorites": true
     }
   ]

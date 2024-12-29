@@ -1,5 +1,5 @@
 import Wrapper from "../../shared/Wrapper";
-import StylButton from "../../shared/StylButton";
+import StyledButton from "../../shared/StyledButton";
 import useLogin from "../../../hooks/useLogin";
 import { FormControl } from "@mui/material";
 import StyledInput from "../../shared/StyledInput";
@@ -28,7 +28,6 @@ const Login = () => {
               label="Username"
               autoComplete="name"
             />
-
             <StyledInput
               type="password"
               value={password}
@@ -41,9 +40,9 @@ const Login = () => {
         </>
       )}
 
-      <StylButton type="submit" onClick={handleSubmit}>
+      <StyledButton type="submit" onClick={handleSubmit}>
         {isLogged ? "Logout" : "Login"}
-      </StylButton>
+      </StyledButton>
     </Wrapper>
   );
 };

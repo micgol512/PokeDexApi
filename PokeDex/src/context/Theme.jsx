@@ -17,6 +17,7 @@ const basicThemeStyles = {
       placeholder: "#3c6affcc",
       error: "#ff0000",
       primary: "#ff0000",
+      main: "#ffffffcc",
     },
     typography: {
       fontFamily: "'Roboto', sans-serif",
@@ -34,6 +35,7 @@ const basicThemeStyles = {
       placeholder: "#3c6affcc",
       error: "#ff0000",
       primary: "#0077ff",
+      main: "#ffffffcc",
     },
     typography: {
       fontFamily: "'Roboto', sans-serif",
@@ -46,7 +48,6 @@ const ThemeProviderWrapp = ({ children }) => {
   const currentTheme = basicThemeStyles[theme];
 
   const toggleTheme = () => {
-    console.log("zmiania motywu");
     setTheme((p) => (p === "light" ? "dark" : "light"));
   };
 

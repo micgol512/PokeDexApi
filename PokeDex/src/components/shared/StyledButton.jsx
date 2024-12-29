@@ -2,30 +2,10 @@
 import { Button } from "@mui/material";
 import styled from "styled-components";
 
-const StyledButton = styled.button.withConfig({
-  shouldForwardProp: (prop) => prop !== "isActive",
-})`
-  border: 1px solid #3c6aff;
-  border-radius: 8px;
-  background-color: ${({ isActive }) => (isActive ? "darkred" : "#fff")};
-  color: ${({ isActive }) => (isActive ? "#fff" : "#000")};
-  cursor: pointer;
-  text-shadow: 0px 0px 3px #04060f;
-
-  &:hover {
-    background-color: #ffff00;
-    color: #3c6aff;
-  }
-  &:active {
-    transform: scale(0.95);
-  }
-`;
-
 const StyledButtonCss = styled(Button)(({ theme, isActive }) => ({
   "&&": {
     borderRadius: "0.5rem",
     color: theme.colors.color,
-    //backgroundColor: theme.colors.bg,
   },
   "&:hover": {
     backgroundColor: isActive ? theme.colors.hoverbg : theme.colors.bg,
@@ -35,12 +15,12 @@ const StyledButtonCss = styled(Button)(({ theme, isActive }) => ({
   },
 }));
 
-const StylButton = ({
+const StyledButton = ({
   onClick,
   children,
   isActive,
   type = "button",
-  disabled,
+  disabled = false,
 }) => (
   <StyledButtonCss
     variant={isActive ? "contained" : "outlined"}
@@ -53,4 +33,4 @@ const StylButton = ({
   </StyledButtonCss>
 );
 
-export default StylButton;
+export default StyledButton;

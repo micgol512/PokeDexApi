@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import { useContext } from "react";
 import { PokemonsListContext } from "../../../context/PokemonsListContext";
 import PokemonList from "../../shared/PokemonList";
 
