@@ -6,6 +6,9 @@ import { LOCAL_URL } from "../../services/links";
 import { LoginContext } from "../../context/LoginContext";
 import { enqueueSnackbar } from "notistack";
 import useUpdatePokemonStatus from "../../hooks/useUpdateStatus";
+import { PokemonsListContext } from "../../context/PokemonsListContext";
+import { mergePokemon } from "../../services/functions";
+import useSyncData from "../../hooks/useSyncData";
 
 const PulseHeart = keyframes`
 0% { transform: scale(1); }
@@ -96,9 +99,9 @@ const updateFavoriteStatus = async (id, isFavorite) => {
 const FavoriteBtn = ({ isFavorites = false, id }) => {
   const [isFavorite, setIsFavorite] = useState(isFavorites);
   const { isLogged } = useContext(LoginContext);
-
+  // const { syncData } = useSyncData();
   const updateStatus = useUpdatePokemonStatus();
-
+  const { syncData } = useSyncData();
   // const handleClick = () => {
   //   updateStatus(id, status);
   // };
@@ -113,6 +116,7 @@ const FavoriteBtn = ({ isFavorites = false, id }) => {
     }
     await updateStatus(id, { isFavorites: !isFavorite });
     setIsFavorite(!isFavorite);
+    syncData();
   };
 
   return isFavorite ? (

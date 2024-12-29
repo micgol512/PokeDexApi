@@ -3,45 +3,22 @@ import { LOCAL_URL } from "./links";
 export const firstUpper = (string = "none") =>
   `${string.slice(0, 1).toUpperCase()}${string.slice(1)}`;
 
-export const extractUrls = (obj) => {
-  let urls = [];
-  for (let key in obj) {
-    if (typeof obj[key] === "object" && obj[key] !== null) {
-      urls = urls.concat(extractUrls(obj[key]));
-    } else if (typeof obj[key] === "string" && obj[key].startsWith("http")) {
-      urls.push(obj[key]);
-    }
-  }
-  return urls;
-};
-
-export const removeNullValues = (obj) => {
-  if (typeof obj !== "object" || obj === null) return obj;
-
-  const result = Array.isArray(obj) ? [] : {};
-
-  for (const [key, value] of Object.entries(obj)) {
-    if (value !== null) {
-      const cleanedValue = removeNullValues(value);
-      if (cleanedValue !== undefined) {
-        result[key] = cleanedValue;
-      }
-    }
-  }
-
-  return result;
-};
-
 export const mergePokemon = (apiPokes, localPokes) => {
   const mergedPokes = apiPokes.map((apiPoke) => {
     const match = localPokes.find((localPoke) => localPoke.id === apiPoke.id);
-    return match ? { ...apiPoke, ...match } : apiPoke;
+    if (match) {
+      if (match.isFavorites === undefined) {
+        const { isFavorites, ...rest } = apiPoke;
+        return { ...rest, ...match };
+      }
+      return { ...apiPoke, ...match };
+    }
+    return apiPoke;
   });
 
   const localOnlyPokes = localPokes.filter(
     (localPoke) => !apiPokes.some((apiPoke) => apiPoke.id === localPoke.id)
   );
-
   return mergedPokes.concat(localOnlyPokes);
 };
 
@@ -59,8 +36,6 @@ export const sortPokesByKey = (pokes, key, ascending = true) =>
   });
 
 export const updateLocalDatabase = async (id, updatedData) => {
-  console.log("updateLocalDatabase", id, updatedData.id);
-
   try {
     const response = await fetch(`${LOCAL_URL}/pokemons/${id}`, {
       method: "PATCH",

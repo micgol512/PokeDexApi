@@ -7,6 +7,7 @@ import { firstUpper } from "../../services/functions";
 import { useContext, useEffect } from "react";
 import { PokemonsListContext } from "../../context/PokemonsListContext";
 import FavoriteBtn from "./FavoriteBtn";
+import ArenaBtn from "./ArenaBtn";
 
 const PokeDexBasic = styled.div`
   position: absolute;
@@ -98,6 +99,12 @@ const PokeStrings = ({ type, children }) => (
     {children}
   </PokeString>
 );
+const FunctonsBtn = styled.div`
+  position: absolute;
+  top: 209px;
+  left: calc(50% + 45px);
+  z-index: 5;
+`;
 
 const PokeDetails = () => {
   const navigate = useNavigate();
@@ -144,7 +151,10 @@ const PokeDetails = () => {
       <PokeStrings type={"base experience"}>
         {pokemon.base_experience}
       </PokeStrings>
-      <FavoriteBtn isFavorites={pokemon?.isFavorites} id={pokemon.id} />
+      <FunctonsBtn>
+        <FavoriteBtn isFavorites={pokemon?.isFavorites} id={pokemon.id} />
+        <ArenaBtn pokemon={pokemon} />
+      </FunctonsBtn>
     </Wrapper>
     // </Wrapper>
   );

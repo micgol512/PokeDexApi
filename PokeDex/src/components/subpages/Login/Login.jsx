@@ -1,8 +1,8 @@
-import Input from "../../shared/Input";
 import Wrapper from "../../shared/Wrapper";
 import StylButton from "../../shared/StylButton";
 import useLogin from "../../../hooks/useLogin";
 import { FormControl } from "@mui/material";
+import StyledInput from "../../shared/StyledInput";
 
 const Login = () => {
   const {
@@ -17,28 +17,23 @@ const Login = () => {
   return (
     <Wrapper styles={{ flexFlow: "row nowrap" }}>
       {isLogged ? (
-        <div>Zalogowano jako: {localStorage.getItem("user")}</div>
+        <div>Welcome, {localStorage.getItem("user")}</div>
       ) : (
         <>
-          <FormControl
-            onSubmit={handleSubmit}
-            size="small"
-            sx={{ flexDirection: "row" }}
-          >
-            <Input
+          <FormControl size="small" sx={{ flexDirection: "row", gap: "5px" }}>
+            <StyledInput
               type="text"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
-              placeholder="Username"
+              label="Username"
               autoComplete="name"
             />
-          </FormControl>
-          <FormControl>
-            <Input
+
+            <StyledInput
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password"
+              label="Password"
               autoComplete="current-password"
               size="small"
             />

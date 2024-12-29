@@ -27,169 +27,43 @@
   ],
   "pokemons": [
     {
-      "name": "XYZ",
-      "ability": "Some ability",
-      "height": 99,
-      "weight": 99,
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png",
-      "id": 222,
-      "wins": 12,
-      "base_experience": 999,
-      "width": 0,
-      "draws": 2,
-      "loses": 4
+      "id": 152,
+      "name": "Chicka",
+      "height": 12,
+      "weight": 22,
+      "base_experience": 334,
+      "ability": "Aaa",
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/152.png"
+    },
+    {
+      "id": 5,
+      "wins": 1
+    },
+    {
+      "id": 2,
+      "loses": 1
     },
     {
       "id": 4,
-      "wins": 1,
-      "loses": 14,
-      "draws": 0,
-      "isFavorites": true
-    },
-    {
-      "id": 7,
-      "wins": 0,
-      "loses": 3,
-      "draws": 0
-    },
-    {
-      "id": 25,
-      "wins": 6,
-      "loses": 5,
-      "draws": 2,
+      "loses": 1,
       "isFavorites": true
     },
     {
       "id": 8,
-      "wins": 0,
-      "loses": 3,
-      "rows": 0
-    },
-    {
-      "id": 17,
-      "isFavorites": true,
-      "wins": 4
-    },
-    {
-      "id": 2,
-      "wins": 8,
-      "loses": 8
-    },
-    {
-      "id": 1,
-      "loses": 14,
-      "wins": 3,
-      "base_experience": 99,
-      "height": 99,
-      "isFavorites": true,
-      "draws": 2,
-      "name": "bulbasaur",
-      "weight": 69,
-      "ability": "overgrow",
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png"
-    },
-    {
-      "name": "venusaur",
-      "height": 123,
-      "weight": 1000,
-      "base_experience": 123,
-      "ability": "overgrow",
-      "id": 3,
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png",
-      "wins": 1,
-      "isFavorites": true
-    },
-    {
-      "id": 9,
-      "wins": 2,
-      "loses": 1
-    },
-    {
-      "id": 10,
-      "loses": 1,
-      "draws": 1
-    },
-    {
-      "id": 15,
-      "wins": 2
-    },
-    {
-      "id": 151,
-      "wins": 3,
-      "loses": 1
-    },
-    {
-      "id": 150,
-      "wins": 2
-    },
-    {
-      "id": 6,
-      "wins": 8
-    },
-    {
-      "id": 5,
-      "loses": 5,
-      "wins": 4
-    },
-    {
-      "id": 12,
-      "wins": 1,
-      "loses": 1
-    },
-    {
-      "id": 14,
-      "loses": 1
-    },
-    {
-      "id": 13,
-      "draws": 1
-    },
-    {
-      "id": 152,
-      "name": "Chicka",
-      "height": 25,
-      "weight": 52,
-      "base_experience": 110,
-      "ability": "Overgrowl",
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/152.png"
-    },
-    {
-      "id": 153,
-      "name": "Bea",
-      "height": 110,
-      "weight": 2,
-      "base_experience": 23,
-      "ability": "Qwaq",
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/153.png",
-      "isFavorites": true,
       "wins": 1
     },
     {
-      "id": 154,
-      "name": "Assd",
-      "height": 12,
-      "weight": 2,
-      "base_experience": 32,
-      "ability": "Asss",
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/154.png"
-    },
-    {
-      "id": 161,
-      "name": "Asd",
-      "height": 12,
-      "weight": 123,
-      "base_experience": 2,
-      "ability": "asdd1",
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/164.png"
-    },
-    {
-      "id": 155,
-      "name": "Cinda",
+      "id": 153,
+      "name": "Aasd",
       "height": 123,
-      "weight": 33,
-      "base_experience": 1234,
-      "ability": "Flame",
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/156.png"
+      "weight": 23,
+      "base_experience": 4,
+      "ability": "asd",
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/153.png"
+    },
+    {
+      "id": 1,
+      "isFavorites": true
     }
   ]
 }

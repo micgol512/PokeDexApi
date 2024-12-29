@@ -2,6 +2,7 @@
 import { Pagination } from "@mui/material";
 import styled, { css } from "styled-components";
 import { useSearchParams } from "react-router-dom";
+import useSyncData from "../../hooks/useSyncData";
 
 // const StyledPagination = styled(Pagination)`
 //   .MuiPaginationItem-root {
@@ -24,10 +25,12 @@ import { useSearchParams } from "react-router-dom";
 // `;
 
 const StaticPagination = ({ max = 1 }) => {
+  const { syncData } = useSyncData();
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = searchParams.get("page") || 1;
   const handleChange = (_e, value) => {
     setSearchParams({ page: value });
+    syncData();
   };
   return (
     <Pagination

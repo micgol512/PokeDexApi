@@ -1,5 +1,4 @@
 import { useContext, useEffect, useState } from "react";
-import { removeNullValues } from "../services/functions.js";
 import { PokemonsListContext } from "../context/PokemonsListContext.jsx";
 
 const useGetPokemonData = (url) => {
@@ -49,10 +48,6 @@ const useGetPokemonData = (url) => {
 
     fetchData();
   }, [url, setIsLoading]);
-
-  // useEffect(() => {
-  //   setPokemons((prev) => sortPokesByKey(prev, "id", true));
-  // }, [pokemons]);
 
   return { pokemons, error };
 };

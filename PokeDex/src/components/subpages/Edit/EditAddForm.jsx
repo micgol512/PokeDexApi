@@ -7,7 +7,7 @@ import StylButton from "../../shared/StylButton";
 import StyledInput from "../../shared/StyledInput";
 import useRegisterNewPoke from "../../../hooks/useRegisterNewPoke";
 import { enqueueSnackbar } from "notistack";
-import { TextField } from "@mui/material";
+import { Input, TextField } from "@mui/material";
 import { PokemonsListContext } from "../../../context/PokemonsListContext";
 import styled from "styled-components";
 import { useNavigate, useParams } from "react-router-dom";
@@ -43,9 +43,9 @@ const EditAddForm = () => {
   const [futureID, setFutureID] = useState(152);
   const [name, setName] = useState("");
   const [ability, setAbility] = useState("");
-  const [height, setHeight] = useState(0);
-  const [weight, setWeight] = useState(0);
-  const [base_experience, setBase_experience] = useState(0);
+  const [height, setHeight] = useState("");
+  const [weight, setWeight] = useState("");
+  const [base_experience, setBase_experience] = useState("");
 
   const { registerNewPoke, loading, error } = useRegisterNewPoke();
 
@@ -94,9 +94,9 @@ const EditAddForm = () => {
     }
     setName("");
     setAbility("");
-    setHeight(0);
-    setWeight(0);
-    setBase_experience(0);
+    setHeight("");
+    setWeight("");
+    setBase_experience("");
     navigate("/");
   };
 
@@ -126,33 +126,36 @@ const EditAddForm = () => {
           }
         />
 
-        <Wrapper styles={{ flexDirection: "row", justifyContent: "center" }}>
-          <StylButton onClick={prevImg}>{"<"}</StylButton>
-          <StylButton onClick={nextImg}>{">"}</StylButton>
-        </Wrapper>
+        {!id && (
+          <Wrapper styles={{ flexDirection: "row", justifyContent: "center" }}>
+            <StylButton onClick={prevImg}>{"<"}</StylButton>
+            <StylButton onClick={nextImg}>{">"}</StylButton>
+          </Wrapper>
+        )}
 
-        <TextField
-          {...register("name")}
+        <StyledInput
+          register={register}
+          name="name"
           label="Name"
-          placeholder="Name"
           type="text"
           error={!!errors.name}
           helperText={errors.name ? errors.name.message : ""}
           value={name}
           onChange={(e) => setName(e.target.value)}
         />
-        <TextField
-          {...register("ability")}
+        <StyledInput
+          register={register}
+          name="ability"
           label="Ability"
-          placeholder="Ability"
           type="text"
           error={!!errors.ability}
           helperText={errors.ability ? errors.ability.message : ""}
           value={ability}
           onChange={(e) => setAbility(e.target.value)}
         />
-        <TextField
-          {...register("height")}
+        <StyledInput
+          register={register}
+          name="height"
           label="Height"
           placeholder="Height"
           type="number"
@@ -161,18 +164,19 @@ const EditAddForm = () => {
           value={height}
           onChange={(e) => setHeight(e.target.value)}
         />
-        <TextField
-          {...register("weight")}
+        <StyledInput
+          register={register}
+          name="weight"
           label="Weight"
-          placeholder="Weight"
           type="number"
           error={!!errors.weight}
           helperText={errors.weight ? errors.weight.message : ""}
           value={weight}
           onChange={(e) => setWeight(e.target.value)}
         />
-        <TextField
-          {...register("base_experience")}
+        <StyledInput
+          register={register}
+          name="base_experience"
           label="Base Experience"
           placeholder="Base Experience"
           type="number"

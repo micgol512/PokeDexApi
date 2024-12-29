@@ -12,7 +12,6 @@ const useLogin = () => {
     e.preventDefault();
     if (!isLogged) {
       const url = `${LOCAL_URL}/users?username=${username}&password=${password}`;
-
       try {
         const response = await fetch(url);
         const data = await response.json();

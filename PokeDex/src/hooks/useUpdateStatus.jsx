@@ -14,6 +14,9 @@ const useUpdatePokemonStatus = () => {
         if (statusUpdates.isFavorites === true) {
           if (!pokemon.isFavorites) {
             updatedPokemon.isFavorites = true;
+            enqueueSnackbar(`Pokemon #${id} add to favorites.`, {
+              variant: "info",
+            });
           } else {
             enqueueSnackbar(`Pokemon #${id} is already a favorite.`, {
               variant: "info",
