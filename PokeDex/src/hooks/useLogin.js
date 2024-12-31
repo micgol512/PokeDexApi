@@ -1,12 +1,13 @@
 import { useState, useContext } from "react";
 import { enqueueSnackbar } from "notistack";
-import { LoginContext } from "../context";
+import { ArenaContext, LoginContext } from "../context";
 import { LOCAL_URL } from "../services/links";
 
 const useLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { isLogged, logIn, logOut } = useContext(LoginContext);
+  const { popFromArena } = useContext(ArenaContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,18 +25,21 @@ const useLogin = () => {
         } else {
           enqueueSnackbar("Invalid username or password", { variant: "error" });
           logOut();
+          popFromArena();
         }
       } catch (err) {
         enqueueSnackbar(`Failed to connect to the server: ${err}`, {
           variant: "error",
         });
         logOut();
+        popFromArena();
       }
     } else {
       enqueueSnackbar("Logout.", { variant: "info" });
       logOut();
       setPassword("");
       setUsername("");
+      popFromArena();
     }
   };
 

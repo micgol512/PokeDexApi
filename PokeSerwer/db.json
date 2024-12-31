@@ -13,5 +13,35 @@
       "email": "a@a.a"
     }
   ],
-  "pokemons": []
+  "pokemons": [
+    {
+      "id": 7,
+      "loses": 2
+    },
+    {
+      "id": 5,
+      "wins": 1,
+      "loses": 1
+    },
+    {
+      "id": 8,
+      "loses": 2
+    },
+    {
+      "id": 6,
+      "wins": 3
+    },
+    {
+      "id": 3,
+      "wins": 1
+    },
+    {
+      "id": 4,
+      "loses": 1
+    },
+    {
+      "id": 2,
+      "wins": 1
+    }
+  ]
 }
