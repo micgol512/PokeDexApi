@@ -1,19 +1,21 @@
 /* eslint-disable react/prop-types */
+// /* eslint-disable react/prop-types */
+
 import { useContext } from "react";
 import styled, { keyframes } from "styled-components";
-import { ArenaContext } from "../../context/ArenaContext";
+import { enqueueSnackbar } from "notistack";
 import StadiumOutlinedIcon from "@mui/icons-material/StadiumOutlined";
 import StadiumIcon from "@mui/icons-material/Stadium";
-import { LoginContext } from "../../context/LoginContext";
-import { enqueueSnackbar } from "notistack";
-const Shake = keyframes`
+
+import { ArenaContext, LoginContext } from "../../context";
+
+const Shake = keyframes` 
   0% { transform: translateX(0); }
   25% { transform: translateX(-3px); }
   50% { transform: translateX(3px); }
   75% { transform: translateX(-3px); }
   100% { transform: translateX(0); }
 `;
-
 const ArenaActiveIcon = styled(StadiumIcon)`
   color: ${({ theme }) => theme.colors.border};
   &:hover {

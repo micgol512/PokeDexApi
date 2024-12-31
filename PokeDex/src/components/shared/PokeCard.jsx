@@ -2,9 +2,7 @@
 import { useNavigate } from "react-router-dom";
 import styled, { css, keyframes } from "styled-components";
 import { firstUpper } from "../../services/functions";
-import FavoriteBtn from "./FavoriteBtn";
-import ArenaBtn from "./ArenaBtn";
-import Wrapper from "./Wrapper";
+import { ArenaBtn, FavoriteBtn, Wrapper } from "./";
 
 const rotateShadow = keyframes`
   0% {

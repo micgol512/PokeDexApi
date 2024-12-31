@@ -1,14 +1,13 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-
-import styled from "styled-components";
-import StyledButton from "../../shared/StyledButton";
-import { TextField } from "@mui/material";
-import useRegisterUser from "../../../hooks/useRegisterUser";
 import { enqueueSnackbar } from "notistack";
-import { useContext } from "react";
-import { LoginContext } from "../../../context/LoginContext";
+import styled from "styled-components";
+
+import useRegisterUser from "../../../hooks/useRegisterUser";
+import { LoginContext } from "../../../context";
+import { StyledButton, StyledInput } from "../../shared";
 
 const StyledForm = styled.form(({ theme }) => ({
   padding: "10px 5px",
@@ -90,52 +89,18 @@ const RegisterForm = () => {
   };
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
-      {/* <Input
-        {...register("username")}
-        placeholder="Username*"
-        error={errors?.username?.message}
-        autoComplete="name"
-      />
-      <Input
-        {...register("password")}
-        placeholder="Password*"
-        type="password"
-        error={errors?.password?.message}
-        autoComplete="new-password"
-      />
-      <Input
-        {...register("repeatPassword")}
-        placeholder="Reapeat password*"
-        type="password"
-        error={errors?.repeatPassword?.message}
-        autoComplete="new-password"
-      />
-      <Input
-        {...register("email")}
-        placeholder="E-mail*"
-        error={errors?.email?.message}
-        autoComplete="email"
-      /> */}
-      {/* <StyledInput label="Something" error={true} helperText="Wrong" />
       <StyledInput
         register={register}
-        name="lastname"
-        label="Lastname"
-        placeholder="Lastname"
-        error={!!errors.lastname}
-        helperText={errors.lastname ? errors.lastname.message : ""}
-        autoComplete="lastname"
-      /> */}
-      <TextField
-        {...register("username")}
+        name="username"
         label="Username"
         placeholder="Username"
         error={!!errors.username}
         helperText={errors.username ? errors.username.message : ""}
         autoComplete="name"
       />
-      <TextField
-        {...register("password")}
+      <StyledInput
+        register={register}
+        name="password"
         label="Password"
         placeholder="Password"
         type="password"
@@ -143,17 +108,19 @@ const RegisterForm = () => {
         helperText={errors.password ? errors.password.message : ""}
         autoComplete="new-password"
       />
-      <TextField
-        {...register("repeatPassword")}
-        label="Reapeat password"
-        placeholder="Reapeat password"
+      <StyledInput
+        register={register}
+        name="repeatPassword"
+        label="Repeat password"
+        placeholder="Repeat password"
         type="password"
         error={!!errors.repeatPassword}
         helperText={errors.repeatPassword ? errors.repeatPassword.message : ""}
         autoComplete="new-password"
       />
-      <TextField
-        {...register("email")}
+      <StyledInput
+        register={register}
+        name="email"
         label="E-mail"
         placeholder="E-mail"
         error={!!errors.email}
@@ -162,7 +129,7 @@ const RegisterForm = () => {
       />
 
       <StyledButton type="submit">
-        {loading ? "Checking..." : "Sing In"}
+        {loading ? "Checking..." : "Sign In"}
       </StyledButton>
     </StyledForm>
   );

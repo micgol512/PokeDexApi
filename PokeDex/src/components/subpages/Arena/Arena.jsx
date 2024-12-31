@@ -1,10 +1,11 @@
 import { useContext, useEffect, useState } from "react";
-import { ArenaContext } from "../../../context/ArenaContext";
-import styled, { keyframes } from "styled-components";
-import PokeCard from "../../shared/PokeCard";
-import Wrapper from "../../shared/Wrapper";
-import useUpdatePokemonStatus from "../../../hooks/useUpdateStatus";
 import { Button } from "@mui/material";
+import styled, { keyframes } from "styled-components";
+
+import useUpdatePokemonStatus from "../../../hooks/useUpdateStatus";
+import useSyncData from "../../../hooks/useSyncData";
+import { ArenaContext } from "../../../context";
+import { PokeCard, Wrapper } from "../../shared";
 
 const ArenaBasic = styled.div(({ theme, randbg }) => ({
   display: "flex",
@@ -79,10 +80,12 @@ const PokemonWrapper = styled.div`
 
 const Arena = () => {
   const { arenaPokemon, popFromArena } = useContext(ArenaContext);
+  const { syncData } = useSyncData();
   const [fightStarted, setFightStarted] = useState(false);
   const [endFight, setEndFight] = useState(false);
-  const updateStatus = useUpdatePokemonStatus();
+  const { updateStatus } = useUpdatePokemonStatus();
   const randbg = Math.ceil(Math.random() * 10);
+
   useEffect(() => {
     setFightStarted(false);
     setEndFight(false);
@@ -90,6 +93,7 @@ const Arena = () => {
       if (endFight) popFromArena();
     };
   }, []);
+
   const fight = () => {
     let winnerIndex = 0;
     if (
@@ -121,6 +125,7 @@ const Arena = () => {
       }
       setFightStarted(false);
       setEndFight(true);
+      syncData();
     }, 2000);
   };
   const handleResetArenaFight = () => {
@@ -146,10 +151,13 @@ const Arena = () => {
         {arenaPokemon.length === 2 && (
           <Wrapper styles={{ gap: "20px" }}>
             <ArenaFloor>
-              <PokemonWrapper animate={fightStarted}>
+              <PokemonWrapper animate={fightStarted ? "true" : null}>
                 <PokeCard pokemon={arenaPokemon[0]} size="large" />
               </PokemonWrapper>
-              <PokemonWrapper animate={fightStarted} second={true}>
+              <PokemonWrapper
+                animate={fightStarted ? "true" : null}
+                second="true"
+              >
                 <PokeCard pokemon={arenaPokemon[1]} size="large" />
               </PokemonWrapper>
             </ArenaFloor>

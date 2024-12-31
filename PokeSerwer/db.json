@@ -13,49 +13,5 @@
       "email": "a@a.a"
     }
   ],
-  "pokemons": [
-    {
-      "id": 152,
-      "name": "Chicka",
-      "height": 12,
-      "weight": 22,
-      "base_experience": 334,
-      "ability": "Aaa",
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/152.png"
-    },
-    {
-      "id": 5,
-      "wins": 1,
-      "loses": 3,
-      "name": "charmeleon",
-      "height": 11,
-      "weight": 1900,
-      "base_experience": 142,
-      "ability": "blaze",
-      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png"
-    },
-    {
-      "id": 2,
-      "loses": 1
-    },
-    {
-      "id": 4,
-      "loses": 2,
-      "isFavorites": true
-    },
-    {
-      "id": 1,
-      "loses": 3,
-      "wins": 1
-    },
-    {
-      "id": 3,
-      "wins": 4
-    },
-    {
-      "id": 6,
-      "wins": 3,
-      "isFavorites": true
-    }
-  ]
+  "pokemons": []
 }

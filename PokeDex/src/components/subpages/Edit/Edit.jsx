@@ -1,6 +1,5 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import Wrapper from "../../shared/Wrapper";
-import StyledButton from "../../shared/StyledButton";
+import { StyledButton, Wrapper } from "../../shared";
 
 const Register = () => {
   const navigate = useNavigate();

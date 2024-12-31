@@ -1,15 +1,18 @@
-import { useContext } from "react";
-import PokemonList from "../../shared/PokemonList";
-import { PokemonsListContext } from "../../../context/PokemonsListContext";
+import { useContext, useEffect, useState } from "react";
+import { PokemonsListContext } from "../../../context";
+import { PokemonList } from "../../shared";
 
 const Favorites = () => {
   const { pokemonsList } = useContext(PokemonsListContext);
+  const [sortedPokemons, setSortedPokemons] = useState([]);
 
-  return (
-    <PokemonList
-      pokemons={pokemonsList.filter((pokemon) => pokemon?.isFavorites === true)}
-    />
-  );
+  useEffect(() => {
+    setSortedPokemons(
+      pokemonsList.filter((pokemon) => pokemon?.isFavorites === true)
+    );
+  }, [pokemonsList]);
+
+  return <PokemonList pokemons={sortedPokemons} />;
 };
 
 export default Favorites;

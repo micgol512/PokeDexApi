@@ -1,7 +1,7 @@
 import { enqueueSnackbar } from "notistack";
 import { useContext, useEffect } from "react";
-import { LoginContext } from "../../../context/LoginContext";
-import Wrapper from "../../shared/Wrapper";
+import { LoginContext } from "../../../context";
+import { Wrapper } from "../../shared";
 
 const NotLogged = () => {
   const { isLoged } = useContext(LoginContext);

@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { PokemonsListContext } from "../context/PokemonsListContext.jsx";
+import { PokemonsListContext } from "../context";
 
 const useGetPokemonData = (url) => {
   const { setIsLoading } = useContext(PokemonsListContext);

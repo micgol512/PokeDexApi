@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Navigate } from "react-router-dom";
-import { LoginContext } from "../../context/LoginContext";
+import { LoginContext } from "../../context";
 
 // eslint-disable-next-line react/prop-types
 const NotLoggedRoute = ({ children }) => {

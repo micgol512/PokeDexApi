@@ -1,6 +1,6 @@
 import { useContext } from "react";
-import { PokemonsListContext } from "../../../context/PokemonsListContext";
-import PokemonList from "../../shared/PokemonList";
+import { PokemonsListContext } from "../../../context";
+import { PokemonList } from "../../shared";
 
 const ListForEdit = () => {
   const { pokemonsList } = useContext(PokemonsListContext);

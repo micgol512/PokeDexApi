@@ -1,8 +1,7 @@
-import Wrapper from "../../shared/Wrapper";
-import StyledButton from "../../shared/StyledButton";
-import useLogin from "../../../hooks/useLogin";
 import { FormControl } from "@mui/material";
-import StyledInput from "../../shared/StyledInput";
+
+import useLogin from "../../../hooks/useLogin";
+import { StyledButton, StyledInput, Wrapper } from "../../shared";
 
 const Login = () => {
   const {

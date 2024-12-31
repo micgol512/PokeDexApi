@@ -1,26 +1,26 @@
-import { LOCAL_URL } from "./links";
+/* eslint-disable no-unused-vars */
+import { LOCAL_URL } from "./links.js";
 
 export const firstUpper = (string = "none") =>
   `${string.slice(0, 1).toUpperCase()}${string.slice(1)}`;
 
 export const mergePokemon = (apiPokes, localPokes) => {
-  const mergedPokes = apiPokes.map((apiPoke) => {
-    const match = localPokes.find((localPoke) => localPoke.id === apiPoke.id);
-    if (match) {
-      if (match.isFavorites === undefined) {
-        // eslint-disable-next-line no-unused-vars
-        const { _isFavorites, ...rest } = apiPoke;
-        return { ...rest, ...match };
-      }
-      return { ...apiPoke, ...match };
+  const localMap = new Map(localPokes.map((poke) => [poke.id, poke]));
+
+  const merged = apiPokes.map((apiPoke) => {
+    const localPoke = localMap.get(apiPoke.id);
+    if (localPoke) {
+      const { isFavorites, ...filteredApiPoke } = apiPoke;
+      return { ...filteredApiPoke, ...localPoke };
     }
-    return apiPoke;
+    const { isFavorites, ...filteredApiPoke } = apiPoke;
+    return { ...filteredApiPoke };
   });
 
-  const localOnlyPokes = localPokes.filter(
+  const additionalPokes = localPokes.filter(
     (localPoke) => !apiPokes.some((apiPoke) => apiPoke.id === localPoke.id)
   );
-  return mergedPokes.concat(localOnlyPokes);
+  return merged.concat(additionalPokes);
 };
 
 export const sortPokesByKey = (pokes, key, ascending = true) =>

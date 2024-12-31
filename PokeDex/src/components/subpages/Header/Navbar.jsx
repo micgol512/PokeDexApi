@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
-import { NavLink } from "react-router-dom";
-import Wrapper from "../../shared/Wrapper";
-import StyledButton from "../../shared/StyledButton";
-import { Badge } from "@mui/material";
 import { useContext } from "react";
-import { ArenaContext } from "../../../context/ArenaContext";
-// import { Badge } from "@mui/material";
+import { NavLink } from "react-router-dom";
+import { Badge } from "@mui/material";
+import { ArenaContext } from "../../../context";
+import { StyledButton, Wrapper } from "../../shared";
 
 const routes = [
   { name: "Pokemons", id: 1, path: "pokemon" },

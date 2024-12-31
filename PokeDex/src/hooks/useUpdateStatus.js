@@ -1,9 +1,7 @@
-import { useSnackbar } from "notistack";
+import { enqueueSnackbar } from "notistack";
 import { LOCAL_URL } from "../services/links";
 
 const useUpdatePokemonStatus = () => {
-  const { enqueueSnackbar } = useSnackbar();
-
   const updateStatus = async (id, statusUpdates) => {
     try {
       const response = await fetch(`${LOCAL_URL}/pokemons/${id}`);
@@ -100,7 +98,7 @@ const useUpdatePokemonStatus = () => {
     }
   };
 
-  return updateStatus;
+  return { updateStatus };
 };
 
 export default useUpdatePokemonStatus;

@@ -1,14 +1,13 @@
-import { useCallback, useContext, useEffect } from "react";
-
+import { useContext } from "react";
+import { LoginContext, PokemonsListContext } from "../context";
 import { mergePokemon } from "../services/functions";
 import { LOCAL_URL } from "../services/links";
-import { PokemonsListContext } from "../context/PokemonsListContext";
-import { LoginContext } from "../context/LoginContext";
 
 const useSyncData = () => {
   const { setPokemonsList } = useContext(PokemonsListContext);
   const { isLogged } = useContext(LoginContext);
-  const syncData = useCallback(async () => {
+
+  const syncData = async () => {
     try {
       const response = await fetch(`${LOCAL_URL}/pokemons`);
 
@@ -20,11 +19,7 @@ const useSyncData = () => {
     } catch (err) {
       console.error("ERROR: ", err);
     }
-  }, []);
-
-  useEffect(() => {
-    syncData();
-  }, []);
+  };
 
   return { syncData };
 };

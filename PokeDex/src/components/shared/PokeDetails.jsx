@@ -1,12 +1,11 @@
 /* eslint-disable react/prop-types */
-import styled, { css } from "styled-components";
-import Wrapper from "./Wrapper";
-import { useNavigate, useParams } from "react-router-dom";
-import { firstUpper } from "../../services/functions";
 import { useContext } from "react";
-import { PokemonsListContext } from "../../context/PokemonsListContext";
-import FavoriteBtn from "./FavoriteBtn";
-import ArenaBtn from "./ArenaBtn";
+import { useNavigate, useParams } from "react-router-dom";
+import styled, { css } from "styled-components";
+
+import { firstUpper } from "../../services/functions";
+import { PokemonsListContext } from "../../context/";
+import { ArenaBtn, FavoriteBtn, Wrapper } from "./";
 
 const PokeDexBasic = styled.div`
   position: absolute;

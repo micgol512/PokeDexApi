@@ -1,11 +1,10 @@
+import { useContext, useState } from "react";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import styled, { keyframes } from "styled-components";
-import { useContext, useState } from "react";
-import { LoginContext } from "../../context/LoginContext";
 import { enqueueSnackbar } from "notistack";
+import { LoginContext } from "../../context";
 import useUpdatePokemonStatus from "../../hooks/useUpdateStatus";
-
 import useSyncData from "../../hooks/useSyncData";
 
 const PulseHeart = keyframes`
@@ -31,12 +30,8 @@ const FavoriteActiveIcon = styled(FavoriteIcon)`
 const FavoriteBtn = ({ isFavorites = false, id }) => {
   const [isFavorite, setIsFavorite] = useState(isFavorites);
   const { isLogged } = useContext(LoginContext);
-  // const { syncData } = useSyncData();
-  const updateStatus = useUpdatePokemonStatus();
+  const { updateStatus } = useUpdatePokemonStatus();
   const { syncData } = useSyncData();
-  // const handleClick = () => {
-  //   updateStatus(id, status);
-  // };
 
   const toggleFavorite = async (e) => {
     e.stopPropagation();

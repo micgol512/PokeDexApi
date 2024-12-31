@@ -1,4 +1,4 @@
-import Wrapper from "../../shared/Wrapper";
+import { Wrapper } from "../../shared";
 import RegisterForm from "./RegisterForm";
 
 const Register = () => {

@@ -1,14 +1,12 @@
 import { useState, useContext } from "react";
-import { LoginContext } from "../context/LoginContext";
 import { enqueueSnackbar } from "notistack";
+import { LoginContext } from "../context";
 import { LOCAL_URL } from "../services/links";
-import useSyncData from "./useSyncData";
 
 const useLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { isLogged, logIn, logOut } = useContext(LoginContext);
-  const { syncData } = useSyncData();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,7 +21,6 @@ const useLogin = () => {
           logIn();
           setPassword("");
           setUsername("");
-          syncData();
         } else {
           enqueueSnackbar("Invalid username or password", { variant: "error" });
           logOut();

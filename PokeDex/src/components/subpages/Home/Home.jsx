@@ -1,8 +1,7 @@
 import { useContext, useEffect } from "react";
 import useSyncData from "../../../hooks/useSyncData";
-import Wrapper from "../../shared/Wrapper";
-import { LoginContext } from "../../../context/LoginContext";
-
+import { LoginContext } from "../../../context";
+import { Wrapper } from "../../shared";
 const Home = () => {
   const { syncData } = useSyncData();
   const { isLogged } = useContext(LoginContext);

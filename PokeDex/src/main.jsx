@@ -13,8 +13,8 @@ import {
   Pokemons,
   Ranking,
   Register,
-} from "./components/subpages/";
-import PokeDetails from "./components/shared/PokeDetails.jsx";
+} from "./components/subpages";
+import { PokeDetails } from "./components/shared";
 import { LoggedRoute, NotLoggedRoute } from "./components/RouteWrappers/";
 import EditAddForm from "./components/subpages/Edit/EditAddForm.jsx";
 import ListForEdit from "./components/subpages/Edit/ListForEdit.jsx";

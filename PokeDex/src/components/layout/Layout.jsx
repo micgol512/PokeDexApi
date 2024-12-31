@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import styled from "styled-components";
-import { Header } from "../subpages/index";
+import { Header } from "../subpages";
+
 const RootWrapper = styled.div`
   display: flex;
   flex-direction: column;

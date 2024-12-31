@@ -1,16 +1,14 @@
+import { useContext, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import Wrapper from "../../shared/Wrapper";
-import { useContext, useEffect, useState } from "react";
-import StyledButton from "../../shared/StyledButton";
-import StyledInput from "../../shared/StyledInput";
-import useRegisterNewPoke from "../../../hooks/useRegisterNewPoke";
-import { enqueueSnackbar } from "notistack";
-import { PokemonsListContext } from "../../../context/PokemonsListContext";
 import styled from "styled-components";
-import { useNavigate, useParams } from "react-router-dom";
+import { enqueueSnackbar } from "notistack";
+import useRegisterNewPoke from "../../../hooks/useRegisterNewPoke";
+import { PokemonsListContext } from "../../../context";
 import { updateLocalDatabase } from "../../../services/functions";
+import { StyledButton, StyledInput, Wrapper } from "../../shared";
 
 const schema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
@@ -153,7 +151,6 @@ const EditAddForm = () => {
           register={register}
           name="height"
           label="Height"
-          placeholder="Height"
           type="number"
           error={!!errors.height}
           helperText={errors.height ? errors.height.message : ""}
@@ -174,7 +171,6 @@ const EditAddForm = () => {
           register={register}
           name="base_experience"
           label="Base Experience"
-          placeholder="Base Experience"
           type="number"
           error={!!errors.base_experience}
           helperText={

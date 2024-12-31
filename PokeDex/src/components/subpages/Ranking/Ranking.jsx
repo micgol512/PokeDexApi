@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import PokemonList from "../../shared/PokemonList";
-import { PokemonsListContext } from "../../../context/PokemonsListContext";
 import { FormControl, FormLabel, MenuItem, Select } from "@mui/material";
-import Wrapper from "../../shared/Wrapper";
+import { PokemonsListContext } from "../../../context";
 import { sortPokesByKey } from "../../../services/functions";
+import { PokemonList, Wrapper } from "../../shared";
+
 const Ranking = () => {
   const { pokemonsList } = useContext(PokemonsListContext);
   const [sortBy, setSortBy] = useState("id");

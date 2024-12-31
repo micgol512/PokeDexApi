@@ -1,14 +1,16 @@
 /* eslint-disable react/prop-types */
-import PokeCard from "./PokeCard";
-import Wrapper from "./Wrapper";
-import StaticPagination from "./StaticPagination";
+import { useContext } from "react";
 import { useSearchParams } from "react-router-dom";
+import { PokemonsListContext } from "../../context";
+import { PokeCard, StaticPagination, Wrapper } from "./";
 
 const PokemonList = ({ pokemons, forEdit }) => {
+  const { isLoading } = useContext(PokemonsListContext);
   const [searchParams] = useSearchParams();
   const currentPage = searchParams.get("page") || 1;
 
-  if (pokemons.length === 0) return <div>Brak elementów</div>;
+  if (isLoading) return <div>Loading...</div>;
+  if (pokemons.length === 0) return <div>The list of Pokémon is empty.</div>;
   return (
     <>
       <Wrapper

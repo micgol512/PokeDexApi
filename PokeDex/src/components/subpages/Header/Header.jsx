@@ -1,14 +1,13 @@
 import { useContext, useEffect } from "react";
-import Wrapper from "../../shared/Wrapper";
-import Logo from "./Logo";
-import { NavButton, Navbar } from "./Navbar";
-import { LoginContext } from "../../../context/LoginContext";
-import Login from "../Login/Login";
+import { LoginContext, PokemonsListContext } from "../../../context";
+import useSyncData from "../../../hooks/useSyncData";
 import useGetPokemonData from "../../../hooks/useGetPokemonData";
+import { Wrapper } from "../../shared";
+import { Login } from "../";
+import { NavButton, Navbar } from "./Navbar";
+import Logo from "./Logo";
 import ThemeChanger from "./ThemeChanger";
 import { API_URL } from "../../../services/links";
-import { PokemonsListContext } from "../../../context/PokemonsListContext";
-import useSyncData from "../../../hooks/useSyncData";
 
 const Header = () => {
   const { isLogged } = useContext(LoginContext);
@@ -18,11 +17,13 @@ const Header = () => {
   );
   const { syncData } = useSyncData();
 
+  const firstLoad = async () => {
+    await setPokemonsList(pokemons);
+    isLogged && syncData();
+  };
+
   useEffect(() => {
-    setPokemonsList(pokemons);
-    if (isLogged) {
-      syncData();
-    }
+    firstLoad();
   }, [isLogged, pokemons]);
 
   return (
