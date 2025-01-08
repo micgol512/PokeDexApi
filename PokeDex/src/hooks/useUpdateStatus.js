@@ -2,7 +2,7 @@ import { enqueueSnackbar } from "notistack";
 import { LOCAL_URL } from "../services/links";
 
 const useUpdatePokemonStatus = () => {
-  const updateStatus = async (id, statusUpdates) => {
+  const updateStatus = async (id, statusUpdates, base_experience) => {
     try {
       const response = await fetch(`${LOCAL_URL}/pokemons/${id}`);
       if (response.ok) {
@@ -50,6 +50,9 @@ const useUpdatePokemonStatus = () => {
           Object.keys(statusUpdates).forEach((key) => {
             if (key !== "isFavorites") {
               updatedPokemon[key] = (pokemon[key] || 0) + statusUpdates[key];
+              if (key === "wins") {
+                updatedPokemon.base_experience = base_experience + 10;
+              }
             }
           });
         }

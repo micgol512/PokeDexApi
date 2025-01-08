@@ -79,7 +79,8 @@ const PokemonWrapper = styled.div`
 `;
 
 const Arena = () => {
-  const { arenaPokemon, popFromArena } = useContext(ArenaContext);
+  const { arenaPokemon, popFromArena, updateArenaWinner } =
+    useContext(ArenaContext);
   const { syncData } = useSyncData();
   const [fightStarted, setFightStarted] = useState(false);
   const [endFight, setEndFight] = useState(false);
@@ -88,22 +89,24 @@ const Arena = () => {
 
   useEffect(() => {
     setFightStarted(false);
-    setEndFight(false);
     return () => {
-      if (endFight) popFromArena();
+      if (endFight) {
+        popFromArena();
+        setEndFight(false);
+      }
     };
-  }, []);
+  }, [endFight]);
 
   const fight = () => {
     let winnerIndex = 0;
     if (
-      arenaPokemon[1].base_experience * arenaPokemon[1].height >
-      arenaPokemon[0].base_experience * arenaPokemon[0].height
+      arenaPokemon[1].base_experience * arenaPokemon[1].weight >
+      arenaPokemon[0].base_experience * arenaPokemon[0].weight
     ) {
       winnerIndex = 1;
     } else if (
-      arenaPokemon[0].base_experience * arenaPokemon[0].height ===
-      arenaPokemon[1].base_experience * arenaPokemon[1].height
+      arenaPokemon[0].base_experience * arenaPokemon[0].weight ===
+      arenaPokemon[1].base_experience * arenaPokemon[1].weight
     ) {
       winnerIndex = -1;
     }
@@ -112,20 +115,24 @@ const Arena = () => {
 
   const handleFight = () => {
     setFightStarted(true);
-
-    setTimeout(() => {
+    setTimeout(async () => {
       const indexWinner = fight();
       if (indexWinner === -1) {
-        updateStatus(arenaPokemon[0].id, { draws: 1 });
-        updateStatus(arenaPokemon[1].id, { draws: 1 });
+        await updateStatus(arenaPokemon[0].id, { draws: 1 });
+        await updateStatus(arenaPokemon[1].id, { draws: 1 });
       } else {
-        updateStatus(arenaPokemon[indexWinner].id, { wins: 1 });
-        updateStatus(arenaPokemon[1 - indexWinner].id, { loses: 1 });
+        await updateStatus(
+          arenaPokemon[indexWinner].id,
+          { wins: 1 },
+          arenaPokemon[indexWinner].base_experience
+        );
+        await updateStatus(arenaPokemon[1 - indexWinner].id, { loses: 1 });
         popFromArena(arenaPokemon[1 - indexWinner]);
+        await updateArenaWinner(arenaPokemon[indexWinner].id);
       }
       setFightStarted(false);
+      await syncData();
       setEndFight(true);
-      syncData();
     }, 2000);
   };
   const handleResetArenaFight = () => {

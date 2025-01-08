@@ -11,11 +11,7 @@ const Ranking = () => {
   const [sortedPokemons, setSortedPokemons] = useState(pokemonsList);
 
   useEffect(() => {
-    setSortedPokemons(
-      pokemonsList.filter(
-        (pokemon) => pokemon.loses || pokemon.wins || pokemon.draws
-      )
-    );
+    setSortedPokemons(pokemonsList);
   }, [pokemonsList]);
 
   useEffect(() => {
@@ -42,6 +38,9 @@ const Ranking = () => {
             <MenuItem value={"wins"}>Wins</MenuItem>
             <MenuItem value={"loses"}>Loses</MenuItem>
             <MenuItem value={"draws"}>Draws</MenuItem>
+            <MenuItem value={"base_experience"}>Experience</MenuItem>
+            <MenuItem value={"height"}>Height</MenuItem>
+            <MenuItem value={"weight"}>Weight</MenuItem>
           </Select>
         </FormControl>
         <FormControl sx={{ flexDirection: "row" }} size="small">
