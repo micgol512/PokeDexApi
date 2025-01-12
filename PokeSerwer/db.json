@@ -8,65 +8,10 @@
     },
     {
       "id": 2,
-      "username": "micgol",
-      "password": "micgol",
-      "email": "admin@admin.co"
-    },
-    {
-      "id": 3,
       "username": "a",
       "password": "a",
       "email": "a@a.a"
-    },
-    {
-      "id": 4,
-      "username": "Aaa",
-      "password": "zaq1@wsX",
-      "email": "aa@aa.aa"
-    },
-    {
-      "id": 5,
-      "username": "Aaaa",
-      "password": "zaq1@wsX",
-      "email": "xxx@xxx.xx"
-    },
-    {
-      "id": 6,
-      "username": "Michał",
-      "password": "zaq1@wsX",
-      "email": "pp@w2.ww"
-    },
-    {
-      "id": 7,
-      "username": "Sdd",
-      "password": "zaq12wsX!",
-      "email": "q@w.ww"
     }
   ],
-  "favorities": [
-    1,
-    7
-  ],
-  "pokemons": [
-    {
-      "id": 1,
-      "pokeId": 1,
-      "isFavorites": true
-    },
-    {
-      "id": 2,
-      "pokeId": 4,
-      "wins": "2",
-      "lose": "0",
-      "rows": "1"
-    },
-    {
-      "id": 3,
-      "pokeId": 7,
-      "isFavorites": true,
-      "wins": "0",
-      "lose": "2",
-      "rows": "0"
-    }
-  ]
+  "pokemons": []
 }

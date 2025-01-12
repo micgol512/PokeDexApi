@@ -1,12 +1,13 @@
-/* eslint-disable no-unused-vars */
 import { Outlet } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
-import { ArenaProvider } from "./context/ArenaContext";
-import { LoginProvider } from "./context/LoginContext";
 import Layout from "./components/layout/Layout";
+import {
+  ArenaProvider,
+  LoginProvider,
+  PokemonsListProvider,
+  ThemeProviderWrapp,
+} from "./context";
 import "./App.css";
-import { ThemeProviderWrapp } from "./context/Theme";
-import { PageProvider } from "./context/PageContext";
 
 function App() {
   return (
@@ -20,17 +21,17 @@ function App() {
         horizontal: "left",
       }}
     >
-      <LoginProvider>
-        <ArenaProvider>
-          <ThemeProviderWrapp>
-            <PageProvider>
+      <ArenaProvider>
+        <LoginProvider>
+          <PokemonsListProvider>
+            <ThemeProviderWrapp>
               <Layout>
                 <Outlet />
               </Layout>
-            </PageProvider>
-          </ThemeProviderWrapp>
-        </ArenaProvider>
-      </LoginProvider>
+            </ThemeProviderWrapp>
+          </PokemonsListProvider>
+        </LoginProvider>
+      </ArenaProvider>
     </SnackbarProvider>
   );
 }

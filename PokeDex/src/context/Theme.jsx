@@ -2,7 +2,7 @@
 import { createContext, useState } from "react";
 import { ThemeProvider } from "styled-components";
 
-export const Theme = createContext();
+const Theme = createContext();
 
 const basicThemeStyles = {
   light: {
@@ -16,6 +16,8 @@ const basicThemeStyles = {
       border: "#3c6aff",
       placeholder: "#3c6affcc",
       error: "#ff0000",
+      primary: "#ff0000",
+      main: "#ffffffcc",
     },
     typography: {
       fontFamily: "'Roboto', sans-serif",
@@ -29,9 +31,11 @@ const basicThemeStyles = {
       bg: "#cfcfcf",
       focusBg: "#cc0000",
       hoverBg: "#cc0000",
-      border: "#3c6aff",
+      border: "#0077ff",
       placeholder: "#3c6affcc",
       error: "#ff0000",
+      primary: "#0077ff",
+      main: "#ffffffcc",
     },
     typography: {
       fontFamily: "'Roboto', sans-serif",
@@ -39,12 +43,11 @@ const basicThemeStyles = {
   },
 };
 
-export const ThemeProviderWrapp = ({ children }) => {
+const ThemeProviderWrapp = ({ children }) => {
   const [theme, setTheme] = useState("light");
   const currentTheme = basicThemeStyles[theme];
 
   const toggleTheme = () => {
-    console.log("zmiania motywu");
     setTheme((p) => (p === "light" ? "dark" : "light"));
   };
 
@@ -54,3 +57,4 @@ export const ThemeProviderWrapp = ({ children }) => {
     </Theme.Provider>
   );
 };
+export { Theme, ThemeProviderWrapp };

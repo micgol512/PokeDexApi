@@ -2,13 +2,15 @@
 import styled, { css } from "styled-components";
 
 const FullScreen = styled.div`
+  margin: 0;
+  padding: 0;
   display: flex;
+
   flex-flow: column nowrap;
   gap: 1rem;
   position: absolute;
   width: 100%;
   height: 100%;
-  top: max(100px, 10vh);
   left: 0;
   ${({ blur }) => {
     if (blur)
@@ -21,11 +23,19 @@ const FullScreen = styled.div`
 const FlexDiv = styled.div.withConfig({
   shouldForwardProp: (prop) => prop !== "styles",
 })`
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-flow: column nowrap;
   gap: 0.3rem;
   align-items: center;
   justify-content: center;
+  ${({ blur }) => {
+    if (blur)
+      return css`
+        backdrop-filter: blur(5px);
+      `;
+  }}
   ${({ styles }) => styles && css(styles)};
 `;
 const Wrapper = ({ full, children, blur, styles, onClick }) => {

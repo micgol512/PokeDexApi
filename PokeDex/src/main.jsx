@@ -8,14 +8,15 @@ import {
   Edit,
   Favorites,
   Home,
-  Login,
   NotLogged,
   Pokemons,
   Ranking,
   Register,
-} from "./components/subpages/";
-import PokeDetails from "./components/shared/PokeDetails.jsx";
+} from "./components/subpages";
+import { PokeDetails } from "./components/shared";
 import { LoggedRoute, NotLoggedRoute } from "./components/RouteWrappers/";
+import EditAddForm from "./components/subpages/Edit/EditAddForm.jsx";
+import ListForEdit from "./components/subpages/Edit/ListForEdit.jsx";
 
 const router = createBrowserRouter(
   [
@@ -25,6 +26,10 @@ const router = createBrowserRouter(
       children: [
         { element: <Home />, path: "*" },
         { element: <Home />, path: "/" },
+        {
+          element: <PokeDetails />,
+          path: "/:id",
+        },
         {
           element: (
             <LoggedRoute>
@@ -36,27 +41,14 @@ const router = createBrowserRouter(
         {
           element: (
             <LoggedRoute>
-              <Login />
-            </LoggedRoute>
-          ),
-          path: "/login",
-        },
-        {
-          element: (
-            <LoggedRoute>
               <Register />
             </LoggedRoute>
           ),
           path: "/register",
         },
         {
-          element: (
-            <NotLoggedRoute>
-              <Pokemons />
-            </NotLoggedRoute>
-          ),
+          element: <Pokemons />,
           path: "/pokemon",
-          children: [{ element: <PokeDetails />, path: "/pokemon/:id" }],
         },
 
         {
@@ -90,6 +82,11 @@ const router = createBrowserRouter(
             </NotLoggedRoute>
           ),
           path: "/edit",
+          children: [
+            { element: <EditAddForm />, path: "/edit/add" },
+            { element: <ListForEdit />, path: "/edit/list" },
+            { element: <EditAddForm />, path: "/edit/:id" },
+          ],
         },
 
         // { element: <ListElementsDetails />, path: "/summary/:id" },

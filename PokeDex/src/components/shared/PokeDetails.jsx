@@ -1,9 +1,12 @@
 /* eslint-disable react/prop-types */
-import styled, { css } from "styled-components";
-import Wrapper from "./Wrapper";
+import { useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import useGetPokeByID from "../../hooks/useGetPokeByID";
+import styled, { css } from "styled-components";
+
 import { firstUpper } from "../../services/functions";
+import { PokemonsListContext } from "../../context/";
+import { ArenaBtn, FavoriteBtn, Wrapper } from "./";
+
 const PokeDexBasic = styled.div`
   position: absolute;
   top: 0;
@@ -14,7 +17,20 @@ const PokeDexBasic = styled.div`
     center / contain;
   z-index: 5;
 `;
-const PokeImage = styled.img`
+const PokeDexBasicClose = styled.div`
+  position: absolute;
+  top: 0;
+  left: calc(50% - 200px);
+  width: 400px;
+  height: 300px;
+  background: transparent url("../../src/images/dex/PokedexBaseClose.png")
+    no-repeat center / contain;
+  z-index: 5;
+`;
+
+const PokeImage = styled.img.withConfig({
+  shouldForwardProp: (prop) => prop !== "randBG",
+})`
   position: absolute;
   top: 90px;
   left: calc(50% - 165px);
@@ -75,75 +91,51 @@ const Span = styled.span`
   text-shadow: 0px 0px 1px darkred;
   font-size: 0.5rem;
 `;
-const NavBtn = styled.div`
-  position: absolute;
-  top: 228px;
-  color: red;
-  font-weight: 800;
-  cursor: pointer;
-  z-index: 5;
-  ${({ nav }) => {
-    if (nav === "-")
-      return css`
-        left: calc(50% - 65px);
-      `;
-    else
-      return css`
-        left: calc(50% - 35px);
-      `;
-  }}
-  &:before {
-    content: "${({ nav }) => {
-      if (nav === "-") return css`‹‹`;
-      return css`››`;
-    }}";
-  }
-`;
 const PokeStrings = ({ type, children }) => (
   <PokeString onClick={(e) => e.stopPropagation()} type={type}>
     {type !== "name" && <Span>{`${firstUpper(type)}: `}</Span>}
     {children}
   </PokeString>
 );
+const FunctonsBtn = styled.div`
+  display: flex;
+  gap: 5px;
+  position: absolute;
+  top: 5px;
+  left: calc(50% + 145px);
+  z-index: 5;
+`;
 
 const PokeDetails = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { pokemon, isLoading, error } = useGetPokeByID(id);
+  const { pokemonsList } = useContext(PokemonsListContext);
   const randBG = Math.ceil(Math.random() * 3);
+  const pokemon = pokemonsList.find((poke) => poke.id === parseInt(id));
 
   const backPage = () => {
-    navigate(`/pokemon`);
+    navigate(-1);
   };
-
-  const prevPoke = () => {
-    if (id > 1) navigate(`/pokemon/${id - 1}`);
-  };
-  const nextPoke = () => {
-    if (id < 151) navigate(`/pokemon/${parseInt(id) + 1}`);
-  };
-
-  if (error) return <div>{error}</div>;
-  if (!isLoading) return <div>Loading...</div>;
-  // console.log("Details: ", pokemon.images);
+  if (!pokemon)
+    return (
+      <Wrapper
+        full
+        blur="true"
+        styles={{
+          top: "110px",
+          height: "100vh",
+        }}
+        onClick={backPage}
+      >
+        <PokeDexBasicClose />
+      </Wrapper>
+    );
 
   return (
     // <Wrapper full>
-    <Wrapper
-      full
-      blur="true"
-      styles={{
-        top: "110px",
-        height: "100vh",
-      }}
-      onClick={backPage}
-    >
+    <Wrapper full onClick={backPage}>
       <PokeDexBasic onClick={(e) => e.stopPropagation()} />
-      <PokeImage
-        src={pokemon.images?.front_default}
-        alt={pokemon.name}
-        randBG={randBG}
-      />
+      <PokeImage src={pokemon.image} alt={pokemon.name} randBG={randBG} />
       <PokeStrings type={"name"}>{firstUpper(pokemon.name)}</PokeStrings>
       <PokeStrings type={"ability"}>{firstUpper(pokemon.ability)}</PokeStrings>
       <PokeStrings type={"height"}>{pokemon.height}</PokeStrings>
@@ -151,21 +143,10 @@ const PokeDetails = () => {
       <PokeStrings type={"base experience"}>
         {pokemon.base_experience}
       </PokeStrings>
-      <NavBtn
-        onClick={(e) => {
-          e.stopPropagation();
-          prevPoke();
-        }}
-        nav="-"
-      />
-      <NavBtn
-        onClick={(e) => {
-          e.stopPropagation();
-          nextPoke();
-        }}
-        nav="+"
-      />
-      {/* <NavBtn type="+" /> */}
+      <FunctonsBtn>
+        <FavoriteBtn isFavorites={pokemon?.isFavorites} id={pokemon.id} />
+        <ArenaBtn pokemon={pokemon} />
+      </FunctonsBtn>
     </Wrapper>
     // </Wrapper>
   );

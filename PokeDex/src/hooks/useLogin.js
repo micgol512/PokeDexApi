@@ -1,40 +1,45 @@
 import { useState, useContext } from "react";
-import { LoginContext } from "../../../context/LoginContext";
 import { enqueueSnackbar } from "notistack";
-import { LOCAL_URL } from "../../../services/links";
+import { ArenaContext, LoginContext } from "../context";
+import { LOCAL_URL } from "../services/links";
 
 const useLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const { isLogged, logIn, logOut } = useContext(LoginContext);
+  const { popFromArena } = useContext(ArenaContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!isLogged) {
       const url = `${LOCAL_URL}/users?username=${username}&password=${password}`;
-
       try {
         const response = await fetch(url);
         const data = await response.json();
         if (data.length > 0) {
-          enqueueSnackbar("Logowanie powiodło się!", { variant: "success" });
+          enqueueSnackbar("Login succesfull.", { variant: "success" });
           localStorage.setItem("user", username);
           logIn();
           setPassword("");
           setUsername("");
         } else {
-          enqueueSnackbar("Nieprawidłowe dane logowania", { variant: "error" });
+          enqueueSnackbar("Invalid username or password", { variant: "error" });
           logOut();
+          popFromArena();
         }
       } catch (err) {
-        enqueueSnackbar(`Failed to connect to the server: ${err}`, { variant: "error" });
+        enqueueSnackbar(`Failed to connect to the server: ${err}`, {
+          variant: "error",
+        });
         logOut();
+        popFromArena();
       }
     } else {
-      enqueueSnackbar("Wylogowano.", { variant: "info" });
+      enqueueSnackbar("Logout.", { variant: "info" });
       logOut();
       setPassword("");
       setUsername("");
+      popFromArena();
     }
   };
 
