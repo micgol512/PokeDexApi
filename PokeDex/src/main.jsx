@@ -8,7 +8,6 @@ import {
   Edit,
   Favorites,
   Home,
-  Login,
   NotLogged,
   Pokemons,
   Ranking,
@@ -38,14 +37,6 @@ const router = createBrowserRouter(
             </LoggedRoute>
           ),
           path: "/notlogged",
-        },
-        {
-          element: (
-            <LoggedRoute>
-              <Login />
-            </LoggedRoute>
-          ),
-          path: "/login",
         },
         {
           element: (

@@ -13,5 +13,14 @@
       "email": "a@a.a"
     }
   ],
-  "pokemons": []
+  "pokemons": [
+    {
+      "id": 2,
+      "wins": 1
+    },
+    {
+      "id": 1,
+      "loses": 1
+    }
+  ]
 }

@@ -3,11 +3,15 @@ import { FormControl, FormLabel, MenuItem, Select } from "@mui/material";
 import { PokemonsListContext } from "../../../context";
 import { sortPokesByKey } from "../../../services/functions";
 import { PokemonList, Wrapper } from "../../shared";
+import { useSearchParams } from "react-router-dom";
 
 const Ranking = () => {
   const { pokemonsList } = useContext(PokemonsListContext);
-  const [sortBy, setSortBy] = useState("id");
-  const [sortAscending, setSortAscending] = useState(true);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [sortBy, setSortBy] = useState(searchParams.get("sortBy") || "id");
+  const [sortAscending, setSortAscending] = useState(
+    searchParams.get("ascending") === "true"
+  );
   const [sortedPokemons, setSortedPokemons] = useState(pokemonsList);
 
   useEffect(() => {
@@ -19,12 +23,25 @@ const Ranking = () => {
   }, [sortBy, sortAscending]);
 
   const onChangeSortByHandler = (e) => {
-    setSortBy(e.target.value);
-    setSortedPokemons((p) => sortPokesByKey(p, e.target.value, sortAscending));
+    const newSortBy = e.target.value;
+    setSearchParams((prevParams) => {
+      const params = new URLSearchParams(prevParams);
+      params.set("sortBy", newSortBy);
+      return params;
+    });
+    setSortBy(newSortBy);
+    setSortedPokemons((p) => sortPokesByKey(p, newSortBy, sortAscending));
   };
+
   const onChangeSortAscendingHandler = (e) => {
-    setSortAscending(e.target.value);
-    setSortedPokemons((p) => sortPokesByKey(p, sortBy, e.target.value));
+    const newSortAscending = e.target.value;
+    setSearchParams((prevParams) => {
+      const params = new URLSearchParams(prevParams);
+      params.set("ascending", newSortAscending);
+      return params;
+    });
+    setSortAscending(newSortAscending);
+    setSortedPokemons((p) => sortPokesByKey(p, sortBy, newSortAscending));
   };
 
   return (
