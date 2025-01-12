@@ -8,7 +8,12 @@ const StaticPagination = ({ max = 1 }) => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = searchParams.get("page") || 1;
   const handleChange = (_e, value) => {
-    setSearchParams({ page: value });
+    const newPage = value;
+    setSearchParams((prevParams) => {
+      const params = new URLSearchParams(prevParams);
+      params.set("page", newPage);
+      return params;
+    });
     syncData();
   };
   return (
